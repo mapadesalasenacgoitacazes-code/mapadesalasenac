@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="Segoe UI, sans-serif">
+  <defs>
+    <filter id="shadow3"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.1"/></filter>
+  </defs>
+  <rect width="800" height="340" rx="12" fill="#f5f7fa" stroke="#ddd" stroke-width="1"/>
+  <text x="400" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1a1a">MoSCoW - Uber</text>
+
+  <!-- Must Have -->
+  <rect x="20" y="50" width="370" height="140" rx="8" fill="#fff" stroke="#e53935" stroke-width="2" filter="url(#shadow3)"/>
+  <rect x="20" y="50" width="370" height="32" rx="8" fill="#e53935"/>
+  <rect x="20" y="70" width="370" height="12" fill="#e53935"/>
+  <text x="32" y="72" font-size="14" font-weight="700" fill="#fff">M - Must Have (Obrigatorio)</text>
+  <text x="32" y="102" font-size="12" fill="#333">#1. Solicitar viagem</text>
+  <text x="32" y="120" font-size="12" fill="#333">#2. Matching passageiro-motorista</text>
+  <text x="32" y="138" font-size="12" fill="#333">#3. Rastreamento GPS</text>
+  <text x="32" y="156" font-size="12" fill="#333">#5. Aceitar/recusar corrida</text>
+  <text x="32" y="174" font-size="12" fill="#333">#8. Processar pagamento</text>
+  <text x="32" y="184" font-size="10" fill="#888" font-style="italic">Sem isso, o sistema nao entrega valor minimo.</text>
+
+  <!-- Should Have -->
+  <rect x="410" y="50" width="370" height="140" rx="8" fill="#fff" stroke="#FB8C00" stroke-width="2" filter="url(#shadow3)"/>
+  <rect x="410" y="50" width="370" height="32" rx="8" fill="#FB8C00"/>
+  <rect x="410" y="70" width="370" height="12" fill="#FB8C00"/>
+  <text x="422" y="72" font-size="14" font-weight="700" fill="#fff">S - Should Have (Importante)</text>
+  <text x="422" y="102" font-size="12" fill="#333">#4. Preco dinamico (surge)</text>
+  <text x="422" y="120" font-size="12" fill="#333">#10. Navegacao GPS integrada</text>
+  <text x="422" y="158" font-size="10" fill="#888" font-style="italic">Faz falta, mas da para lancar sem.</text>
+
+  <!-- Could Have -->
+  <rect x="20" y="205" width="370" height="120" rx="8" fill="#fff" stroke="#43A047" stroke-width="2" filter="url(#shadow3)"/>
+  <rect x="20" y="205" width="370" height="32" rx="8" fill="#43A047"/>
+  <rect x="20" y="225" width="370" height="12" fill="#43A047"/>
+  <text x="32" y="227" font-size="14" font-weight="700" fill="#fff">C - Could Have (Desejavel)</text>
+  <text x="32" y="257" font-size="12" fill="#333">#6. Avaliar motorista</text>
+  <text x="32" y="275" font-size="12" fill="#333">#7. Avaliar passageiro</text>
+  <text x="32" y="293" font-size="12" fill="#333">#9. Compartilhar viagem</text>
+  <text x="32" y="313" font-size="10" fill="#888" font-style="italic">Diferencial competitivo, nao essencial.</text>
+
+  <!-- Won't Have -->
+  <rect x="410" y="205" width="370" height="120" rx="8" fill="#fff" stroke="#757575" stroke-width="2" filter="url(#shadow3)"/>
+  <rect x="410" y="205" width="370" height="32" rx="8" fill="#757575"/>
+  <rect x="410" y="225" width="370" height="12" fill="#757575"/>
+  <text x="422" y="227" font-size="14" font-weight="700" fill="#fff">W - Won't Have (Fora do escopo)</text>
+  <text x="422" y="257" font-size="12" fill="#333">Uber Eats (entrega de comida)</text>
+  <text x="422" y="275" font-size="12" fill="#333">Uber Reserve (agendamento)</text>
+  <text x="422" y="293" font-size="12" fill="#333">Uber Teen (contas menores)</text>
+  <text x="422" y="313" font-size="10" fill="#888" font-style="italic">Fica para versoes futuras.</text>
+</svg>
