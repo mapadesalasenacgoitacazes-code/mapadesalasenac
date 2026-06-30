@@ -1,4 +1,8 @@
-# Python
+# PHP
+vendor/
+composer.lock
+
+# Python (scripts auxiliares)
 __pycache__/
 *.pyc
 .venv/
@@ -6,6 +10,9 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
+nbproject/
 
 # Claude Code
 .claude/
@@ -13,3 +20,17 @@ __pycache__/
 # OS
 Thumbs.db
 .DS_Store
+Desktop.ini
+*.swp
+*~
+
+# Ambiente local
+.env
+*.log
+
+# XAMPP / Laragon
+.htaccess.bak
+
+# Arquivos temporarios
+*.tmp
+*.bak
