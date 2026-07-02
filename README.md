@@ -1,4 +1,4 @@
-# Mapa de Salas — SENAC Minas
+# Mapa de Salas SENAC Minas
 
 Sistema web para gerenciamento de reservas, monitoramento e organizacao de salas de cursos do SENAC Minas BH. Substitui a planilha Excel utilizada atualmente.
 
