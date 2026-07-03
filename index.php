@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <a style="font-size: 75px;" href="mapa-painel.html">Página - Mapa de Salas</a>
+    <a style="font-size: 75px;" href="mapa-painel.php">Página - Mapa de Salas</a>
 </body>
 
 </html>
