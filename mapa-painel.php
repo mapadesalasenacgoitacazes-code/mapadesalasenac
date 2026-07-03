@@ -178,7 +178,7 @@
 </head>
 
 <body>
-
+ 
     <!-- MENU LATERAL -->
     <div class="menu-lateral d-flex flex-column justify-content-between pb-4">
         <div>
@@ -324,7 +324,7 @@
                 </thead>
 
                 <tbody>
-                    
+
                     <!-- LINHA: SALA 1 -->
                     <tr>
                         <td class="coluna-sala">
