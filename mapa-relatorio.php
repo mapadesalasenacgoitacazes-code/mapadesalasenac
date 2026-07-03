@@ -89,150 +89,159 @@
             margin-bottom: 10px;
         }
 
-        .green { background: #4caf50; }
-        .orange { background: #ff9800; }
-        .purple { background: #7e57c2; }
+        .green {
+            background: #4caf50;
+        }
+
+        .orange {
+            background: #ff9800;
+        }
+
+        .purple {
+            background: #7e57c2;
+        }
     </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar p-3">
-    <h5 class="badge bg-primary fs-5 px-3 py-2">MS</h5>
+    <!-- SIDEBAR -->
+    <div class="sidebar p-3">
+        <h5 class="badge bg-primary fs-5 px-3 py-2">MS</h5>
 
-    <a href="mapa-painel.php"><i class="bi bi-house"></i> Painel</a>
-    <a href="#"><i class="bi bi-door-open"></i> Salas</a>
-    <a href="#"><i class="bi bi-people"></i> Turmas</a>
-    <a href="#"><i class="bi bi-calendar"></i> Reservas</a>
-    <a class="active" href="mapa-relatorio.php"><i class="bi bi-bar-chart"></i> Relatórios</a>
+        <a href="mapa-painel.php"><i class="bi bi-house"></i> Painel</a>
+        <a href="#"><i class="bi bi-door-open"></i> Salas</a>
+        <a href="#"><i class="bi bi-people"></i> Turmas</a>
+        <a href="#"><i class="bi bi-calendar"></i> Reservas</a>
+        <a class="active" href="mapa-relatorio.php"><i class="bi bi-bar-chart"></i> Relatórios</a>
 
-    <div class="mt-4">
-        <a href="#" class="text-danger"><i class="bi bi-box-arrow-left"></i> Sair</a>
-    </div>
-</div>
-
-<!-- CONTEÚDO -->
-<div class="content">
-
-    <!-- HEADER -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h3 class="fw-bold mb-0">Relatório de Turmas</h3>
-            <small class="text-muted">Veja o histórico de utilização das salas</small>
+        <div class="mt-4">
+            <a href="#" class="text-danger"><i class="bi bi-box-arrow-left"></i> Sair</a>
         </div>
+    </div>
 
-        <div class="d-flex align-items-center gap-3">
-            <i class="bi bi-bell fs-5"></i>
-            <div class="text-end">
-                <strong>Maria Silva</strong><br>
-                <small>Supervisão</small>
+    <!-- CONTEÚDO -->
+    <div class="content">
+
+        <!-- HEADER -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="fw-bold mb-0">Relatório de Turmas</h3>
+                <small class="text-muted">Veja o histórico de utilização das salas</small>
             </div>
-        </div>
-    </div>
 
-    <!-- CARDS -->
-    <div class="row g-3 mb-4">
-
-        <div class="col-md-3">
-            <div class="card-box">
-                <div class="icon bg-primary text-white"><i class="bi bi-building"></i></div>
-                <div>
-                    <strong>3</strong><br>
-                    <small>Salas utilizadas</small>
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-bell fs-5"></i>
+                <div class="text-end">
+                    <strong>Maria Silva</strong><br>
+                    <small>Supervisão</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card-box">
-                <div class="icon bg-success text-white"><i class="bi bi-calendar"></i></div>
-                <div>
-                    <small>Período analisado</small><br>
-                    <strong>25/05 - 01/07</strong>
+        <!-- CARDS -->
+        <div class="row g-3 mb-4">
+
+            <div class="col-md-3">
+                <div class="card-box">
+                    <div class="icon bg-primary text-white"><i class="bi bi-building"></i></div>
+                    <div>
+                        <strong>3</strong><br>
+                        <small>Salas utilizadas</small>
+                    </div>
                 </div>
             </div>
+
+            <div class="col-md-3">
+                <div class="card-box">
+                    <div class="icon bg-success text-white"><i class="bi bi-calendar"></i></div>
+                    <div>
+                        <small>Período analisado</small><br>
+                        <strong>25/05 - 01/07</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card-box">
+                    <div class="icon bg-warning text-white"><i class="bi bi-clock"></i></div>
+                    <div>
+                        <strong>23 dias</strong><br>
+                        <small>Total de uso</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card-box">
+                    <div class="icon bg-info text-white"><i class="bi bi-people"></i></div>
+                    <div>
+                        <strong>3</strong><br>
+                        <small>Turmas diferentes</small>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="card-box">
-                <div class="icon bg-warning text-white"><i class="bi bi-clock"></i></div>
-                <div>
-                    <strong>23 dias</strong><br>
-                    <small>Total de uso</small>
-                </div>
-            </div>
+        <!-- TABELA -->
+        <div class="bg-white p-3 rounded mb-4">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Sala</th>
+                        <th>Tipo</th>
+                        <th>Primeira vez</th>
+                        <th>Última vez</th>
+                        <th>Total</th>
+                        <th>Turno</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>🍳 Cozinha Industrial</td>
+                        <td>Cozinha</td>
+                        <td>25/05/2026</td>
+                        <td>29/06/2026</td>
+                        <td>12 dias</td>
+                        <td><span class="badge bg-warning text-dark">Manhã</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>🖥 Sala 4</td>
+                        <td>Sala de Aula</td>
+                        <td>27/05/2026</td>
+                        <td>01/07/2026</td>
+                        <td>8 dias</td>
+                        <td><span class="badge bg-warning">Tarde</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>⚗ Lab 2</td>
+                        <td>Laboratório</td>
+                        <td>15/06/2026</td>
+                        <td>22/06/2026</td>
+                        <td>3 dias</td>
+                        <td><span class="badge bg-warning">Tarde</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div class="col-md-3">
-            <div class="card-box">
-                <div class="icon bg-info text-white"><i class="bi bi-people"></i></div>
-                <div>
-                    <strong>3</strong><br>
-                    <small>Turmas diferentes</small>
-                </div>
-            </div>
+        <!-- TIMELINE -->
+        <div class="timeline">
+
+            <h5 class="mb-3">Linha do tempo</h5>
+
+            <div class="bar green" style="width: 85%;">Cozinha (manhã)</div>
+            <div class="bar orange" style="width: 90%;">Sala 4 (tarde)</div>
+            <div class="bar purple" style="width: 40%;">Lab 2 (tarde)</div>
+
         </div>
 
     </div>
-
-    <!-- TABELA -->
-    <div class="bg-white p-3 rounded mb-4">
-        <table class="table align-middle">
-            <thead>
-                <tr>
-                    <th>Sala</th>
-                    <th>Tipo</th>
-                    <th>Primeira vez</th>
-                    <th>Última vez</th>
-                    <th>Total</th>
-                    <th>Turno</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>🍳 Cozinha Industrial</td>
-                    <td>Cozinha</td>
-                    <td>25/05/2026</td>
-                    <td>29/06/2026</td>
-                    <td>12 dias</td>
-                    <td><span class="badge bg-warning text-dark">Manhã</span></td>
-                </tr>
-
-                <tr>
-                    <td>🖥 Sala 4</td>
-                    <td>Sala de Aula</td>
-                    <td>27/05/2026</td>
-                    <td>01/07/2026</td>
-                    <td>8 dias</td>
-                    <td><span class="badge bg-warning">Tarde</span></td>
-                </tr>
-
-                <tr>
-                    <td>⚗ Lab 2</td>
-                    <td>Laboratório</td>
-                    <td>15/06/2026</td>
-                    <td>22/06/2026</td>
-                    <td>3 dias</td>
-                    <td><span class="badge bg-warning">Tarde</span></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- TIMELINE -->
-    <div class="timeline">
-
-        <h5 class="mb-3">Linha do tempo</h5>
-
-        <div class="bar green" style="width: 85%;">Cozinha (manhã)</div>
-        <div class="bar orange" style="width: 90%;">Sala 4 (tarde)</div>
-        <div class="bar purple" style="width: 40%;">Lab 2 (tarde)</div>
-
-    </div>
-
-</div>
 
 </body>
+
 </html>
