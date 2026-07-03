@@ -6,8 +6,6 @@
 ---
 ## Tela 01 - Login
 
-![Tela de Login](prints/tela_01.png)
-
 Tela inicial do sistema. O usuario informa **e-mail institucional** e **senha** para acessar. O perfil (Admin, Supervisao, Suporte, Docente) define as permissoes apos o login. A sessao expira apos **30 minutos de inatividade**.
 
 - **Requisito:** RF01
@@ -17,8 +15,6 @@ Tela inicial do sistema. O usuario informa **e-mail institucional** e **senha** 
 
 ## Tela 02 - Painel Principal (Calendario de Salas)
 
-![Painel Principal](prints/tela_02.png)
-
 Tela principal apos login, **substitui a planilha Excel**. Visao semanal com salas nas linhas e dias nas colunas. Possui **4 modos de visualizacao** (Dia, Semana, Mes, Ano) e filtros por turno, tipo de sala e andar. Cards superiores mostram totais de salas cadastradas, disponiveis, ocupadas e em manutencao.
 
 - **Requisitos:** RF11, RF12
@@ -26,8 +22,6 @@ Tela principal apos login, **substitui a planilha Excel**. Visao semanal com sal
 <img width="1260" height="672" alt="tela_02" src="https://github.com/user-attachments/assets/a659f232-3769-40ce-b362-f4f7950218d4" />
 ---
 ## Tela 03 - Cadastro de Salas
-
-![Cadastro de Salas](prints/tela_03.png)
 
 Listagem de salas com tabela contendo numero, tipo, capacidade, andar e status. Formulario lateral para cadastrar nova sala com campos obrigatorios. Permite editar e alterar status (**Disponivel**, **Ocupada**, **Manutencao**).
 
@@ -38,8 +32,6 @@ Listagem de salas com tabela contendo numero, tipo, capacidade, andar e status. 
 ---
 ## Tela 04 - Cadastro de Turmas
 
-![Cadastro de Turmas](prints/tela_04.png)
-
 Cadastro com codigo, curso, professor(es), turno e dias da semana fixos. Tabela com filtros por tipo de curso, area, programa e progresso. Suporta **multiplos professores por turma** com indicacao de professor principal.
 
 - **Requisitos:** RF04, RF12, RF15
@@ -48,8 +40,6 @@ Cadastro com codigo, curso, professor(es), turno e dias da semana fixos. Tabela 
 
 ---
 ## Tela 05 - Criar Reserva (Modal)
-
-![Criar Reserva](prints/tela_05.png)
 
 Modal que abre ao clicar em "Nova Reserva" ou em um dia vazio no calendario. Campos: sala, turma, data, turno e observacao. Exibe **alerta de conflito** quando a sala ja esta reservada naquele turno. Mostra salas disponiveis no mesmo horario como alternativa.
 
@@ -62,8 +52,6 @@ Modal que abre ao clicar em "Nova Reserva" ou em um dia vazio no calendario. Cam
 
 ## Tela 06 - Historico de Salas por Turma
 
-![Historico de Salas](prints/tela_06.png)
-
 Visualizacao do historico de alocacao de uma turma. Mostra timeline com todas as salas utilizadas, datas de uso e total de dias em cada sala. Permite consultar por codigo da turma ou nome do curso.
 
 - **Requisito:** RF13
@@ -73,8 +61,6 @@ Visualizacao do historico de alocacao de uma turma. Mostra timeline com todas as
 ---
 
 ## Tela 07 - Cadastro de Cursos
-
-![Cadastro de Cursos](prints/tela_07.png)
 
 Listagem e cadastro de cursos com nome, tipo (Ageis, Graduacao, Pos Graduacao, Tecnico), **area SENAC** (23 areas), programa (Todos, Senac Mais, PSG) e carga horaria total. Filtros por tipo, area e status.
 
@@ -86,8 +72,6 @@ Listagem e cadastro de cursos com nome, tipo (Ageis, Graduacao, Pos Graduacao, T
 
 ## Tela 08 - Cadastro de Feriados e Recessos
 
-![Cadastro de Feriados](prints/tela_08.png)
-
 Gerenciamento de feriados e recessos por unidade. Campos: data, descricao e tipo (**Nacional**, **Estadual**, **Municipal**, **Recesso**). Calendario visual destaca os dias cadastrados. Cada unidade define seus proprios feriados.
 
 - **Requisito:** RF09
@@ -97,8 +81,6 @@ Gerenciamento de feriados e recessos por unidade. Campos: data, descricao e tipo
 ---
 
 ## Tela 09 - Registrar Dia sem Aula
-
-![Registrar Dia sem Aula](prints/tela_09.png)
 
 Registro de dias cancelados para uma turma especifica. Campos: turma, data e motivo.
 
@@ -111,8 +93,6 @@ Registro de dias cancelados para uma turma especifica. Campos: turma, data e mot
 
 ## Tela 10 - Log de Auditoria
 
-![Log de Auditoria](prints/tela_10.png)
-
 Listagem de todas as acoes realizadas no sistema. Mostra usuario, acao (criacao, edicao, cancelamento), tabela afetada, ID do registro, descricao e data/hora. Filtros por tabela, acao, periodo e busca por texto.
 
 - **Requisito:** RF16
@@ -122,8 +102,6 @@ Listagem de todas as acoes realizadas no sistema. Mostra usuario, acao (criacao,
 ---
 
 ## Tela 11 - Dashboard de Ocupacao
-
-![Dashboard de Ocupacao](prints/tela_11.png)
 
 Painel visual com graficos de ocupacao das salas. Mostra taxa de ocupacao por turno, salas mais utilizadas, ranking por tipo de sala e evolucao mensal. Filtros por periodo e unidade.
 
@@ -135,8 +113,6 @@ Painel visual com graficos de ocupacao das salas. Mostra taxa de ocupacao por tu
 
 ## Tela 12 - Gestao de Usuarios (Admin)
 
-![Gestao de Usuarios](prints/tela_12.png)
-
 Painel administrativo para criar, editar e desativar contas de usuario. Tabela com nome, e-mail, perfil, unidade, status e data de criacao. Formulario para novo usuario com definicao de perfil de acesso e unidade.
 
 - **Requisito:** RF01
@@ -147,8 +123,6 @@ Painel administrativo para criar, editar e desativar contas de usuario. Tabela c
 ---
 
 ## Tela 13 - Historico de Modificacoes
-
-![Historico de Modificacoes](prints/tela_13.png)
 
 Visualizacao detalhada do historico de alteracoes de um registro especifico. Mostra quem alterou, quando e o que mudou com comparacao **valor anterior** versus **valor novo** em cores (vermelho para antigo, verde para novo). Filtros por tabela, acao, periodo e busca.
 
