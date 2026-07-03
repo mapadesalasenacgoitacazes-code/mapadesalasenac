@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Estudo - Requisitos de Software</title>
+    <style>
+        @page { size: A4; margin: 15mm; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1a1a1a; line-height: 1.6; padding: 30px 35px;
+            max-width: 900px; margin: 0 auto; background: #fff;
+        }
+
+        .cabecalho-senac {
+            border: 2px solid #1565C0; border-radius: 8px;
+            padding: 18px 22px; margin-bottom: 10px; background: #f8faff;
+        }
+        .cabecalho-senac .instituicao { font-size: 16px; font-weight: 700; color: #1565C0; margin-bottom: 2px; }
+        .cabecalho-senac .curso { font-size: 13px; color: #333; margin-bottom: 1px; }
+        .cabecalho-senac .info-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 2px 20px; margin-top: 8px; font-size: 13px; color: #444;
+        }
+        .cabecalho-senac .info-grid span { font-weight: 600; color: #1a1a1a; }
+
+        h1 { font-size: 26px; color: #1a1a1a; font-weight: 800; text-align: center; margin: 20px 0 5px; }
+        h1 em { font-style: normal; color: #1565C0; }
+        .subtitulo { font-size: 13px; color: #666; text-align: center; margin-bottom: 25px; }
+
+        .nivel {
+            background: #f5f7fa; border-radius: 8px; padding: 20px 22px; margin-bottom: 22px;
+        }
+        .nivel-titulo {
+            font-size: 16px; font-weight: 700; color: white; padding: 10px 18px;
+            border-radius: 6px; margin: -20px -22px 16px -22px;
+        }
+        .nivel-1 .nivel-titulo { background: #43A047; border-radius: 8px 8px 0 0; }
+        .nivel-2 .nivel-titulo { background: #FB8C00; border-radius: 8px 8px 0 0; }
+        .nivel-3 .nivel-titulo { background: #1565C0; border-radius: 8px 8px 0 0; }
+        .nivel-4 .nivel-titulo { background: #7B1FA2; border-radius: 8px 8px 0 0; }
+
+        .tema {
+            background: #fff; border: 1px solid #ddd; border-radius: 8px;
+            padding: 16px; margin-bottom: 14px;
+        }
+        .tema-titulo {
+            font-size: 15px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px;
+        }
+        .tema-conexao {
+            font-size: 12px; color: #1565C0; font-weight: 600; margin-bottom: 8px;
+        }
+        .tema-desc {
+            font-size: 13px; color: #555; margin-bottom: 10px;
+        }
+
+        .video-list { list-style: none; padding: 0; }
+        .video-list li {
+            padding: 8px 12px; margin-bottom: 6px;
+            background: #f8faff; border-radius: 6px; border-left: 3px solid #1565C0;
+            font-size: 13px;
+        }
+        .video-list li a {
+            color: #1565C0; text-decoration: none; font-weight: 600;
+        }
+        .video-list li a:hover { text-decoration: underline; }
+        .video-list li .obs {
+            display: block; font-size: 11.5px; color: #777; margin-top: 2px;
+        }
+        .lang-tag {
+            display: inline-block; padding: 1px 7px; border-radius: 10px;
+            font-size: 10px; font-weight: 700; color: white; margin-right: 4px;
+            vertical-align: middle;
+        }
+        .lang-pt { background: #43A047; }
+        .lang-en { background: #1565C0; }
+        .video-list li.en-video {
+            background: #f0f4ff; border-left-color: #7B1FA2;
+        }
+
+        .anotacao {
+            border: 1px dashed #ccc; border-radius: 6px; padding: 10px 14px;
+            margin-top: 8px; min-height: 50px; font-size: 12px; color: #aaa;
+        }
+
+        .dica-senior {
+            background: #E3F2FD; border: 1px solid #90CAF9; border-radius: 8px;
+            padding: 16px 20px; margin: 25px 0; font-size: 13px; color: #1565C0;
+        }
+        .dica-senior strong { font-size: 14px; }
+
+        .footer {
+            margin-top: 30px; padding-top: 10px; border-top: 3px solid #1565C0;
+            font-size: 12px; color: #888; text-align: center;
+        }
+
+        @media print {
+            body { padding: 15px; }
+            .nivel { break-inside: avoid; }
+            a { color: #1565C0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== CABEÇALHO SENAC ========== -->
+    <div class="cabecalho-senac">
+        <div class="instituicao">Senac Minas</div>
+        <div class="curso">Curso: Técnico em Desenvolvimento de Sistemas</div>
+        <div class="info-grid">
+            <div>Disciplina: <span>UC 7 — Aplicações em Desenvolvimento Web</span></div>
+            <div>Data: <span>25 de junho de 2026</span></div>
+            <div>Aluna: <span>Thaís Oliveira</span></div>
+            <div>Professor: <span>Cleiton de Jesus Pereira</span></div>
+        </div>
+    </div>
+
+    <h1>Guia de Estudo: <em>Requisitos de Software</em></h1>
+    <p class="subtitulo">Roteiro de vídeos organizados do básico ao avançado — estude nessa ordem</p>
+
+    <!-- ===================================================== -->
+    <!-- NÍVEL 1 -->
+    <!-- ===================================================== -->
+    <div class="nivel nivel-1">
+        <div class="nivel-titulo">NÍVEL 1 — O QUE SÃO REQUISITOS? (Assista primeiro)</div>
+
+        <div class="tema">
+            <div class="tema-titulo">Requisitos Funcionais vs. Não Funcionais</div>
+            <div class="tema-conexao">Conecta com: Seções 2 e 4 das suas fichas</div>
+            <div class="tema-desc">Entender a diferença entre "o que o sistema faz" (funcional) e "como o sistema deve ser" (não funcional). Esse é o conceito mais fundamental de toda a disciplina.</div>
+            <ul class="video-list">
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=zCX-N1H8Vps" target="_blank">Functional and Nonfunctional Requirements — Georgia Tech</a>
+                    <span class="obs">Aula da Georgia Tech (universidade dos EUA). Curta e muito clara — explica com exemplos visuais. Tem legenda automática em português.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=-OdcVyMHwcs" target="_blank">Requisitos Funcionais, Não Funcionais e Regras de Negócio</a>
+                    <span class="obs">Alternativa em português — explica os 3 conceitos juntos, ideal para começar.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=YLd6AWKVyas" target="_blank">Requisito Funcional e Não Funcional: entenda a diferença</a>
+                    <span class="obs">Mais direto ao ponto, foca só na diferença entre RF e RNF com exemplos práticos.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=sGhWSH4i0d0" target="_blank">Exemplos de Requisitos Funcionais e Não Funcionais</a>
+                    <span class="obs">Vários exemplos reais — bom para comparar com o que você escreveu nas fichas.</span>
+                </li>
+            </ul>
+            <div class="anotacao">Suas anotações: </div>
+        </div>
+
+        <div class="tema">
+            <div class="tema-titulo">Atores e Diagrama de Casos de Uso (UML)</div>
+            <div class="tema-conexao">Conecta com: Seção 1 das suas fichas (Mapeie os Atores)</div>
+            <div class="tema-desc">O que é um ator? Como desenhar o diagrama que mostra quem faz o quê no sistema. Você já mapeou atores nas fichas — agora vai entender a teoria por trás.</div>
+            <ul class="video-list">
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=4emxjxonNRI" target="_blank">UML Use Case Diagrams</a>
+                    <span class="obs">Muito visual e bem produzido — cobre atores, relacionamentos e exemplos animados. Tem legenda automática em português.</span>
+                </li>
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=rThKZtYFXbA" target="_blank">How to Draw Use Case Diagram UML — Beginner Level Master Class</a>
+                    <span class="obs">Passo a passo para desenhar do zero — mesmo sem saber inglês fluente, dá para acompanhar porque é muito visual.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=ePX-S4Leq7Y" target="_blank">Curso de UML — O que são Casos de Uso</a>
+                    <span class="obs">Alternativa em português — começa do zero: define Ator, Caso de Uso e Relacionamentos.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=Q0Xambvgn1s" target="_blank">Curso UML — Diagrama de Caso de Uso — Atores</a>
+                    <span class="obs">Foca especificamente em atores — tipos, como identificar, exemplos.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=tezLX9quOVc" target="_blank">Curso de UML — Diagrama de Casos de Uso — Exemplo Básico</a>
+                    <span class="obs">Monta um diagrama do zero para um sistema simples — bom para praticar junto.</span>
+                </li>
+            </ul>
+            <div class="anotacao">Suas anotações: </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- NÍVEL 2 -->
+    <!-- ===================================================== -->
+    <div class="nivel nivel-2">
+        <div class="nivel-titulo">NÍVEL 2 — COMO PRIORIZAR E ORGANIZAR</div>
+
+        <div class="tema">
+            <div class="tema-titulo">Priorização MoSCoW</div>
+            <div class="tema-conexao">Conecta com: Seção 3 das suas fichas (Priorize com MoSCoW)</div>
+            <div class="tema-desc">Must, Should, Could, Won't — como decidir o que entra na versão 1.0 e o que fica para depois. Você já fez isso nas fichas, agora vai entender a técnica formalmente.</div>
+            <ul class="video-list">
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=aTWS_ANTCFs" target="_blank">MoSCoW Prioritisation: How to Use It Effectively — Agile Business Consortium</a>
+                    <span class="obs">Do Agile Business Consortium (quem criou o método). Curto, direto e com exemplo real de como evitar scope creep. Legenda automática em PT.</span>
+                </li>
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=NJ2JM_PKXjk" target="_blank">The MoSCoW Prioritization Method — Explanation and Best Practices</a>
+                    <span class="obs">Explica cada letra do acrônimo com exemplos claros — boa produção visual.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=WzTsnd2zyQg" target="_blank">Priorização de Requisitos — Técnica MoSCoW</a>
+                    <span class="obs">Alternativa em português — voltado para engenharia de requisitos, o mais alinhado com a sua disciplina.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=OOux_bS40pk" target="_blank">Priorização de Backlog com a Técnica MoSCoW — com exemplo fácil</a>
+                    <span class="obs">Exemplo prático bem didático — bom para fixar o conceito.</span>
+                </li>
+            </ul>
+            <div class="anotacao">Suas anotações: </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- NÍVEL 3 -->
+    <!-- ===================================================== -->
+    <div class="nivel nivel-3">
+        <div class="nivel-titulo">NÍVEL 3 — ENTREVISTA COM STAKEHOLDERS (Assista ANTES da reunião do projeto)</div>
+
+        <div class="tema">
+            <div class="tema-titulo">Como fazer Entrevista de Levantamento de Requisitos</div>
+            <div class="tema-conexao">Conecta com: Guia do professor (Seção 5 — Roteiro de Perguntas-Chave)</div>
+            <div class="tema-desc">Como conduzir uma entrevista com o cliente/usuário, que perguntas fazer, como transformar respostas vagas em requisitos concretos. Esse é o mais importante para o seu projeto final.</div>
+            <ul class="video-list">
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=I1RIhmf0IlI" target="_blank">Requirements Gathering — Gather Requirements in 1 Session</a>
+                    <span class="obs">Ensina como extrair TODOS os requisitos em uma única sessão com o cliente. Muito prático e direto. Legenda automática em PT.</span>
+                </li>
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=TwB08Xl5WqU" target="_blank">Essential Questions to Ask During Stakeholder Interviews</a>
+                    <span class="obs">Lista de perguntas essenciais para não esquecer nada na entrevista — leve como checklist para a reunião do projeto.</span>
+                </li>
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=uE3RH1xZFAA" target="_blank">How I Conduct A Stakeholder Interview (UX Framework)</a>
+                    <span class="obs">Uma designer de UX mostra como ela faz na vida real — abordagem diferente da engenharia, mas muito útil.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=eeb4uuP7nhY" target="_blank">Levantamento de Requisitos: Exemplo prático de entrevista</a>
+                    <span class="obs">Alternativa em português — simula uma entrevista real com cliente. Assista esse se preferir em PT.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=q9DmL98Sikc" target="_blank">Como entender claramente as necessidades dos stakeholders</a>
+                    <span class="obs">Foca em técnicas para extrair o que o cliente realmente precisa (nem sempre é o que ele pede).</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=mxoUvzD7qMk" target="_blank">Técnicas de Elicitação de Requisitos — Entrevista</a>
+                    <span class="obs">Abordagem mais acadêmica — bom para entender a teoria das técnicas de elicitação.</span>
+                </li>
+            </ul>
+            <div class="anotacao">Suas anotações: </div>
+        </div>
+
+        <div class="tema">
+            <div class="tema-titulo">Cenários de Exceção e Fluxos Alternativos</div>
+            <div class="tema-conexao">Conecta com: Seção 5 das suas fichas (Cenário de Exceção)</div>
+            <div class="tema-desc">O que acontece quando dá errado? Fluxo principal vs. alternativo vs. de exceção. Isso é o que diferencia um sistema "que funciona" de um sistema "que funciona bem".</div>
+            <ul class="video-list">
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=l-eRDgIorIk" target="_blank">What is the Difference Between Exception Flow and Alternate Flow?</a>
+                    <span class="obs">Explica exatamente a diferença que confunde todo mundo: fluxo alternativo vs. exceção. Curto e objetivo. Legenda automática em PT.</span>
+                </li>
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=WuNQLhx3dd8" target="_blank">Use Case Description EXAMPLE — Tutorial and Best Practices</a>
+                    <span class="obs">Mostra um exemplo completo de documentação de caso de uso com fluxo principal, alternativo e de exceção.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=z69LLWDuyas" target="_blank">Fluxos principal e alternativos</a>
+                    <span class="obs">Alternativa em português — explica a diferença entre fluxo principal, alternativo e de exceção.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=RF65FropKiI" target="_blank">Documentando Casos de Uso com Cenários</a>
+                    <span class="obs">Mostra como escrever cenários completos — exatamente o que você fez na seção 5 das fichas.</span>
+                </li>
+            </ul>
+            <div class="anotacao">Suas anotações: </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- NÍVEL 4 -->
+    <!-- ===================================================== -->
+    <div class="nivel nivel-4">
+        <div class="nivel-titulo">NÍVEL 4 — BÔNUS (Vai te destacar no projeto final)</div>
+
+        <div class="tema">
+            <div class="tema-titulo">Figma para Iniciantes — Prototipação</div>
+            <div class="tema-conexao">Conecta com: Guia do professor (Seção 6 — Prototipação)</div>
+            <div class="tema-desc">Desenhar telas antes de programar. Se você chegar na reunião com os stakeholders mostrando um protótipo no Figma, fica muito mais fácil validar se o que você entendeu é o que eles querem.</div>
+            <ul class="video-list">
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=HoKD1qIcchQ" target="_blank">Figma Tutorial for Beginners — Complete Course 2025</a>
+                    <span class="obs">Curso completo e atualizado 2025. Produção excelente — do básico ao avançado em um só vídeo. Legenda automática em PT.</span>
+                </li>
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=jwCmIBJ8Jtc" target="_blank">Figma Tutorial for UI Design — Course for Beginners (freeCodeCamp)</a>
+                    <span class="obs">Do freeCodeCamp — referência mundial em cursos gratuitos. Muito completo e bem estruturado.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=5U2Sxj8AEks" target="_blank">Como usar o Figma: aulão gratuito do absoluto zero para iniciantes [2025]</a>
+                    <span class="obs">Alternativa em português — começa do zero mesmo, ideal se você nunca abriu o Figma.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=udY4Id6bK6U" target="_blank">Como usar o Figma 2025/26 em 1 hora — Tutorial do zero</a>
+                    <span class="obs">Em 1 hora você já sai sabendo montar uma tela básica — ótimo custo-benefício de tempo.</span>
+                </li>
+            </ul>
+            <div class="anotacao">Suas anotações: </div>
+        </div>
+
+        <div class="tema">
+            <div class="tema-titulo">Histórias de Usuário (User Stories)</div>
+            <div class="tema-conexao">Conecta com: Evolução natural dos seus Requisitos Funcionais</div>
+            <div class="tema-desc">A forma ágil de escrever requisitos: "Como [ator], eu quero [ação] para [objetivo]". É a evolução do que você fez na seção 2 das fichas — mesmo conceito, formato diferente usado no mercado.</div>
+            <ul class="video-list">
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=C_S3ygjANg4" target="_blank">Beginner's Guide to Writing User Stories (Real Examples)</a>
+                    <span class="obs">Guia para iniciantes com exemplos reais — linguagem simples e visual. Legenda automática em PT.</span>
+                </li>
+                <li class="en-video">
+                    <span class="lang-tag lang-en">EN</span>
+                    <a href="https://www.youtube.com/watch?v=SRRQCDZQ6G4" target="_blank">Agile User Stories — How To Write User Stories (Simplilearn)</a>
+                    <span class="obs">Da Simplilearn — explica o formato "Como [ator], eu quero [ação] para [objetivo]" com exemplos e critérios INVEST.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=fgW0sfbefK8" target="_blank">O que é uma História de Usuário? — Fundamentos de Gestão de Backlog</a>
+                    <span class="obs">Alternativa em português — explica o conceito de forma clara e ensina a decompor funcionalidades.</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=yG6GUqrje1k" target="_blank">Requisitos Ágeis — Como escrever histórias de usuário incríveis!</a>
+                    <span class="obs">Foca em como escrever bem — com critérios de qualidade (INVEST).</span>
+                </li>
+                <li>
+                    <span class="lang-tag lang-pt">PT</span>
+                    <a href="https://www.youtube.com/watch?v=ktW3UtZPTA4" target="_blank">O que é uma História de Usuário (User Story)?</a>
+                    <span class="obs">Vídeo mais recente (2024) — explicação atualizada e com exemplos práticos.</span>
+                </li>
+            </ul>
+            <div class="anotacao">Suas anotações: </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- DICA DE SENIOR -->
+    <!-- ===================================================== -->
+    <div class="dica-senior">
+        <strong>Conselho de Senior:</strong><br><br>
+        O erro mais comum de quem está começando é assistir 50 vídeos e não praticar.
+        Você já praticou — as 4 fichas que acabou de preencher <strong>são a prática</strong>.
+        Agora os vídeos vão fazer muito mais sentido porque você já passou pela experiência de analisar sistemas reais.<br><br>
+        <strong>Ordem importa:</strong> Nível 1 → 2 → 3 → 4. Não pule.<br>
+        <strong>Prioridade máxima:</strong> Nível 3 (entrevista com stakeholders) — é a próxima etapa real do seu projeto.<br>
+        <strong>Tempo estimado:</strong> ~3 a 4 horas de vídeos + anotações.
+    </div>
+
+    <div class="footer">
+        Guia de Estudo — Requisitos de Software | Senac Minas | Thaís Oliveira | Junho 2026
+    </div>
+
+</body>
+</html>

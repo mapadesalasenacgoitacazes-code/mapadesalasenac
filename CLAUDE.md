@@ -9,9 +9,10 @@ Sistema web para gerenciamento de reservas de salas do SENAC Minas BH, substitui
 - **Backend:** PHP 8 (MVC puro, sem framework)
 - **Banco:** MySQL 8
 - **Frontend:** HTML + CSS + JS + Bootstrap 5
-- **Servidor:** Apache (XAMPP ou Laragon)
+- **Servidor dev:** Apache (XAMPP ou Laragon)
+- **Hospedagem:** InfinityFree (PHP + MySQL gratuito, sem SSH, SSL via Let's Encrypt)
 - **Autenticacao:** PHP Sessions + password_hash()
-- **Seguranca:** PDO com prepared statements
+- **Seguranca:** PDO com prepared statements, CSRF tokens, htmlspecialchars()
 
 ## Estrutura do projeto
 

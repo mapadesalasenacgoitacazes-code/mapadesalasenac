@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prototipos - Mapa de Salas SENAC Minas</title>
+    <title>Protótipos - Mapa de Salas SENAC Minas</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; color: #1a1a1a; }
@@ -30,7 +30,7 @@
         .page-header { background: var(--senac-azul); color: white; padding: 20px 30px; text-align: center; }
         .page-header h1 { font-size: 22px; }
         .page-header p { font-size: 13px; opacity: 0.8; margin-top: 4px; }
-        .paleta { display: flex; justify-content: center; gap: 16px; padding: 16px; background: white; border-bottom: 1px solid var(--cinza-borda); }
+        .paleta { display: flex; justify-content: center; gap: 16px; padding: 16px; background: white; border-bottom: 1px solid var(--cinza-borda); flex-wrap: wrap; }
         .paleta-item { display: flex; align-items: center; gap: 6px; font-size: 11px; }
         .paleta-cor { width: 24px; height: 24px; border-radius: 4px; border: 1px solid #ddd; }
 
@@ -39,6 +39,10 @@
         .tela-label { font-size: 14px; font-weight: 700; color: var(--senac-azul); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
         .tela-label .num { background: var(--senac-laranja); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; }
         .tela-desc { font-size: 12px; color: var(--cinza-texto); margin-bottom: 12px; }
+        .tela-moscow { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 4px; }
+        .moscow-must { background: #fce4ec; color: #c62828; }
+        .moscow-should { background: #fff3e0; color: #e65100; }
+        .moscow-could { background: #e8f5e9; color: #2e7d32; }
 
         /* WIREFRAME FRAME */
         .wireframe { background: white; border: 2px solid var(--cinza-borda); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
@@ -133,6 +137,7 @@
         .alert-warning { background: var(--senac-laranja-bg); border: 1px solid var(--senac-laranja-claro); color: #9A3412; }
         .alert-danger { background: var(--vermelho-bg); border: 1px solid #FECACA; color: var(--vermelho); }
         .alert-success { background: var(--verde-bg); border: 1px solid #86EFAC; color: #166534; }
+        .alert-info { background: var(--senac-azul-claro); border: 1px solid #93C5FD; color: #1E40AF; }
 
         /* LOGIN */
         .login-page { background: var(--senac-azul); min-height: 480px; display: flex; align-items: center; justify-content: center; }
@@ -165,14 +170,38 @@
         .chip { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 600; border: 1px solid var(--cinza-borda); background: white; }
         .chip.active { background: var(--senac-azul); color: white; border-color: var(--senac-azul); }
 
+        /* DASHBOARD CHARTS */
+        .chart-bar { display: flex; align-items: flex-end; gap: 8px; height: 120px; padding: 0 10px; }
+        .chart-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+        .chart-col .bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 4px; }
+        .chart-col .bar-label { font-size: 10px; color: var(--cinza-texto); }
+        .chart-col .bar-value { font-size: 11px; font-weight: 700; color: var(--senac-azul); }
+
+        /* DONUT */
+        .donut-container { display: flex; align-items: center; gap: 20px; }
+        .donut-legend { font-size: 12px; }
+        .donut-legend div { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+        .donut-legend .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+        /* LOG TIMELINE */
+        .log-entry { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-size: 12px; }
+        .log-time { color: var(--cinza-texto); white-space: nowrap; min-width: 130px; }
+        .log-action { flex: 1; }
+        .log-action .log-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-right: 4px; }
+        .log-badge-criar { background: var(--verde-bg); color: var(--verde); }
+        .log-badge-editar { background: var(--senac-azul-claro); color: var(--senac-azul); }
+        .log-badge-cancelar { background: var(--vermelho-bg); color: var(--vermelho); }
+        .log-badge-status { background: var(--senac-laranja-bg); color: #9A3412; }
+        .log-user { color: var(--cinza-texto); min-width: 100px; text-align: right; }
+
         @media print { body { background: white; } .wireframe { box-shadow: none; break-inside: avoid; } }
     </style>
 </head>
 <body>
 
     <div class="page-header">
-        <h1>Prototipos de Telas — Mapa de Salas SENAC Minas</h1>
-        <p>Wireframes de media fidelidade | Paleta oficial SENAC | 7 telas principais</p>
+        <h1>Protótipos de Telas - Mapa de Salas SENAC Minas</h1>
+        <p>Wireframes de média fidelidade | Paleta oficial SENAC | 13 telas | Versão 3.0 - Alinhado com Documento de Requisitos Unificado v3.0</p>
     </div>
 
     <div class="paleta">
@@ -184,21 +213,44 @@
         <div class="paleta-item"><div class="paleta-cor" style="background: #DC2626;"></div> Vermelho (alerta)</div>
     </div>
 
+    <!-- INDICE DAS TELAS -->
+    <div style="max-width: 1300px; margin: 20px auto; padding: 0 20px;">
+        <div style="background: white; border: 1px solid var(--cinza-borda); border-radius: 8px; padding: 18px 24px;">
+            <h3 style="font-size: 14px; color: var(--senac-azul); margin-bottom: 10px;">Índice das Telas</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; font-size: 13px;">
+                <div><strong style="color: var(--senac-laranja);">1.</strong> Tela de Login <span class="tela-moscow moscow-must">Must</span></div>
+                <div><strong style="color: var(--senac-laranja);">7.</strong> Cadastro de Cursos <span class="tela-moscow moscow-should">Should</span></div>
+                <div><strong style="color: var(--senac-laranja);">2.</strong> Painel Principal - Calendário <span class="tela-moscow moscow-must">Must</span></div>
+                <div><strong style="color: var(--senac-laranja);">8.</strong> Cadastro de Feriados e Recessos <span class="tela-moscow moscow-should">Should</span></div>
+                <div><strong style="color: var(--senac-laranja);">3.</strong> Cadastro de Salas <span class="tela-moscow moscow-must">Must</span></div>
+                <div><strong style="color: var(--senac-laranja);">9.</strong> Registrar Dia sem Aula <span class="tela-moscow moscow-should">Should</span></div>
+                <div><strong style="color: var(--senac-laranja);">4.</strong> Cadastro de Turmas <span class="tela-moscow moscow-must">Must</span></div>
+                <div><strong style="color: var(--senac-laranja);">10.</strong> Log de Auditoria <span class="tela-moscow moscow-could">Could</span></div>
+                <div><strong style="color: var(--senac-laranja);">5.</strong> Criar Reserva (Modal) <span class="tela-moscow moscow-must">Must</span></div>
+                <div><strong style="color: var(--senac-laranja);">11.</strong> Dashboard de Ocupação <span class="tela-moscow moscow-could">Could</span></div>
+                <div><strong style="color: var(--senac-laranja);">6.</strong> Histórico de Salas por Turma <span class="tela-moscow moscow-should">Should</span></div>
+                <div><strong style="color: var(--senac-laranja);">12.</strong> Gestão de Usuários (Admin) <span class="tela-moscow moscow-could">Could</span></div>
+                <div></div>
+                <div><strong style="color: var(--senac-laranja);">13.</strong> Histórico de Modificações <span class="tela-moscow moscow-could">Could</span></div>
+            </div>
+        </div>
+    </div>
+
     <div class="telas-grid">
 
         <!-- ============================================ -->
         <!-- TELA 1: LOGIN -->
         <!-- ============================================ -->
         <div class="tela-section">
-            <div class="tela-label"><span class="num">1</span> Tela de Login</div>
-            <div class="tela-desc">Tela inicial. Perfil do usuario (Supervisao/Suporte/Docente) define o que aparece apos o login. RF01.</div>
+            <div class="tela-label"><span class="num">1</span> Tela de Login <span class="tela-moscow moscow-must">Must (Obrigatório)</span></div>
+            <div class="tela-desc">Tela inicial. Perfil do usuário (Admin/Supervisão/Suporte/Docente) define permissões após login. Sessão expira após 30 min de inatividade. RF01.</div>
             <div class="wireframe">
                 <div class="login-page">
                     <div class="login-card">
                         <div class="login-header">
                             <div class="login-logo">MS</div>
                             <h2>Mapa de Salas</h2>
-                            <p>SENAC Minas — Gerenciamento de Salas</p>
+                            <p>SENAC Minas - Gerenciamento de Salas</p>
                         </div>
                         <div class="login-body">
                             <div class="form-group">
@@ -208,11 +260,13 @@
                             <div class="form-group">
                                 <label class="form-label">Senha</label>
                                 <input class="form-input" type="password" placeholder="********" disabled>
+                                <div style="font-size: 10px; color: var(--cinza-texto); margin-top: 4px;">Mínimo 8 caracteres (letras + números + símbolos)</div>
                             </div>
                             <button class="login-btn" disabled>Entrar</button>
                         </div>
                         <div class="login-footer">
-                            Esqueceu a senha? Contate o administrador do sistema.
+                            Esqueceu a senha? Contate o administrador do sistema.<br>
+                            <span style="font-size: 10px; color: #ccc; margin-top: 4px; display: inline-block;">HTTPS via SSL/TLS | Token CSRF | session_regenerate_id()</span>
                         </div>
                     </div>
                 </div>
@@ -223,8 +277,8 @@
         <!-- TELA 2: PAINEL PRINCIPAL -->
         <!-- ============================================ -->
         <div class="tela-section">
-            <div class="tela-label"><span class="num">2</span> Painel Principal — Calendario de Salas</div>
-            <div class="tela-desc">Tela principal apos login. Substitui a planilha Excel. Visao semanal com as salas nas linhas e os dias nas colunas. RF11, RF12.</div>
+            <div class="tela-label"><span class="num">2</span> Painel Principal - Calendário de Salas <span class="tela-moscow moscow-must">Must (Obrigatório)</span></div>
+            <div class="tela-desc">Tela principal após login. Substitui a planilha Excel. Visão semanal com salas nas linhas e dias nas colunas. 4 modos: Dia/Semana/Mês/Ano. Filtros por turno, tipo de sala e andar. RF11, RF12.</div>
             <div class="wireframe">
                 <div class="navbar">
                     <div class="navbar-logo">
@@ -236,10 +290,11 @@
                         <a href="#">Salas</a>
                         <a href="#">Turmas</a>
                         <a href="#">Reservas</a>
-                        <a href="#">Relatorios</a>
+                        <a href="#">Feriados</a>
+                        <a href="#">Relatórios</a>
                     </div>
                     <div class="navbar-user">
-                        <span class="perfil-badge">Supervisao</span>
+                        <span class="perfil-badge">Supervisão</span>
                         Maria Silva
                         <div class="avatar">MS</div>
                     </div>
@@ -261,42 +316,46 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-number" style="color: var(--vermelho);">1</div>
-                            <div class="stat-label">Em manutencao</div>
+                            <div class="stat-label">Em manutenção</div>
                         </div>
                     </div>
 
                     <!-- Filtros rapidos -->
                     <div class="filter-bar">
                         <div class="form-group">
-                            <label class="form-label">Visualizacao</label>
+                            <label class="form-label">Visualização</label>
                             <div class="chip-group">
                                 <span class="chip">Dia</span>
                                 <span class="chip active">Semana</span>
-                                <span class="chip">Mes</span>
+                                <span class="chip">Mês</span>
                                 <span class="chip">Ano</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Periodo</label>
+                            <label class="form-label">Período</label>
                             <input class="form-input" type="text" value="29/06 - 05/07/2026" disabled style="width:160px;">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Turno</label>
                             <div class="chip-group">
                                 <span class="chip active">Todos</span>
-                                <span class="chip">Manha</span>
+                                <span class="chip">Manhã</span>
                                 <span class="chip">Tarde</span>
                                 <span class="chip">Noite</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Tipo</label>
-                            <select class="form-input form-select" disabled style="width:140px;"><option>Todos os tipos</option></select>
+                            <label class="form-label">Tipo de Sala</label>
+                            <select class="form-input form-select" disabled style="width:130px;"><option>Todos os tipos</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Andar</label>
+                            <select class="form-input form-select" disabled style="width:110px;"><option>Todos</option></select>
                         </div>
                         <button class="btn btn-primary" disabled>+ Nova Reserva</button>
                     </div>
 
-                    <!-- Calendario semanal -->
+                    <!-- Calendário semanal -->
                     <div class="card">
                         <div class="calendar-grid">
                             <div class="cal-header">SALA</div>
@@ -309,7 +368,7 @@
                             <div class="cal-header" style="background: var(--cinza-texto);">DOM 05</div>
 
                             <!-- Sala 1 -->
-                            <div class="cal-room-label">Sala 1 <span class="room-type">Sala de Aula (28)</span></div>
+                            <div class="cal-room-label">Sala 1 <span class="room-type">Sala de Aula · Térreo (28)</span></div>
                             <div class="cal-cell"><div class="turma-block manha">006.0009 - APQ Admin</div><div class="turma-block tarde">006.0012 - Logistica</div></div>
                             <div class="cal-cell"><div class="turma-block manha">006.0009 - APQ Admin</div></div>
                             <div class="cal-cell"><div class="turma-block manha">006.0009 - APQ Admin</div><div class="turma-block tarde">006.0012 - Logistica</div></div>
@@ -319,7 +378,7 @@
                             <div class="cal-cell" style="background: #f3f4f6;"></div>
 
                             <!-- Sala 2 -->
-                            <div class="cal-room-label">Sala 2 <span class="room-type">Sala de Aula (28)</span></div>
+                            <div class="cal-room-label">Sala 2 <span class="room-type">Sala de Aula · 1o andar (28)</span></div>
                             <div class="cal-cell"><div class="turma-block tarde">006.0018 - TI Redes</div></div>
                             <div class="cal-cell"><div class="turma-block tarde">006.0018 - TI Redes</div></div>
                             <div class="cal-cell"><div class="turma-block tarde">006.0018 - TI Redes</div></div>
@@ -329,27 +388,27 @@
                             <div class="cal-cell" style="background: #f3f4f6;"></div>
 
                             <!-- Lab 1 -->
-                            <div class="cal-room-label">Lab 1 <span class="room-type">Laboratorio (25)</span></div>
+                            <div class="cal-room-label">Lab 1 <span class="room-type">Laboratório · 2o andar (25)</span></div>
                             <div class="cal-cell"><div class="turma-block noite">006.0042 - Dev Sistemas</div></div>
                             <div class="cal-cell"><div class="turma-block noite">006.0042 - Dev Sistemas</div></div>
-                            <div class="cal-cell"><div class="turma-block noite">006.0042 - Dev Sistemas</div></div>
+                            <div class="cal-cell feriado" style="position:relative;"><div style="font-size:8px;color:#DC2626;position:absolute;top:2px;right:4px;">Feriado</div></div>
                             <div class="cal-cell"><div class="turma-block noite">006.0042 - Dev Sistemas</div></div>
                             <div class="cal-cell"><div class="turma-block noite">006.0042 - Dev Sistemas</div></div>
                             <div class="cal-cell"></div>
                             <div class="cal-cell" style="background: #f3f4f6;"></div>
 
                             <!-- Cozinha -->
-                            <div class="cal-room-label">Cozinha <span class="room-type">Cozinha (20)</span></div>
+                            <div class="cal-room-label">Cozinha <span class="room-type">Cozinha · Térreo (20)</span></div>
                             <div class="cal-cell"><div class="turma-block manha">006.0055 - Gastronomia</div></div>
                             <div class="cal-cell"></div>
-                            <div class="cal-cell"><div class="turma-block manha">006.0055 - Gastronomia</div></div>
+                            <div class="cal-cell feriado"></div>
                             <div class="cal-cell"></div>
                             <div class="cal-cell"><div class="turma-block manha">006.0055 - Gastronomia</div></div>
                             <div class="cal-cell"></div>
                             <div class="cal-cell" style="background: #f3f4f6;"></div>
 
-                            <!-- Auditorio -->
-                            <div class="cal-room-label" style="color: var(--vermelho);">Auditorio <span class="room-type" style="color: var(--vermelho);">Manutencao (50)</span></div>
+                            <!-- Auditório -->
+                            <div class="cal-room-label" style="color: var(--vermelho);">Auditório <span class="room-type" style="color: var(--vermelho);">Manutenção · 1o andar (50)</span></div>
                             <div class="cal-cell" style="background: var(--vermelho-bg);"></div>
                             <div class="cal-cell" style="background: var(--vermelho-bg);"></div>
                             <div class="cal-cell" style="background: var(--vermelho-bg);"></div>
@@ -360,11 +419,11 @@
                         </div>
                     </div>
                     <div style="display: flex; gap: 14px; margin-top: 10px; font-size: 10px; color: var(--cinza-texto);">
-                        <span><span style="display:inline-block;width:10px;height:10px;background:var(--amarelo-bg);border:1px solid #EAB308;border-radius:2px;"></span> Manha</span>
+                        <span><span style="display:inline-block;width:10px;height:10px;background:var(--amarelo-bg);border:1px solid #EAB308;border-radius:2px;"></span> Manhã</span>
                         <span><span style="display:inline-block;width:10px;height:10px;background:var(--senac-laranja-bg);border:1px solid var(--senac-laranja);border-radius:2px;"></span> Tarde</span>
                         <span><span style="display:inline-block;width:10px;height:10px;background:#E0E7FF;border:1px solid #6366F1;border-radius:2px;"></span> Noite</span>
-                        <span><span style="display:inline-block;width:10px;height:10px;background:var(--vermelho-bg);border:1px solid var(--vermelho);border-radius:2px;"></span> Manutencao</span>
-                        <span><span style="display:inline-block;width:10px;height:10px;background:#FEF2F2;border:1px solid #FCA5A5;border-radius:2px;"></span> Feriado</span>
+                        <span><span style="display:inline-block;width:10px;height:10px;background:var(--vermelho-bg);border:1px solid var(--vermelho);border-radius:2px;"></span> Manutenção</span>
+                        <span><span style="display:inline-block;width:10px;height:10px;background:#FEF2F2;border:1px solid #FCA5A5;border-radius:2px;"></span> Feriado/Recesso</span>
                     </div>
                 </div>
             </div>
@@ -374,8 +433,8 @@
         <!-- TELA 3: CADASTRO DE SALA -->
         <!-- ============================================ -->
         <div class="tela-section">
-            <div class="tela-label"><span class="num">3</span> Cadastro de Salas</div>
-            <div class="tela-desc">Listagem + formulario de cadastro. A equipe cadastra livremente. RF02.</div>
+            <div class="tela-label"><span class="num">3</span> Cadastro de Salas <span class="tela-moscow moscow-must">Must (Obrigatório)</span></div>
+            <div class="tela-desc">Listagem + formulario de cadastro. A equipe cadastra livremente. Campo Andar obrigatorio. RF02.</div>
             <div class="wireframe">
                 <div class="navbar">
                     <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
@@ -384,7 +443,8 @@
                         <a href="#" class="active">Salas</a>
                         <a href="#">Turmas</a>
                         <a href="#">Reservas</a>
-                        <a href="#">Relatorios</a>
+                        <a href="#">Feriados</a>
+                        <a href="#">Relatórios</a>
                     </div>
                     <div class="navbar-user"><span class="perfil-badge">Suporte</span> Carlos <div class="avatar">C</div></div>
                 </div>
@@ -398,23 +458,23 @@
                             <table class="table-mini">
                                 <thead>
                                     <tr>
-                                        <th>Numero</th>
+                                        <th>Número</th>
                                         <th>Tipo</th>
                                         <th>Andar</th>
                                         <th>Capacidade</th>
                                         <th>Recursos</th>
                                         <th>Status</th>
-                                        <th>Acoes</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td><strong>Sala 1</strong></td>
                                         <td>Sala de Aula</td>
-                                        <td>Terreo</td>
+                                        <td>Térreo</td>
                                         <td>28 vagas</td>
                                         <td>Projetor, Ar-cond.</td>
-                                        <td><span class="status-badge status-disponivel">Disponivel</span></td>
+                                        <td><span class="status-badge status-disponivel">Disponível</span></td>
                                         <td><button class="btn btn-secondary btn-sm" disabled>Editar</button></td>
                                     </tr>
                                     <tr>
@@ -428,29 +488,29 @@
                                     </tr>
                                     <tr>
                                         <td><strong>Lab 1</strong></td>
-                                        <td>Laboratorio</td>
+                                        <td>Laboratório</td>
                                         <td>2o andar</td>
                                         <td>25 vagas</td>
                                         <td>25 PCs, Projetor</td>
-                                        <td><span class="status-badge status-disponivel">Disponivel</span></td>
+                                        <td><span class="status-badge status-disponivel">Disponível</span></td>
                                         <td><button class="btn btn-secondary btn-sm" disabled>Editar</button></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Cozinha</strong></td>
                                         <td>Cozinha</td>
-                                        <td>Terreo</td>
+                                        <td>Térreo</td>
                                         <td>20 vagas</td>
-                                        <td>Fogao ind., Forno</td>
-                                        <td><span class="status-badge status-disponivel">Disponivel</span></td>
+                                        <td>Fogão ind., Forno</td>
+                                        <td><span class="status-badge status-disponivel">Disponível</span></td>
                                         <td><button class="btn btn-secondary btn-sm" disabled>Editar</button></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Auditorio</strong></td>
-                                        <td>Auditorio</td>
+                                        <td><strong>Auditório</strong></td>
+                                        <td>Auditório</td>
                                         <td>1o andar</td>
                                         <td>50 vagas</td>
                                         <td>Projetor, Som, Mic</td>
-                                        <td><span class="status-badge status-manutencao">Manutencao</span></td>
+                                        <td><span class="status-badge status-manutencao">Manutenção</span></td>
                                         <td><button class="btn btn-secondary btn-sm" disabled>Editar</button></td>
                                     </tr>
                                 </tbody>
@@ -464,7 +524,7 @@
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label class="form-label">Numero / Nome da Sala *</label>
+                                    <label class="form-label">Número / Nome da Sala *</label>
                                     <input class="form-input" placeholder="Ex: Sala 6, Lab 2, Cozinha B" disabled>
                                 </div>
                                 <div class="form-group">
@@ -472,8 +532,8 @@
                                     <select class="form-input form-select" disabled>
                                         <option>Selecione...</option>
                                         <option>Sala de Aula</option>
-                                        <option>Laboratorio</option>
-                                        <option>Auditorio</option>
+                                        <option>Laboratório</option>
+                                        <option>Auditório</option>
                                         <option>Cozinha</option>
                                         <option>Especial</option>
                                     </select>
@@ -486,7 +546,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Andar *</label>
-                                    <input class="form-input" placeholder="Ex: Terreo, 1o andar, 2o andar" disabled>
+                                    <input class="form-input" placeholder="Ex: Térreo, 1o andar, 2o andar" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Recursos disponiveis</label>
@@ -494,7 +554,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Observacao</label>
+                                <label class="form-label">Observação</label>
                                 <input class="form-input" placeholder="Ex: Bloco B, proximo ao refeitorio" disabled>
                             </div>
                             <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px;">
@@ -511,8 +571,8 @@
         <!-- TELA 4: CADASTRO DE TURMA -->
         <!-- ============================================ -->
         <div class="tela-section">
-            <div class="tela-label"><span class="num">4</span> Cadastro de Turmas</div>
-            <div class="tela-desc">Cadastro com codigo, curso, professor, turno e dias da semana fixos. RF04.</div>
+            <div class="tela-label"><span class="num">4</span> Cadastro de Turmas <span class="tela-moscow moscow-must">Must (Obrigatório)</span></div>
+            <div class="tela-desc">Cadastro com codigo, curso, professor(es), turno e dias da semana fixos. Filtros expandidos por tipo, area, programa, progresso. RF04, RF12, RF15.</div>
             <div class="wireframe">
                 <div class="navbar">
                     <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
@@ -521,7 +581,8 @@
                         <a href="#">Salas</a>
                         <a href="#" class="active">Turmas</a>
                         <a href="#">Reservas</a>
-                        <a href="#">Relatorios</a>
+                        <a href="#">Feriados</a>
+                        <a href="#">Relatórios</a>
                     </div>
                     <div class="navbar-user"><span class="perfil-badge">Suporte</span> Carlos <div class="avatar">C</div></div>
                 </div>
@@ -534,23 +595,27 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Tipo de Curso</label>
-                            <select class="form-input form-select" disabled style="width:140px;"><option>Todos</option></select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Area</label>
-                            <select class="form-input form-select" disabled style="width:160px;"><option>Todas as areas</option></select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Professor</label>
-                            <select class="form-input form-select" disabled style="width:150px;"><option>Todos</option></select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Dias</label>
                             <select class="form-input form-select" disabled style="width:130px;"><option>Todos</option></select>
                         </div>
                         <div class="form-group">
+                            <label class="form-label">Área</label>
+                            <select class="form-input form-select" disabled style="width:140px;"><option>Todas as areas</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Programa</label>
+                            <select class="form-input form-select" disabled style="width:120px;"><option>Todos</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Professor</label>
+                            <select class="form-input form-select" disabled style="width:130px;"><option>Todos</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Dias</label>
+                            <select class="form-input form-select" disabled style="width:110px;"><option>Todos</option></select>
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">Progresso</label>
-                            <select class="form-input form-select" disabled style="width:130px;"><option>Qualquer</option></select>
+                            <select class="form-input form-select" disabled style="width:110px;"><option>Qualquer</option></select>
                         </div>
                         <button class="btn btn-primary btn-sm" disabled>Filtrar</button>
                     </div>
@@ -565,24 +630,26 @@
                             <table class="table-mini">
                                 <thead>
                                     <tr>
-                                        <th>Codigo</th>
+                                        <th>Código</th>
                                         <th>Curso</th>
                                         <th>Tipo</th>
+                                        <th>Programa</th>
                                         <th>Professores</th>
                                         <th>Turno</th>
                                         <th>Dias</th>
-                                        <th>Periodo</th>
+                                        <th>Período</th>
                                         <th>Progresso</th>
-                                        <th>Acoes</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td><strong>006.2026.0009</strong></td>
                                         <td>APQ Serv. Admin.</td>
-                                        <td style="font-size:10px;">Tecnico</td>
+                                        <td style="font-size:10px;">Técnico</td>
+                                        <td style="font-size:10px;">Senac+</td>
                                         <td>Juan Carlo</td>
-                                        <td><span class="turno-badge turno-m">Manha</span></td>
+                                        <td><span class="turno-badge turno-m">Manhã</span></td>
                                         <td>Seg a Sex</td>
                                         <td>02/02 - 02/03/2027</td>
                                         <td><div style="display:flex;align-items:center;gap:6px;"><div class="progress-bar" style="width:60px;"><div class="progress-fill mid" style="width:80%;"></div></div><span style="font-size:11px;">80%</span></div></td>
@@ -591,7 +658,8 @@
                                     <tr>
                                         <td><strong>006.2026.0042</strong></td>
                                         <td>Dev. Sistemas</td>
-                                        <td style="font-size:10px;">Tecnico</td>
+                                        <td style="font-size:10px;">Técnico</td>
+                                        <td style="font-size:10px;">Senac+</td>
                                         <td>Cleiton Pereira</td>
                                         <td><span class="turno-badge turno-n">Noite</span></td>
                                         <td>Seg a Sex</td>
@@ -602,9 +670,10 @@
                                     <tr>
                                         <td><strong>006.2026.0055</strong></td>
                                         <td>Gastronomia</td>
-                                        <td style="font-size:10px;">Cursos Ageis</td>
+                                        <td style="font-size:10px;">Cursos Ágeis</td>
+                                        <td style="font-size:10px;">PSG</td>
                                         <td>Raphaela, Ana Paula</td>
-                                        <td><span class="turno-badge turno-m">Manha</span></td>
+                                        <td><span class="turno-badge turno-m">Manhã</span></td>
                                         <td>Seg/Qua/Sex</td>
                                         <td>25/05 - 21/07/2026</td>
                                         <td><div style="display:flex;align-items:center;gap:6px;"><div class="progress-bar" style="width:60px;"><div class="progress-fill mid" style="width:61%;"></div></div><span style="font-size:11px;">61%</span></div></td>
@@ -613,9 +682,10 @@
                                     <tr>
                                         <td><strong>006.2026.0031</strong></td>
                                         <td>Design Grafico</td>
-                                        <td style="font-size:10px;">Cursos Ageis</td>
+                                        <td style="font-size:10px;">Cursos Ágeis</td>
+                                        <td style="font-size:10px;">-</td>
                                         <td>Marcos Vinicios</td>
-                                        <td><span class="turno-badge turno-m">Manha</span></td>
+                                        <td><span class="turno-badge turno-m">Manhã</span></td>
                                         <td>Somente Sab</td>
                                         <td>22/06 - 23/06/2026</td>
                                         <td><div style="display:flex;align-items:center;gap:6px;"><div class="progress-bar" style="width:60px;"><div class="progress-fill high" style="width:100%;"></div></div><span style="font-size:11px;">100%</span></div></td>
@@ -632,12 +702,12 @@
                         <div class="card-body">
                             <div class="form-row-3">
                                 <div class="form-group">
-                                    <label class="form-label">Codigo da Turma *</label>
+                                    <label class="form-label">Código da Turma *</label>
                                     <input class="form-input" placeholder="006.2026.XXXX" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Tipo de Curso *</label>
-                                    <select class="form-input form-select" disabled><option>Selecione...</option><option>Cursos Ageis</option><option>Graduacao</option><option>Pos Graduacao</option><option>Tecnico</option></select>
+                                    <select class="form-input form-select" disabled><option>Selecione...</option><option>Cursos Ágeis</option><option>Graduação</option><option>PósGraduação</option><option>Técnico</option></select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Curso *</label>
@@ -659,7 +729,7 @@
                             <div class="form-row-3">
                                 <div class="form-group">
                                     <label class="form-label">Turno *</label>
-                                    <select class="form-input form-select" disabled><option>Selecione...</option><option>Manha</option><option>Tarde</option><option>Noite</option></select>
+                                    <select class="form-input form-select" disabled><option>Selecione...</option><option>Manhã</option><option>Tarde</option><option>Noite</option></select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Data de Inicio *</label>
@@ -683,12 +753,12 @@
                                 <div style="font-size: 10px; color: var(--cinza-texto); margin-top: 4px;">Selecione os dias em que esta turma tem aula</div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Descricao da Turma</label>
-                                <textarea class="form-input" rows="2" placeholder="Descricao geral da turma, objetivos, informacoes complementares..." disabled style="resize: vertical;"></textarea>
+                                <label class="form-label">Descrição da Turma</label>
+                                <textarea class="form-input" rows="2" placeholder="Descrição geral da turma, objetivos, informações complementares..." disabled style="resize: vertical;"></textarea>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Observacao</label>
-                                <textarea class="form-input" rows="2" placeholder="Anotacoes internas, avisos, lembretes..." disabled style="resize: vertical;"></textarea>
+                                <label class="form-label">Observação</label>
+                                <textarea class="form-input" rows="2" placeholder="Anotações internas, avisos, lembretes..." disabled style="resize: vertical;"></textarea>
                             </div>
                             <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px;">
                                 <button class="btn btn-secondary" disabled>Cancelar</button>
@@ -704,8 +774,8 @@
         <!-- TELA 5: CRIAR RESERVA (MODAL) -->
         <!-- ============================================ -->
         <div class="tela-section">
-            <div class="tela-label"><span class="num">5</span> Criar Reserva (com validacao de conflito)</div>
-            <div class="tela-desc">Modal que abre ao clicar "Nova Reserva" ou ao clicar em um dia vazio no calendario. RF06, RN02.</div>
+            <div class="tela-label"><span class="num">5</span> Criar Reserva (com validação de conflito) <span class="tela-moscow moscow-must">Must (Obrigatório)</span></div>
+            <div class="tela-desc">Modal que abre ao clicar "Nova Reserva" ou ao clicar em um dia vazio no calendario. UNIQUE(id_sala, data, turno) impede conflito. RF06, RN01, RN02.</div>
             <div class="wireframe">
                 <div class="navbar">
                     <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
@@ -714,7 +784,8 @@
                         <a href="#">Salas</a>
                         <a href="#">Turmas</a>
                         <a href="#">Reservas</a>
-                        <a href="#">Relatorios</a>
+                        <a href="#">Feriados</a>
+                        <a href="#">Relatórios</a>
                     </div>
                     <div class="navbar-user"><span class="perfil-badge">Suporte</span> Carlos <div class="avatar">C</div></div>
                 </div>
@@ -727,20 +798,20 @@
                         <div class="modal-body">
                             <div class="alert alert-danger" style="display: flex;">
                                 <span style="font-size: 16px;">&#9888;</span>
-                                <span><strong>Conflito detectado!</strong> A Sala 1 ja esta reservada para a Turma 006.2026.0009 (APQ Admin) no turno da Manha em 30/06/2026.</span>
+                                <span><strong>Conflito detectado!</strong> A Sala 1 ja esta reservada para a Turma 006.2026.0009 (APQ Admin) no turno da Manhã em 30/06/2026.</span>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">Sala *</label>
                                     <select class="form-input form-select" disabled>
-                                        <option>Sala 1 — Sala de Aula (28 vagas)</option>
+                                        <option>Sala 1 - Sala de Aula (28 vagas)</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Turma *</label>
                                     <select class="form-input form-select" disabled>
-                                        <option>006.2026.0012 — Logistica</option>
+                                        <option>006.2026.0012 - Logística</option>
                                     </select>
                                 </div>
                             </div>
@@ -752,7 +823,7 @@
                                 <div class="form-group">
                                     <label class="form-label">Turno *</label>
                                     <select class="form-input form-select" disabled>
-                                        <option>Manha</option>
+                                        <option>Manhã</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -763,7 +834,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Observacao</label>
+                                <label class="form-label">Observação</label>
                                 <input class="form-input" placeholder="Opcional" disabled>
                             </div>
 
@@ -785,8 +856,8 @@
         <!-- TELA 6: HISTORICO / FILTROS -->
         <!-- ============================================ -->
         <div class="tela-section">
-            <div class="tela-label"><span class="num">6</span> Consulta e Historico de Salas por Turma</div>
-            <div class="tela-desc">Filtrar por turma e ver todas as salas pelas quais ela passou. Pedido direto da cliente. RF12, RF13.</div>
+            <div class="tela-label"><span class="num">6</span> Consulta e Histórico de Salas por Turma <span class="tela-moscow moscow-should">Should (Importante)</span></div>
+            <div class="tela-desc">Filtrar por turma e ver todas as salas pelas quais ela passou. Pedido direto da cliente: "e a informação que mais demora pra encontrar na planilha". RF13, RF14.</div>
             <div class="wireframe">
                 <div class="navbar">
                     <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
@@ -795,9 +866,10 @@
                         <a href="#">Salas</a>
                         <a href="#">Turmas</a>
                         <a href="#">Reservas</a>
-                        <a href="#" class="active">Relatorios</a>
+                        <a href="#">Feriados</a>
+                        <a href="#" class="active">Relatórios</a>
                     </div>
-                    <div class="navbar-user"><span class="perfil-badge">Supervisao</span> Maria <div class="avatar">M</div></div>
+                    <div class="navbar-user"><span class="perfil-badge">Supervisão</span> Maria <div class="avatar">M</div></div>
                 </div>
                 <div class="main-content">
                     <!-- Filtro -->
@@ -811,7 +883,7 @@
                             <select class="form-input form-select" disabled style="width:150px;"><option>Todos</option></select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Periodo</label>
+                            <label class="form-label">Período</label>
                             <input class="form-input" value="01/01/2026 - 31/12/2026" disabled style="width: 180px;">
                         </div>
                         <button class="btn btn-primary" disabled>Filtrar</button>
@@ -822,9 +894,9 @@
                     <div class="card" style="margin-bottom: 16px;">
                         <div class="card-header" style="background: var(--senac-azul-claro);">
                             <div>
-                                <h3 style="font-size: 16px;">Turma 006.2026.0055 — Gastronomia</h3>
+                                <h3 style="font-size: 16px;">Turma 006.2026.0055 - Gastronomia</h3>
                                 <div style="font-size: 12px; color: var(--cinza-texto); margin-top: 2px;">
-                                    Prof. Raphaela de Oliveira | Manha | Seg/Qua/Sex | 25/05/2026 - 21/07/2026
+                                    Prof. Raphaela de Oliveira, Ana Paula Silva | Manhã | Seg/Qua/Sex | 25/05/2026 - 21/07/2026 | PSG
                                 </div>
                             </div>
                             <div style="text-align: right;">
@@ -836,8 +908,8 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3>Historico de Salas</h3>
-                            <span style="font-size: 11px; color: var(--cinza-texto);">3 salas utilizadas ao longo do curso</span>
+                            <h3>Histórico de Salas</h3>
+                            <span style="font-size: 11px; color: var(--cinza-texto);">3 salas útilizadas ao longo do curso</span>
                         </div>
                         <div class="card-body" style="padding: 0;">
                             <table class="table-mini">
@@ -845,6 +917,7 @@
                                     <tr>
                                         <th>Sala</th>
                                         <th>Tipo</th>
+                                        <th>Andar</th>
                                         <th>Primeira vez</th>
                                         <th>Ultima vez</th>
                                         <th>Total de dias</th>
@@ -855,14 +928,16 @@
                                     <tr>
                                         <td><strong>Cozinha Industrial</strong></td>
                                         <td>Cozinha</td>
+                                        <td>Térreo</td>
                                         <td>25/05/2026</td>
                                         <td>29/06/2026</td>
                                         <td>12 dias</td>
-                                        <td><span class="turno-badge turno-m">Manha</span></td>
+                                        <td><span class="turno-badge turno-m">Manhã</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Sala 4</strong></td>
                                         <td>Sala de Aula</td>
+                                        <td>1o andar</td>
                                         <td>27/05/2026</td>
                                         <td>01/07/2026</td>
                                         <td>8 dias</td>
@@ -870,7 +945,8 @@
                                     </tr>
                                     <tr>
                                         <td><strong>Lab 2</strong></td>
-                                        <td>Laboratorio</td>
+                                        <td>Laboratório</td>
+                                        <td>2o andar</td>
                                         <td>15/06/2026</td>
                                         <td>22/06/2026</td>
                                         <td>3 dias</td>
@@ -909,14 +985,12 @@
             </div>
         </div>
 
-    </div>
-
         <!-- ============================================ -->
         <!-- TELA 7: CADASTRO DE CURSO -->
         <!-- ============================================ -->
         <div class="tela-section">
-            <div class="tela-label"><span class="num">7</span> Cadastro de Cursos</div>
-            <div class="tela-desc">Cadastro de cursos com tipo (Cursos Ageis, Graduacao, Pos Graduacao, Tecnico) e 22 areas de conhecimento do SENAC. RF03.</div>
+            <div class="tela-label"><span class="num">7</span> Cadastro de Cursos <span class="tela-moscow moscow-should">Should (Importante)</span></div>
+            <div class="tela-desc">Cadastro de cursos com tipo (Cursos Ágeis, Graduação, PósGraduação, Técnico), programa (Todos/Senac+/PSG) e 23 areas de conhecimento SENAC. RF03.</div>
             <div class="wireframe">
                 <div class="navbar">
                     <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
@@ -925,9 +999,10 @@
                         <a href="#">Salas</a>
                         <a href="#" class="active">Turmas</a>
                         <a href="#">Reservas</a>
-                        <a href="#">Relatorios</a>
+                        <a href="#">Feriados</a>
+                        <a href="#">Relatórios</a>
                     </div>
-                    <div class="navbar-user"><span class="perfil-badge">Supervisao</span> Maria <div class="avatar">M</div></div>
+                    <div class="navbar-user"><span class="perfil-badge">Supervisão</span> Maria <div class="avatar">M</div></div>
                 </div>
                 <div class="main-content">
                     <div class="card" style="margin-bottom: 16px;">
@@ -942,25 +1017,25 @@
                                         <th>Nome do Curso</th>
                                         <th>Tipo</th>
                                         <th>Programa</th>
-                                        <th>Area</th>
-                                        <th>Carga Horaria</th>
+                                        <th>Área</th>
+                                        <th>Carga Horária</th>
                                         <th>Turmas Ativas</th>
-                                        <th>Acoes</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td><strong>Tec. Desenvolvimento de Sistemas</strong></td>
-                                        <td>Tecnico</td>
+                                        <td>Técnico</td>
                                         <td>Senac +</td>
-                                        <td>Tecnologia da Informacao</td>
+                                        <td>Tecnologia da Informação</td>
                                         <td>1200h</td>
                                         <td>2</td>
                                         <td><button class="btn btn-secondary btn-sm" disabled>Editar</button></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Gastronomia Basica</strong></td>
-                                        <td>Cursos Ageis</td>
+                                        <td>Cursos Ágeis</td>
                                         <td>PSG</td>
                                         <td>Gastronomia</td>
                                         <td>160h</td>
@@ -969,17 +1044,17 @@
                                     </tr>
                                     <tr>
                                         <td><strong>APQ Servicos Administrativos</strong></td>
-                                        <td>Tecnico</td>
+                                        <td>Técnico</td>
                                         <td>Senac +</td>
-                                        <td>Gestao</td>
+                                        <td>Gestão</td>
                                         <td>800h</td>
                                         <td>1</td>
                                         <td><button class="btn btn-secondary btn-sm" disabled>Editar</button></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Design Grafico</strong></td>
-                                        <td>Cursos Ageis</td>
-                                        <td>—</td>
+                                        <td>Cursos Ágeis</td>
+                                        <td>Todos</td>
                                         <td>Design</td>
                                         <td>200h</td>
                                         <td>1</td>
@@ -996,16 +1071,16 @@
                             <div class="form-row-3">
                                 <div class="form-group">
                                     <label class="form-label">Nome do Curso *</label>
-                                    <input class="form-input" placeholder="Ex: Tecnico em Enfermagem" disabled>
+                                    <input class="form-input" placeholder="Ex: Técnico em Enfermagem" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Tipo de Curso *</label>
                                     <select class="form-input form-select" disabled>
                                         <option>Selecione...</option>
-                                        <option>Cursos Ageis</option>
-                                        <option>Graduacao</option>
-                                        <option>Pos Graduacao</option>
-                                        <option>Tecnico</option>
+                                        <option>Cursos Ágeis</option>
+                                        <option>Graduação</option>
+                                        <option>PósGraduação</option>
+                                        <option>Técnico</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -1019,16 +1094,16 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label class="form-label">Area de Conhecimento *</label>
+                                    <label class="form-label">Área de Conhecimento *</label>
                                     <select class="form-input form-select" disabled>
-                                        <option>Selecione a area...</option>
-                                        <option>Gestao</option>
-                                        <option>Comercio</option>
-                                        <option>Comunicacao</option>
+                                        <option>Selecione a área...</option>
+                                        <option>Gestão</option>
+                                        <option>Comércio</option>
+                                        <option>Comunicação</option>
                                         <option>Artes</option>
                                         <option>Design</option>
-                                        <option>Saude</option>
-                                        <option>Tecnologia da Informacao</option>
+                                        <option>Saúde</option>
+                                        <option>Tecnologia da Informação</option>
                                         <option>Idioma</option>
                                         <option>Educacional</option>
                                         <option>Lazer</option>
@@ -1036,19 +1111,19 @@
                                         <option>Beleza</option>
                                         <option>Turismo</option>
                                         <option>Social</option>
-                                        <option>Producao de Alimentos</option>
-                                        <option>Seguranca</option>
+                                        <option>Produção de Alimentos</option>
+                                        <option>Segurança</option>
                                         <option>Hospedagem</option>
                                         <option>Gastronomia</option>
                                         <option>Eventos</option>
-                                        <option>Asseio e Conservacao</option>
-                                        <option>Meio Ambiente e Saude</option>
+                                        <option>Asseio e Conservação</option>
+                                        <option>Meio Ambiente e Saúde</option>
                                         <option>Meio Ambiente e Recursos Naturais</option>
                                         <option>Games</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Carga Horaria Total (horas) *</label>
+                                    <label class="form-label">Carga Horária Total (horas) *</label>
                                     <input class="form-input" type="number" placeholder="Ex: 1200" disabled>
                                 </div>
                             </div>
@@ -1062,16 +1137,908 @@
             </div>
         </div>
 
+        <!-- ============================================ -->
+        <!-- TELA 8: CADASTRO DE FERIADOS E RECESSOS -->
+        <!-- ============================================ -->
+        <div class="tela-section">
+            <div class="tela-label"><span class="num">8</span> Cadastro de Feriados e Recessos <span class="tela-moscow moscow-should">Should (Importante)</span></div>
+            <div class="tela-desc">Cada unidade define seus próprios feriados/recessos. Ao cadastrar, alerta sobre reservas existentes no dia e recalcula términos. RF05, RN03, RN04.</div>
+            <div class="wireframe">
+                <div class="navbar">
+                    <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
+                    <div class="navbar-menu">
+                        <a href="#">Painel</a>
+                        <a href="#">Salas</a>
+                        <a href="#">Turmas</a>
+                        <a href="#">Reservas</a>
+                        <a href="#" class="active">Feriados</a>
+                        <a href="#">Relatórios</a>
+                    </div>
+                    <div class="navbar-user"><span class="perfil-badge">Suporte</span> Carlos <div class="avatar">C</div></div>
+                </div>
+                <div class="main-content">
+                    <!-- Alerta de conflito ao cadastrar feriado -->
+                    <div class="alert alert-warning">
+                        <span style="font-size: 16px;">&#9888;</span>
+                        <span><strong>Atenção:</strong> Existem 5 reservas no dia 21/04/2026. Deseja cancelar automaticamente e recalcular as datas de término das turmas afetadas?</span>
+                        <div style="margin-left: auto; display: flex; gap: 6px;">
+                            <button class="btn btn-secondary btn-sm" disabled>Não</button>
+                            <button class="btn btn-primary btn-sm" disabled>Sim, cancelar e recalcular</button>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-bottom: 16px;">
+                        <div class="card-header">
+                            <h3>Feriados e Recessos -2026</h3>
+                            <div style="display: flex; gap: 8px;">
+                                <select class="form-input form-select" disabled style="width: 100px;"><option>2026</option><option>2027</option></select>
+                                <button class="btn btn-primary" disabled>+ Novo Feriado</button>
+                            </div>
+                        </div>
+                        <div class="card-body" style="padding: 0;">
+                            <table class="table-mini">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Descrição</th>
+                                        <th>Tipo</th>
+                                        <th>Reservas afetadas</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>01/01/2026</strong></td>
+                                        <td>Confraternização Universal</td>
+                                        <td><span class="status-badge" style="background:#DBEAFE;color:#1E40AF;">Nacional</span></td>
+                                        <td>0</td>
+                                        <td><button class="btn btn-secondary btn-sm" disabled>Editar</button> <button class="btn btn-danger btn-sm" disabled>Excluir</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>21/04/2026</strong></td>
+                                        <td>Dia de Tiradentes</td>
+                                        <td><span class="status-badge" style="background:#DBEAFE;color:#1E40AF;">Nacional</span></td>
+                                        <td><span style="color: var(--vermelho); font-weight: 700;">5</span></td>
+                                        <td><button class="btn btn-secondary btn-sm" disabled>Editar</button> <button class="btn btn-danger btn-sm" disabled>Excluir</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>01/05/2026</strong></td>
+                                        <td>Dia do Trabalhador</td>
+                                        <td><span class="status-badge" style="background:#DBEAFE;color:#1E40AF;">Nacional</span></td>
+                                        <td>0</td>
+                                        <td><button class="btn btn-secondary btn-sm" disabled>Editar</button> <button class="btn btn-danger btn-sm" disabled>Excluir</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>15/08/2026</strong></td>
+                                        <td>Assunção de Nossa Senhora</td>
+                                        <td><span class="status-badge" style="background:#E8F5E9;color:#2E7D32;">Municipal</span></td>
+                                        <td>0</td>
+                                        <td><button class="btn btn-secondary btn-sm" disabled>Editar</button> <button class="btn btn-danger btn-sm" disabled>Excluir</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>20/12 - 04/01</strong></td>
+                                        <td>Recesso de fim de ano</td>
+                                        <td><span class="status-badge" style="background:var(--senac-laranja-bg);color:#9A3412;">Recesso</span></td>
+                                        <td><span style="color: var(--vermelho); font-weight: 700;">12</span></td>
+                                        <td><button class="btn btn-secondary btn-sm" disabled>Editar</button> <button class="btn btn-danger btn-sm" disabled>Excluir</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Form novo feriado -->
+                    <div class="card">
+                        <div class="card-header"><h3>Novo Feriado / Recesso</h3></div>
+                        <div class="card-body">
+                            <div class="form-row-3">
+                                <div class="form-group">
+                                    <label class="form-label">Data *</label>
+                                    <input class="form-input" type="date" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Descrição *</label>
+                                    <input class="form-input" placeholder="Ex: Dia de Tiradentes" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tipo *</label>
+                                    <select class="form-input form-select" disabled>
+                                        <option>Selecione...</option>
+                                        <option>Nacional</option>
+                                        <option>Estadual</option>
+                                        <option>Municipal</option>
+                                        <option>Recesso</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="alert alert-info" style="margin-top: 4px;">
+                                <span style="font-size: 14px;">&#8505;</span>
+                                <span>Ao cadastrar um feriado, o sistema verifica automaticamente as reservas existentes nesse dia e recalcula as datas de término (+1 dia útil) para cada turma afetada.</span>
+                            </div>
+                            <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px;">
+                                <button class="btn btn-secondary" disabled>Cancelar</button>
+                                <button class="btn btn-primary" disabled>Salvar Feriado</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- TELA 9: REGISTRAR DIA SEM AULA -->
+        <!-- ============================================ -->
+        <div class="tela-section">
+            <div class="tela-label"><span class="num">9</span> Registrar Dia sem Aula <span class="tela-moscow moscow-should">Should (Importante)</span></div>
+            <div class="tela-desc">Quando um dia e cancelado (falta, evento), o sistema registra e acrescenta +1 dia útil ao término do curso. Motivo obrigatorio. RF09, RN03.</div>
+            <div class="wireframe">
+                <div class="navbar">
+                    <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
+                    <div class="navbar-menu">
+                        <a href="#">Painel</a>
+                        <a href="#">Salas</a>
+                        <a href="#" class="active">Turmas</a>
+                        <a href="#">Reservas</a>
+                        <a href="#">Feriados</a>
+                        <a href="#">Relatórios</a>
+                    </div>
+                    <div class="navbar-user"><span class="perfil-badge">Suporte</span> Carlos <div class="avatar">C</div></div>
+                </div>
+                <div class="modal-overlay">
+                    <div class="modal-box" style="width: 520px;">
+                        <div class="modal-header">
+                            <h3>Registrar Dia sem Aula</h3>
+                            <button class="close-btn" disabled>&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-info">
+                                <span style="font-size: 14px;">&#8505;</span>
+                                <span>Ao registrar um dia sem aula, o sistema automaticamente acrescenta <strong>+1 dia útil</strong> ao término previsto do curso, pulando feriados, recessos e dias fora do padrão da turma.</span>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Turma *</label>
+                                    <select class="form-input form-select" disabled>
+                                        <option>006.2026.0055 - Gastronomia</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Data do dia cancelado *</label>
+                                    <input class="form-input" type="text" value="02/07/2026" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Motivo do cancelamento *</label>
+                                <select class="form-input form-select" disabled>
+                                    <option>Selecione...</option>
+                                    <option selected>Falta do professor</option>
+                                    <option>Evento institucional</option>
+                                    <option>Manutenção de sala</option>
+                                    <option>Outro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Detalhamento</label>
+                                <textarea class="form-input" rows="2" placeholder="Detalhes adicionais sobre o cancelamento..." disabled style="resize: vertical;">Professora Raphaela comunicou ausencia por motivo de saude.</textarea>
+                            </div>
+
+                            <div class="card" style="margin-top: 12px; background: var(--cinza-bg);">
+                                <div class="card-body" style="padding: 12px 16px;">
+                                    <div style="font-size: 12px; font-weight: 600; color: var(--senac-azul); margin-bottom: 8px;">Impacto no calendario:</div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+                                        <div>
+                                            <div style="color: var(--cinza-texto);">Termino previsto atual:</div>
+                                            <div style="font-weight: 600;">21/07/2026 (Ter)</div>
+                                        </div>
+                                        <div>
+                                            <div style="color: var(--cinza-texto);">Novo término calculado:</div>
+                                            <div style="font-weight: 700; color: var(--senac-laranja);">22/07/2026 (Qua) +1 dia</div>
+                                        </div>
+                                        <div>
+                                            <div style="color: var(--cinza-texto);">Dias cancelados ate agora:</div>
+                                            <div style="font-weight: 600;">3 dias</div>
+                                        </div>
+                                        <div>
+                                            <div style="color: var(--cinza-texto);">Progresso atual:</div>
+                                            <div style="font-weight: 600;">61% → 59%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" disabled>Cancelar</button>
+                            <button class="btn btn-primary" disabled>Confirmar Cancelamento</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- TELA 10: LOG DE AUDITORIA -->
+        <!-- ============================================ -->
+        <div class="tela-section">
+            <div class="tela-label"><span class="num">10</span> Log de Auditoria <span class="tela-moscow moscow-could">Could (Desejável)</span></div>
+            <div class="tela-desc">Registro automático de todas as alterações (criar, editar, cancelar reserva, troca de status). Somente Supervisão e Admin. Não pode ser editado. RF16.</div>
+            <div class="wireframe">
+                <div class="navbar">
+                    <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
+                    <div class="navbar-menu">
+                        <a href="#">Painel</a>
+                        <a href="#">Salas</a>
+                        <a href="#">Turmas</a>
+                        <a href="#">Reservas</a>
+                        <a href="#">Feriados</a>
+                        <a href="#" class="active">Relatórios</a>
+                    </div>
+                    <div class="navbar-user"><span class="perfil-badge">Supervisão</span> Maria <div class="avatar">M</div></div>
+                </div>
+                <div class="main-content">
+                    <!-- Filtros do log -->
+                    <div class="filter-bar">
+                        <div class="form-group">
+                            <label class="form-label">Período</label>
+                            <input class="form-input" type="text" value="01/07/2026 - 02/07/2026" disabled style="width: 180px;">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Usuario</label>
+                            <select class="form-input form-select" disabled style="width:140px;"><option>Todos</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Ação</label>
+                            <select class="form-input form-select" disabled style="width:130px;">
+                                <option>Todas</option>
+                                <option>Criar</option>
+                                <option>Editar</option>
+                                <option>Cancelar</option>
+                                <option>Status</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tabela</label>
+                            <select class="form-input form-select" disabled style="width:130px;">
+                                <option>Todas</option>
+                                <option>reserva</option>
+                                <option>sala</option>
+                                <option>turma</option>
+                                <option>feriado</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary btn-sm" disabled>Filtrar</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Log de Alterações</h3>
+                            <span style="font-size: 11px; color: var(--cinza-texto);">47 registros encontrados</span>
+                        </div>
+                        <div class="card-body" style="padding: 12px 18px;">
+                            <div class="log-entry">
+                                <div class="log-time">02/07/2026 14:32</div>
+                                <div class="log-action">
+                                    <span class="log-badge log-badge-criar">Criar</span>
+                                    <strong>reserva</strong> -Reserva criada: Sala 3 para Turma 006.2026.0018 (TI Redes) em 03/07/2026, turno Tarde
+                                </div>
+                                <div class="log-user">Carlos Silva</div>
+                            </div>
+                            <div class="log-entry">
+                                <div class="log-time">02/07/2026 14:15</div>
+                                <div class="log-action">
+                                    <span class="log-badge log-badge-status">Status</span>
+                                    <strong>sala</strong> -Auditório: status alterado de Disponível para Manutenção
+                                </div>
+                                <div class="log-user">Carlos Silva</div>
+                            </div>
+                            <div class="log-entry">
+                                <div class="log-time">02/07/2026 11:45</div>
+                                <div class="log-action">
+                                    <span class="log-badge log-badge-cancelar">Cancelar</span>
+                                    <strong>reserva</strong> -Reserva cancelada: Sala 1 para Turma 006.2026.0009 em 01/07/2026 (feriado cadastrado)
+                                </div>
+                                <div class="log-user">Carlos Silva</div>
+                            </div>
+                            <div class="log-entry">
+                                <div class="log-time">02/07/2026 11:44</div>
+                                <div class="log-action">
+                                    <span class="log-badge log-badge-criar">Criar</span>
+                                    <strong>feriado</strong> -Feriado cadastrado: 01/07/2026 "Dia Municipal" (Municipal)
+                                </div>
+                                <div class="log-user">Carlos Silva</div>
+                            </div>
+                            <div class="log-entry">
+                                <div class="log-time">01/07/2026 16:20</div>
+                                <div class="log-action">
+                                    <span class="log-badge log-badge-editar">Editar</span>
+                                    <strong>turma</strong> -Turma 006.2026.0055: professor Ana Paula Silva adicionado
+                                </div>
+                                <div class="log-user">Carlos Silva</div>
+                            </div>
+                            <div class="log-entry">
+                                <div class="log-time">01/07/2026 09:30</div>
+                                <div class="log-action">
+                                    <span class="log-badge log-badge-criar">Criar</span>
+                                    <strong>turma</strong> -Turma 006.2026.0060 cadastrada: Técnico em Enfermagem, Noite, Seg a Sex
+                                </div>
+                                <div class="log-user">Carlos Silva</div>
+                            </div>
+                            <div style="text-align: center; padding: 12px; font-size: 11px; color: var(--cinza-texto);">
+                                Mostrando 6 de 47 registros -<a href="#" style="color: var(--senac-azul);">Carregar mais</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info" style="margin-top: 12px;">
+                        <span style="font-size: 14px;">&#128274;</span>
+                        <span>O log de auditoria é somente leitura. Registros não podem ser editados ou excluídos. Acesso restrito aos perfis Supervisão e Admin.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- TELA 11: DASHBOARD DE OCUPACAO -->
+        <!-- ============================================ -->
+        <div class="tela-section">
+            <div class="tela-label"><span class="num">11</span> Dashboard de Ocupação <span class="tela-moscow moscow-could">Could (Desejável)</span></div>
+            <div class="tela-desc">Painel gerencial com indicadores: salas livres/ocupadas, taxa de ocupação por turno, salas em manutenção, turmas com maior demanda. Apenas Supervisão e Admin. RF17.</div>
+            <div class="wireframe">
+                <div class="navbar">
+                    <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
+                    <div class="navbar-menu">
+                        <a href="#">Painel</a>
+                        <a href="#">Salas</a>
+                        <a href="#">Turmas</a>
+                        <a href="#">Reservas</a>
+                        <a href="#">Feriados</a>
+                        <a href="#" class="active">Relatórios</a>
+                    </div>
+                    <div class="navbar-user"><span class="perfil-badge">Supervisão</span> Maria <div class="avatar">M</div></div>
+                </div>
+                <div class="main-content">
+                    <!-- Stats gerais -->
+                    <div class="stats-row">
+                        <div class="stat-card destaque">
+                            <div class="stat-number">24</div>
+                            <div class="stat-label">Total de salas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" style="color: var(--verde);">18</div>
+                            <div class="stat-label">Disponiveis agora</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" style="color: var(--senac-azul);">5</div>
+                            <div class="stat-label">Ocupadas agora</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" style="color: var(--vermelho);">1</div>
+                            <div class="stat-label">Em manutenção</div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                        <!-- Ocupação por turno -->
+                        <div class="card">
+                            <div class="card-header"><h3>Ocupação por Turno (Hoje)</h3></div>
+                            <div class="card-body">
+                                <div class="chart-bar">
+                                    <div class="chart-col">
+                                        <div class="bar-value">75%</div>
+                                        <div class="bar" style="height: 90px; background: linear-gradient(180deg, #FDE68A, #EAB308);"></div>
+                                        <div class="bar-label">Manhã</div>
+                                    </div>
+                                    <div class="chart-col">
+                                        <div class="bar-value">58%</div>
+                                        <div class="bar" style="height: 70px; background: linear-gradient(180deg, var(--senac-laranja-claro), var(--senac-laranja));"></div>
+                                        <div class="bar-label">Tarde</div>
+                                    </div>
+                                    <div class="chart-col">
+                                        <div class="bar-value">33%</div>
+                                        <div class="bar" style="height: 40px; background: linear-gradient(180deg, #C7D2FE, #6366F1);"></div>
+                                        <div class="bar-label">Noite</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Distribuição por tipo -->
+                        <div class="card">
+                            <div class="card-header"><h3>Salas por Tipo</h3></div>
+                            <div class="card-body">
+                                <div class="donut-container">
+                                    <svg viewBox="0 0 120 120" width="120" height="120" style="transform: rotate(-90deg);">
+                                        <circle cx="60" cy="60" r="50" fill="none" stroke="#E8F0FE" stroke-width="20"/>
+                                        <circle cx="60" cy="60" r="50" fill="none" stroke="#004C94" stroke-width="20" stroke-dasharray="157 314" stroke-dashoffset="0"/>
+                                        <circle cx="60" cy="60" r="50" fill="none" stroke="#F7941D" stroke-width="20" stroke-dasharray="94 314" stroke-dashoffset="-157"/>
+                                        <circle cx="60" cy="60" r="50" fill="none" stroke="#16A34A" stroke-width="20" stroke-dasharray="47 314" stroke-dashoffset="-251"/>
+                                        <circle cx="60" cy="60" r="50" fill="none" stroke="#6366F1" stroke-width="20" stroke-dasharray="16 314" stroke-dashoffset="-298"/>
+                                    </svg>
+                                    <div class="donut-legend">
+                                        <div><span class="dot" style="background: #004C94;"></span> Sala de Aula (12)</div>
+                                        <div><span class="dot" style="background: #F7941D;"></span> Laboratório (6)</div>
+                                        <div><span class="dot" style="background: #16A34A;"></span> Cozinha (3)</div>
+                                        <div><span class="dot" style="background: #6366F1;"></span> Auditório (2)</div>
+                                        <div><span class="dot" style="background: #E8F0FE;"></span> Especial (1)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <!-- Turmas com maior demanda -->
+                        <div class="card">
+                            <div class="card-header"><h3>Turmas com Maior Demanda de Salas</h3></div>
+                            <div class="card-body" style="padding: 0;">
+                                <table class="table-mini">
+                                    <thead>
+                                        <tr>
+                                            <th>Turma</th>
+                                            <th>Curso</th>
+                                            <th>Salas usadas</th>
+                                            <th>Trocas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>006.2026.0055</strong></td>
+                                            <td>Gastronomia</td>
+                                            <td>3 salas</td>
+                                            <td><span style="color: var(--vermelho); font-weight: 700;">5</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>006.2026.0042</strong></td>
+                                            <td>Dev. Sistemas</td>
+                                            <td>2 salas</td>
+                                            <td>2</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>006.2026.0009</strong></td>
+                                            <td>APQ Serv. Admin.</td>
+                                            <td>1 sala</td>
+                                            <td>0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Ocupação semanal -->
+                        <div class="card">
+                            <div class="card-header"><h3>Ocupação da Semana</h3></div>
+                            <div class="card-body">
+                                <div class="chart-bar" style="height: 100px;">
+                                    <div class="chart-col">
+                                        <div class="bar-value">83%</div>
+                                        <div class="bar" style="height: 83px; background: var(--senac-azul);"></div>
+                                        <div class="bar-label">Seg</div>
+                                    </div>
+                                    <div class="chart-col">
+                                        <div class="bar-value">67%</div>
+                                        <div class="bar" style="height: 67px; background: var(--senac-azul);"></div>
+                                        <div class="bar-label">Ter</div>
+                                    </div>
+                                    <div class="chart-col">
+                                        <div class="bar-value">75%</div>
+                                        <div class="bar" style="height: 75px; background: var(--senac-azul);"></div>
+                                        <div class="bar-label">Qua</div>
+                                    </div>
+                                    <div class="chart-col">
+                                        <div class="bar-value">58%</div>
+                                        <div class="bar" style="height: 58px; background: var(--senac-azul);"></div>
+                                        <div class="bar-label">Qui</div>
+                                    </div>
+                                    <div class="chart-col">
+                                        <div class="bar-value">71%</div>
+                                        <div class="bar" style="height: 71px; background: var(--senac-azul);"></div>
+                                        <div class="bar-label">Sex</div>
+                                    </div>
+                                    <div class="chart-col">
+                                        <div class="bar-value">25%</div>
+                                        <div class="bar" style="height: 25px; background: var(--senac-laranja);"></div>
+                                        <div class="bar-label">Sab</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- TELA 12: GESTÃO DE USUÁRIOS (ADMIN) -->
+        <!-- ============================================ -->
+        <div class="tela-section">
+            <div class="tela-label"><span class="num">12</span> Gestão de Usuários (Admin) <span class="tela-moscow moscow-could">Could (Desejável)</span></div>
+            <div class="tela-desc">Painel administrativo para criar, editar e desativar contas de usuário. Define perfil de acesso (Supervisão, Suporte, Docente). Apenas Admin. RF01 (futuro).</div>
+            <div class="wireframe">
+                <div class="navbar">
+                    <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
+                    <div class="navbar-menu">
+                        <a>Painel</a>
+                        <a>Salas</a>
+                        <a>Turmas</a>
+                        <a>Reservas</a>
+                        <a>Feriados</a>
+                        <a>Relatórios</a>
+                        <a class="active">Admin</a>
+                    </div>
+                    <div class="navbar-user"><span class="perfil-badge">Admin</span> <div class="avatar">AD</div></div>
+                </div>
+                <div class="layout">
+                    <div class="sidebar">
+                        <div class="sidebar-section">Administração</div>
+                        <a class="active">Usuários</a>
+                        <a>Unidades</a>
+                        <a>Configurações</a>
+                        <div class="sidebar-section">Sistema</div>
+                        <a>Log de Auditoria</a>
+                        <a>Dashboard</a>
+                    </div>
+                    <div class="main-content">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h2 style="font-size: 18px; color: var(--senac-azul);">Gestão de Usuários</h2>
+                            <button class="btn btn-primary" disabled>+ Novo Usuário</button>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                            <input class="form-input" style="flex:1;" placeholder="Buscar por nome ou e-mail..." disabled>
+                            <select class="form-input form-select" style="width: 160px;" disabled>
+                                <option>Todos os perfis</option>
+                            </select>
+                            <select class="form-input form-select" style="width: 140px;" disabled>
+                                <option>Status: Todos</option>
+                            </select>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body" style="padding: 0;">
+                                <table class="table-mini">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>E-mail</th>
+                                            <th>Perfil</th>
+                                            <th>Unidade</th>
+                                            <th>Status</th>
+                                            <th>Criado em</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Ana Paula Silva</strong></td>
+                                            <td>ana.silva@senacminas.com.br</td>
+                                            <td><span class="status-badge" style="background: #E8F0FE; color: var(--senac-azul);">Supervisão</span></td>
+                                            <td>BH Centro</td>
+                                            <td><span class="status-badge status-disponivel">Ativo</span></td>
+                                            <td>15/01/2026</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-secondary" disabled>Editar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Carlos Mendes</strong></td>
+                                            <td>carlos.mendes@senacminas.com.br</td>
+                                            <td><span class="status-badge" style="background: #FFF3E0; color: #E65100;">Suporte</span></td>
+                                            <td>BH Centro</td>
+                                            <td><span class="status-badge status-disponivel">Ativo</span></td>
+                                            <td>20/02/2026</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-secondary" disabled>Editar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Maria Santos</strong></td>
+                                            <td>maria.santos@senacminas.com.br</td>
+                                            <td><span class="status-badge" style="background: #E8F5E9; color: #2E7D32;">Docente</span></td>
+                                            <td>BH Centro</td>
+                                            <td><span class="status-badge status-disponivel">Ativo</span></td>
+                                            <td>10/03/2026</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-secondary" disabled>Editar</button>
+                                            </td>
+                                        </tr>
+                                        <tr style="opacity: 0.6;">
+                                            <td><strong>Roberto Lima</strong></td>
+                                            <td>roberto.lima@senacminas.com.br</td>
+                                            <td><span class="status-badge" style="background: #E8F5E9; color: #2E7D32;">Docente</span></td>
+                                            <td>BH Centro</td>
+                                            <td><span class="status-badge" style="background: #F3F4F6; color: #6B7280;">Inativo</span></td>
+                                            <td>05/01/2026</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-secondary" disabled>Reativar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 12px; color: var(--cinza-texto);">
+                            <span>4 usuários encontrados</span>
+                            <span>Página 1 de 1</span>
+                        </div>
+
+                        <!-- Modal Novo/Editar Usuário -->
+                        <div style="margin-top: 20px;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Novo Usuário</h3>
+                                    <button class="btn btn-sm btn-secondary" disabled>Cancelar</button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Nome completo *</label>
+                                            <input class="form-input" placeholder="Nome do usuário" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">E-mail institucional *</label>
+                                            <input class="form-input" placeholder="usuario@senacminas.com.br" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Perfil de acesso *</label>
+                                            <select class="form-input form-select" disabled>
+                                                <option>Selecione o perfil</option>
+                                                <option>Supervisão</option>
+                                                <option>Suporte</option>
+                                                <option>Docente</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Unidade *</label>
+                                            <select class="form-input form-select" disabled>
+                                                <option>SENAC BH Centro</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Senha inicial *</label>
+                                        <input class="form-input" type="password" placeholder="Mínimo 8 caracteres (letras + números + símbolos)" disabled>
+                                        <div style="font-size: 10px; color: var(--cinza-texto); margin-top: 4px;">Armazenada com password_hash() - o usuário deverá alterar no primeiro acesso.</div>
+                                    </div>
+                                    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 12px;">
+                                        <button class="btn btn-secondary" disabled>Cancelar</button>
+                                        <button class="btn btn-primary" disabled>Salvar Usuário</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: #E8F0FE; border-radius: 6px; padding: 10px 14px; margin-top: 14px; font-size: 11px; color: var(--senac-azul);">
+                            <span><strong>Permissões por perfil:</strong> Supervisão (acesso total), Suporte (cadastros + reservas), Docente (somente leitura + próprias turmas). O perfil Admin será implementado em versão futura.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- TELA 13: HISTÓRICO DE MODIFICAÇÕES -->
+        <!-- ============================================ -->
+        <div class="tela-section">
+            <div class="tela-label"><span class="num">13</span> Histórico de Modificações <span class="tela-moscow moscow-could">Could (Desejável)</span></div>
+            <div class="tela-desc">Visualização detalhada do histórico de alterações de um registro específico (sala, turma, reserva). Mostra quem alterou, quando e o que mudou (valor anterior vs. novo). RF16.</div>
+            <div class="wireframe">
+                <div class="navbar">
+                    <div class="navbar-logo"><div class="logo-box">MS</div> Mapa de Salas</div>
+                    <div class="navbar-menu">
+                        <a>Painel</a>
+                        <a>Salas</a>
+                        <a>Turmas</a>
+                        <a>Reservas</a>
+                        <a>Feriados</a>
+                        <a class="active">Relatórios</a>
+                    </div>
+                    <div class="navbar-user"><span class="perfil-badge">Supervisão</span> <div class="avatar">AP</div></div>
+                </div>
+                <div class="main-content" style="padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <div>
+                            <h2 style="font-size: 18px; color: var(--senac-azul);">Histórico de Modificações</h2>
+                            <p style="font-size: 12px; color: var(--cinza-texto);">Registro detalhado de todas as alterações realizadas no sistema</p>
+                        </div>
+                        <button class="btn btn-secondary" disabled>Voltar ao Log</button>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                        <select class="form-input form-select" style="width: 160px;" disabled>
+                            <option>Tabela: Todas</option>
+                            <option>reserva</option>
+                            <option>sala</option>
+                            <option>turma</option>
+                            <option>feriado</option>
+                        </select>
+                        <select class="form-input form-select" style="width: 160px;" disabled>
+                            <option>Ação: Todas</option>
+                            <option>Criação</option>
+                            <option>Edição</option>
+                            <option>Cancelamento</option>
+                            <option>Exclusão</option>
+                        </select>
+                        <input class="form-input" style="width: 140px;" type="date" value="2026-06-01" disabled>
+                        <input class="form-input" style="width: 140px;" type="date" value="2026-07-02" disabled>
+                        <input class="form-input" style="flex:1;" placeholder="Buscar por usuário ou descrição..." disabled>
+                    </div>
+
+                    <!-- Detalhes de uma alteração específica -->
+                    <div class="card" style="margin-bottom: 16px;">
+                        <div class="card-header" style="background: var(--senac-azul-claro);">
+                            <h3>Detalhes da Alteração #247</h3>
+                            <span style="font-size: 11px; color: var(--cinza-texto);">02/07/2026 às 14:32</span>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; font-size: 13px; margin-bottom: 14px;">
+                                <div><strong>Usuário:</strong> Ana Paula Silva</div>
+                                <div><strong>Ação:</strong> <span class="status-badge" style="background: #FFF3E0; color: #E65100;">Edição</span></div>
+                                <div><strong>Tabela:</strong> reserva (ID: 1842)</div>
+                            </div>
+                            <table class="table-mini">
+                                <thead>
+                                    <tr>
+                                        <th>Campo</th>
+                                        <th>Valor Anterior</th>
+                                        <th>Valor Novo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>id_sala</strong></td>
+                                        <td style="background: #FEE2E2;">3 (Laboratório Informática)</td>
+                                        <td style="background: #DCFCE7;">5 (Sala de Aula 201)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>turno</strong></td>
+                                        <td style="background: #FEE2E2;">Manhã</td>
+                                        <td style="background: #DCFCE7;">Tarde</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>observação</strong></td>
+                                        <td style="background: #FEE2E2;"><em>(vazio)</em></td>
+                                        <td style="background: #DCFCE7;">Realocada por conflito com turma de Gastronomia</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Tabela de histórico geral -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Todas as Modificações</h3>
+                            <span style="font-size: 11px; color: var(--cinza-texto);">156 registros</span>
+                        </div>
+                        <div class="card-body" style="padding: 0;">
+                            <table class="table-mini">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Data/Hora</th>
+                                        <th>Usuário</th>
+                                        <th>Ação</th>
+                                        <th>Tabela</th>
+                                        <th>ID Registro</th>
+                                        <th>Descrição</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background: var(--senac-azul-claro);">
+                                        <td><strong>247</strong></td>
+                                        <td>02/07 14:32</td>
+                                        <td>Ana Paula Silva</td>
+                                        <td><span class="status-badge" style="background: #FFF3E0; color: #E65100;">Edição</span></td>
+                                        <td>reserva</td>
+                                        <td>1842</td>
+                                        <td>Reserva realocada: Sala 3 → Sala 5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>246</td>
+                                        <td>02/07 11:15</td>
+                                        <td>Carlos Mendes</td>
+                                        <td><span class="status-badge" style="background: #DCFCE7; color: var(--verde);">Criação</span></td>
+                                        <td>reserva</td>
+                                        <td>1843</td>
+                                        <td>Reserva criada: Sala 2 para Turma 006.2026.0018</td>
+                                    </tr>
+                                    <tr>
+                                        <td>245</td>
+                                        <td>02/07 10:48</td>
+                                        <td>Ana Paula Silva</td>
+                                        <td><span class="status-badge" style="background: #FEE2E2; color: var(--vermelho);">Cancelamento</span></td>
+                                        <td>reserva</td>
+                                        <td>1835</td>
+                                        <td>Reserva cancelada: feriado cadastrado em 01/07</td>
+                                    </tr>
+                                    <tr>
+                                        <td>244</td>
+                                        <td>01/07 16:20</td>
+                                        <td>Ana Paula Silva</td>
+                                        <td><span class="status-badge" style="background: #DCFCE7; color: var(--verde);">Criação</span></td>
+                                        <td>feriado</td>
+                                        <td>15</td>
+                                        <td>Feriado cadastrado: 01/07 "Dia Municipal"</td>
+                                    </tr>
+                                    <tr>
+                                        <td>243</td>
+                                        <td>01/07 15:55</td>
+                                        <td>Carlos Mendes</td>
+                                        <td><span class="status-badge" style="background: #FFF3E0; color: #E65100;">Edição</span></td>
+                                        <td>sala</td>
+                                        <td>8</td>
+                                        <td>Status alterado: Disponível → Manutenção</td>
+                                    </tr>
+                                    <tr>
+                                        <td>242</td>
+                                        <td>01/07 14:10</td>
+                                        <td>Ana Paula Silva</td>
+                                        <td><span class="status-badge" style="background: #DCFCE7; color: var(--verde);">Criação</span></td>
+                                        <td>turma</td>
+                                        <td>60</td>
+                                        <td>Turma 006.2026.0060 cadastrada: Técnico Enfermagem</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 12px; color: var(--cinza-texto);">
+                        <span>156 registros encontrados</span>
+                        <div style="display: flex; gap: 4px;">
+                            <button class="btn btn-sm btn-secondary" disabled>← Anterior</button>
+                            <button class="btn btn-sm btn-primary" disabled>1</button>
+                            <button class="btn btn-sm btn-secondary" disabled>2</button>
+                            <button class="btn btn-sm btn-secondary" disabled>3</button>
+                            <button class="btn btn-sm btn-secondary" disabled>Próximo →</button>
+                        </div>
+                    </div>
+
+                    <div style="background: #E8F0FE; border-radius: 6px; padding: 10px 14px; margin-top: 14px; font-size: 11px; color: var(--senac-azul);">
+                        <span><strong>Rastreabilidade:</strong> Cada alteração é registrada automaticamente na tabela <code>log_alteracao</code>. Os registros são somente leitura e não podem ser editados ou excluídos. Acesso restrito aos perfis Supervisão e Admin.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div style="max-width: 1300px; margin: 0 auto 40px; padding: 0 20px;">
+    <!-- NOTAS -->
+    <div style="max-width: 1300px; margin: 0 auto 20px; padding: 0 20px;">
         <div style="background: #FFF8E1; border: 1px solid #FFE082; border-radius: 8px; padding: 16px 20px; font-size: 13px; color: #5D4037;">
-            <strong style="color: #E65100;">Nota sobre os prototipos:</strong> Estas telas sao wireframes de media fidelidade para validacao com a cliente. As cores seguem a paleta oficial do SENAC (Azul #004C94, Laranja #F7941D). Os dados exibidos sao ficticios baseados nos nomes reais que apareceram na planilha durante a entrevista. Nenhum elemento e interativo — sao apenas prototipos visuais.
+            <strong style="color: #E65100;">Nota sobre os protótipos:</strong> Estas telas são wireframes de média fidelidade para validação com a cliente. As cores seguem a paleta oficial do SENAC (Azul #004C94, Laranja #F7941D). Os dados exibidos são fictícios baseados nos nomes reais que apareceram na planilha durante a entrevista. Nenhum elemento é interativo, são apenas protótipos visuais.
+        </div>
+    </div>
+
+    <!-- RASTREABILIDADE -->
+    <div style="max-width: 1300px; margin: 0 auto 40px; padding: 0 20px;">
+        <div style="background: white; border: 1px solid var(--cinza-borda); border-radius: 8px; padding: 16px 20px; font-size: 12px;">
+            <strong style="color: #004C94;">Rastreabilidade Tela → Requisito:</strong>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; margin-top: 8px; color: #555;">
+                <div>Tela 1 (Login) → RF01 Autenticação</div>
+                <div>Tela 7 (Cursos) → RF03 Cadastro de Cursos</div>
+                <div>Tela 2 (Painel) → RF11 Calendário, RF12 Filtros</div>
+                <div>Tela 8 (Feriados) → RF05 Feriados, RN03, RN04</div>
+                <div>Tela 3 (Salas) → RF02 Cadastro de Salas</div>
+                <div>Tela 9 (Dia sem Aula) → RF09 Dia sem Aula, RN03</div>
+                <div>Tela 4 (Turmas) → RF04 Turmas, RF12 Filtros, RF15</div>
+                <div>Tela 10 (Log) → RF16 Auditoria</div>
+                <div>Tela 5 (Reserva) → RF06 Reserva, RN01, RN02</div>
+                <div>Tela 11 (Dashboard) → RF17 Dashboard</div>
+                <div>Tela 6 (Histórico) → RF13 Histórico, RF14 Progresso</div>
+                <div>Tela 12 (Admin) → RF01 Autenticação (futuro)</div>
+                <div></div>
+                <div>Tela 13 (Modificações) → RF16 Auditoria</div>
+            </div>
         </div>
     </div>
 
     <div style="text-align: center; padding: 16px; border-top: 3px solid #004C94; font-size: 12px; color: #888; max-width: 1300px; margin: 0 auto;">
-        Prototipos — Mapa de Salas SENAC Minas BH | Versao 2.0 | Junho 2026
+        Protótipos - Mapa de Salas SENAC Minas BH | Versão 3.0 | Julho 2026<br>
+        Alinhado com Documento de Requisitos Unificado v3.0 | Hospedagem: InfinityFree (PHP + MySQL)
     </div>
 
 </body>

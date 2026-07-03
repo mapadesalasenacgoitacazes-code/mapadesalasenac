@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRD - Mapa de Salas SENAC Minas</title>
+    <style>
+        @page { size: A4; margin: 15mm; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1a1a1a; line-height: 1.6; padding: 30px 35px; max-width: 900px; margin: 0 auto; background: #fff; }
+        h1 { font-size: 26px; font-weight: 800; text-align: center; margin-bottom: 2px; }
+        h1 em { font-style: normal; color: #1565C0; }
+        .subtitulo { text-align: center; font-size: 13px; color: #666; margin-bottom: 20px; }
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 30px; background: #f8faff; border: 2px solid #1565C0; border-radius: 8px; padding: 16px 22px; margin-bottom: 24px; font-size: 13px; }
+        .meta-grid .label { color: #666; }
+        .meta-grid .valor { font-weight: 600; color: #1a1a1a; }
+        .secao { margin-bottom: 28px; }
+        .secao h2 { font-size: 18px; font-weight: 700; color: #fff; background: #1565C0; padding: 10px 18px; border-radius: 8px 8px 0 0; margin-bottom: 0; }
+        .secao h2.verde { background: #2E7D32; }
+        .secao h2.laranja { background: #E65100; }
+        .secao h2.roxo { background: #6A1B9A; }
+        .secao h2.cinza { background: #455A64; }
+        .secao-corpo { background: #f5f7fa; border: 1px solid #ddd; border-top: none; border-radius: 0 0 8px 8px; padding: 18px 22px; }
+        .secao-corpo p { margin-bottom: 10px; font-size: 14px; }
+        .secao-corpo ul, .secao-corpo ol { margin: 8px 0 12px 20px; font-size: 13px; }
+        .secao-corpo li { margin-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+        table th { background: #1565C0; color: white; padding: 9px 12px; text-align: left; font-weight: 600; }
+        table td { padding: 8px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+        table tr:nth-child(even) td { background: #eef2f7; }
+        .destaque { background: #FFF8E1; border: 1px solid #FFE082; border-radius: 6px; padding: 12px 16px; margin: 10px 0; font-size: 13px; }
+        .destaque strong { color: #E65100; }
+        .badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; color: white; }
+        .badge-must { background: #e53935; }
+        .badge-should { background: #FB8C00; }
+        .badge-could { background: #43A047; }
+        .badge-wont { background: #757575; }
+        .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 12px 0; }
+        .sprint { border: 2px solid #1565C0; border-radius: 8px; overflow: hidden; }
+        .sprint-header { background: #1565C0; color: white; padding: 8px 12px; font-size: 12px; font-weight: 700; text-align: center; }
+        .sprint-header.s2 { background: #0D47A1; }
+        .sprint-header.s3 { background: #1B5E20; }
+        .sprint-header.s4 { background: #E65100; }
+        .sprint-body { padding: 10px 12px; font-size: 11px; }
+        .sprint-body li { margin-bottom: 4px; }
+        .metrica-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 10px 0; }
+        .metrica-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 14px; text-align: center; }
+        .metrica-card .numero { font-size: 28px; font-weight: 800; color: #1565C0; }
+        .metrica-card .desc { font-size: 11px; color: #666; margin-top: 2px; }
+        .risco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+        .risco-card { background: #fff; border-left: 4px solid #e53935; border-radius: 0 8px 8px 0; padding: 10px 14px; border: 1px solid #ddd; border-left: 4px solid #e53935; }
+        .risco-card.medio { border-left-color: #FB8C00; }
+        .risco-card .risco-titulo { font-size: 12px; font-weight: 700; color: #1a1a1a; }
+        .risco-card .risco-desc { font-size: 11px; color: #555; margin-top: 2px; }
+        .risco-card .risco-mitigacao { font-size: 11px; color: #2E7D32; margin-top: 4px; }
+        .footer { margin-top: 25px; padding-top: 10px; border-top: 3px solid #1565C0; font-size: 12px; color: #888; text-align: center; }
+        @media print { body { padding: 15px; } .secao { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+    <h1>PRD — <em>Mapa de Salas</em></h1>
+    <p class="subtitulo">Product Requirements Document | Sistema de reserva, monitoramento e organizacao de salas</p>
+
+    <div class="meta-grid">
+        <div><span class="label">Produto:</span> <span class="valor">Mapa de Salas SENAC Minas</span></div>
+        <div><span class="label">Versao:</span> <span class="valor">1.0 (MVP)</span></div>
+        <div><span class="label">Cliente:</span> <span class="valor">Supervisao / Coord. Pedagogica — SENAC BH</span></div>
+        <div><span class="label">Data:</span> <span class="valor">29 de junho de 2026</span></div>
+        <div><span class="label">Equipe:</span> <span class="valor">Turma Tec. Desenvolvimento de Sistemas</span></div>
+        <div><span class="label">Status:</span> <span class="valor">Em levantamento</span></div>
+    </div>
+
+    <!-- 1. VISAO GERAL -->
+    <div class="secao">
+        <h2>1. Visao Geral do Produto</h2>
+        <div class="secao-corpo">
+            <p><strong>O que e:</strong> Um sistema web para gerenciar a alocacao de salas de cursos do SENAC Minas, substituindo a planilha Excel atualmente utilizada pela supervisao.</p>
+            <p><strong>Por que existe:</strong> A planilha atual apresenta problemas reais: erros de formula (#N/D), dificuldade de filtrar informacoes cruzadas (ex: "por quais salas a turma X ja passou?"), risco de conflitos nao detectados (duas turmas na mesma sala/turno) e limitacao de visualizacao por ano.</p>
+            <p><strong>Para quem:</strong> Equipe administrativa do SENAC (Supervisao, Suporte, Docentes). Nao e voltado para alunos.</p>
+
+            <div class="destaque">
+                <strong>Proposta de valor em uma frase:</strong> Trocar a planilha por um sistema que impede conflitos de sala automaticamente, calcula progresso dos cursos em tempo real e permite consultar o historico de qualquer turma em segundos.
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. PROBLEMA -->
+    <div class="secao">
+        <h2>2. Problema a Resolver</h2>
+        <div class="secao-corpo">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:30%">Problema</th>
+                        <th style="width:35%">Impacto hoje</th>
+                        <th style="width:35%">Como o sistema resolve</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Conflitos de sala</strong></td>
+                        <td>Ja aconteceu de alocar 2 turmas na mesma sala/turno. A supervisao detecta visualmente, mas depende de atencao humana.</td>
+                        <td>UNIQUE constraint no banco: impossivel fisicamente salvar reserva duplicada. Sistema avisa e sugere salas disponiveis.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Filtro "salas por turma" inexistente</strong></td>
+                        <td>Para saber por quais salas a Gastronomia passou, precisa buscar manualmente na planilha inteira.</td>
+                        <td>View <code>vw_historico_salas_turma</code> retorna a resposta em 1 clique por codigo de turma.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Erros de formula</strong></td>
+                        <td>Linhas vazias geram #N/D. Poluem a planilha e confundem a leitura.</td>
+                        <td>Dados em banco relacional, sem formulas. Campos obrigatorios garantidos por constraint.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Limitacao de ano</strong></td>
+                        <td>A planilha e "ANO 2026". Cursos que cruzam dez/jan ficam partidos entre duas planilhas.</td>
+                        <td>Sistema trabalha com datas reais (inicio/termino), sem limite de ano.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Calculo de termino manual</strong></td>
+                        <td>Quando um dia e cancelado, alguem precisa lembrar de ajustar a data de termino.</td>
+                        <td>RN01 automatizada: dia cancelado recalcula termino. Progresso atualizado em tempo real.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 3. USUARIOS E PERFIS -->
+    <div class="secao">
+        <h2 class="verde">3. Usuarios e Perfis de Acesso</h2>
+        <div class="secao-corpo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Perfil</th>
+                        <th>Pode ver</th>
+                        <th>Pode criar/editar</th>
+                        <th>Pode excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Supervisao</strong></td>
+                        <td>Tudo</td>
+                        <td>Tudo</td>
+                        <td>Nao (somente Admin)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Suporte</strong></td>
+                        <td>Salas, reservas, turmas, progresso</td>
+                        <td>Reservas, status de sala, dia cancelado</td>
+                        <td>Nao</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Docente</strong></td>
+                        <td>Suas turmas, salas alocadas, filtros</td>
+                        <td>Nao</td>
+                        <td>Nao</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Admin (futuro)</strong></td>
+                        <td>Tudo</td>
+                        <td>Tudo + usuarios + feriados + config</td>
+                        <td>Sim (com log)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 4. ESCOPO DO MVP -->
+    <div class="secao">
+        <h2>4. Escopo do MVP (Versao 1.0)</h2>
+        <div class="secao-corpo">
+            <p>O MVP deve resolver os 3 problemas mais criticos: <strong>conflito de sala</strong>, <strong>visualizacao geral</strong> e <strong>filtros</strong>. O criterio de sucesso e: a supervisao consegue parar de usar a planilha para o dia a dia.</p>
+
+            <div class="metrica-grid">
+                <div class="metrica-card">
+                    <div class="numero">17</div>
+                    <div class="desc">Requisitos funcionais<br>levantados</div>
+                </div>
+                <div class="metrica-card">
+                    <div class="numero">8</div>
+                    <div class="desc">Must Have<br>(MVP obrigatorio)</div>
+                </div>
+                <div class="metrica-card">
+                    <div class="numero">10</div>
+                    <div class="desc">Tabelas no<br>banco de dados</div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 14px; margin: 14px 0 8px 0;">Priorizacao MoSCoW</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:8%">Prior.</th>
+                        <th style="width:8%">RF</th>
+                        <th style="width:54%">Requisito</th>
+                        <th style="width:30%">Justificativa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="badge badge-must">MUST</span></td><td>RF01</td><td>Autenticacao e perfis de acesso</td><td>Sem login, qualquer pessoa edita tudo</td></tr>
+                    <tr><td><span class="badge badge-must">MUST</span></td><td>RF02</td><td>Cadastro de salas e ambientes</td><td>Sem salas, nao existe reserva</td></tr>
+                    <tr><td><span class="badge badge-must">MUST</span></td><td>RF04</td><td>Cadastro de turmas</td><td>Sem turmas, nao existe reserva</td></tr>
+                    <tr><td><span class="badge badge-must">MUST</span></td><td>RF06</td><td>Criar reserva com validacao de conflito</td><td>Funcao central. Resolve o problema #1</td></tr>
+                    <tr><td><span class="badge badge-must">MUST</span></td><td>RF10</td><td>Alterar status da sala</td><td>Manutencao e fluxo real e frequente</td></tr>
+                    <tr><td><span class="badge badge-must">MUST</span></td><td>RF11</td><td>Visualizacao geral (painel/calendario)</td><td>Equivalente a planilha. Sem isso, ninguem adota</td></tr>
+                    <tr><td><span class="badge badge-must">MUST</span></td><td>RF12</td><td>Filtros diversos</td><td>Pedido direto da cliente</td></tr>
+                    <tr><td><span class="badge badge-must">MUST</span></td><td>RN02</td><td>Validacao de conflito (constraint)</td><td>Regra critica: impede o erro mais grave</td></tr>
+                    <tr><td colspan="4" style="background: #f0f0f0; height: 4px; padding: 0;"></td></tr>
+                    <tr><td><span class="badge badge-should">SHOULD</span></td><td>RF03</td><td>Cadastro de cursos</td><td>Organiza a relacao turma-curso</td></tr>
+                    <tr><td><span class="badge badge-should">SHOULD</span></td><td>RF05</td><td>Cadastro de feriados e recessos</td><td>Necessario para RN01 funcionar</td></tr>
+                    <tr><td><span class="badge badge-should">SHOULD</span></td><td>RF07</td><td>Reserva recorrente (automatica)</td><td>Sem isso, cada dia e cadastrado manualmente</td></tr>
+                    <tr><td><span class="badge badge-should">SHOULD</span></td><td>RF09</td><td>Registrar dia sem aula (+1 termino)</td><td>RN01: regra de negocio confirmada pela cliente</td></tr>
+                    <tr><td><span class="badge badge-should">SHOULD</span></td><td>RF13</td><td>Historico de salas por turma</td><td>Pedido direto: "quero filtrar por turma"</td></tr>
+                    <tr><td><span class="badge badge-should">SHOULD</span></td><td>RF14</td><td>Calculo de progresso automatico</td><td>Ja existe na planilha, nao pode regredir</td></tr>
+                    <tr><td><span class="badge badge-should">SHOULD</span></td><td>RF15</td><td>Impressao/exportacao de relatorios</td><td>Supervisao imprime relatorios hoje</td></tr>
+                    <tr><td colspan="4" style="background: #f0f0f0; height: 4px; padding: 0;"></td></tr>
+                    <tr><td><span class="badge badge-could">COULD</span></td><td>RF08</td><td>Desocupar/realocar com historico</td><td>Agrega rastreabilidade</td></tr>
+                    <tr><td><span class="badge badge-could">COULD</span></td><td>RF16</td><td>Log de alteracoes (auditoria)</td><td>Util quando varias pessoas editam</td></tr>
+                    <tr><td><span class="badge badge-could">COULD</span></td><td>RF17</td><td>Dashboard de ocupacao</td><td>Visao gerencial, diferencial</td></tr>
+                    <tr><td colspan="4" style="background: #f0f0f0; height: 4px; padding: 0;"></td></tr>
+                    <tr><td><span class="badge badge-wont">WON'T</span></td><td>—</td><td>Integracao com sistema de chamados</td><td>Chamados ficam no canal oficial externo</td></tr>
+                    <tr><td><span class="badge badge-wont">WON'T</span></td><td>—</td><td>Notificacoes push/email</td><td>Complexidade alta, pouco valor no MVP</td></tr>
+                    <tr><td><span class="badge badge-wont">WON'T</span></td><td>—</td><td>App mobile nativo</td><td>Sistema web responsivo ja atende</td></tr>
+                    <tr><td><span class="badge badge-wont">WON'T</span></td><td>—</td><td>Sugestao automatica de sala</td><td>Requer logica de IA/matching, futuro</td></tr>
+                    <tr><td><span class="badge badge-wont">WON'T</span></td><td>—</td><td>Multi-unidade (outras cidades)</td><td>Modelagem ja suporta, mas foco e BH agora</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 5. REGRAS DE NEGOCIO -->
+    <div class="secao">
+        <h2 class="laranja">5. Regras de Negocio Criticas</h2>
+        <div class="secao-corpo">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:10%">Codigo</th>
+                        <th style="width:25%">Regra</th>
+                        <th style="width:35%">Descricao</th>
+                        <th style="width:30%">Implementacao tecnica</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>RN01</strong></td>
+                        <td>Dia sem aula estende termino</td>
+                        <td>Dia cancelado (falta, evento, etc.) adiciona +1 dia util ao termino do curso, pulando feriados e dias nao letivos.</td>
+                        <td>Tabela <code>dia_cancelado</code> + trigger ou logica na aplicacao que recalcula <code>data_termino_calculada</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RN02</strong></td>
+                        <td>Conflito impossivel</td>
+                        <td>Duas turmas nao podem ocupar a mesma sala + turno + dia.</td>
+                        <td><code>UNIQUE(id_sala, data, turno)</code> na tabela <code>reserva</code>. Banco rejeita antes do codigo.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RN03</strong></td>
+                        <td>Turma multi-sala</td>
+                        <td>Uma turma pode usar salas diferentes no mesmo dia (turnos diferentes). Ex: Gastronomia manha na cozinha, tarde no lab.</td>
+                        <td>Reserva e por (turma, sala, data, turno) — nao por dia inteiro. Permite N reservas por turma por dia.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RN04</strong></td>
+                        <td>Progresso automatico</td>
+                        <td>% = (dias realizados / dias previstos) x 100. Dias cancelados nao contam como realizados.</td>
+                        <td>View <code>vw_progresso_turma</code> calcula sob demanda com base nas reservas e cancelamentos.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RN05</strong></td>
+                        <td>Manutencao bloqueia sala</td>
+                        <td>Sala em manutencao nao aceita novas reservas. Reservas futuras existentes geram alerta.</td>
+                        <td>Check no momento da reserva: <code>IF sala.status = 'Manutencao' THEN rejeitar</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RN06</strong></td>
+                        <td>Sem limite de ano</td>
+                        <td>Cursos podem cruzar virada de ano sem quebrar.</td>
+                        <td>Sem particionamento por ano. Datas sao campos DATE puros.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 6. MODELAGEM DE DADOS -->
+    <div class="secao">
+        <h2 class="roxo">6. Modelagem de Dados</h2>
+        <div class="secao-corpo">
+            <p>O banco de dados possui <strong>10 tabelas</strong> e <strong>3 views</strong>. O diagrama completo e o script SQL estao na pasta <code>modelagem/</code>.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tabela</th>
+                        <th>Funcao</th>
+                        <th>Relacionamentos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>unidade</strong></td><td>Unidade do SENAC (BH, futuramente outras)</td><td>1:N sala, feriado, usuario</td></tr>
+                    <tr><td><strong>sala</strong></td><td>Sala com tipo, capacidade e status</td><td>pertence a unidade; 1:N recurso, reserva</td></tr>
+                    <tr><td><strong>recurso_sala</strong></td><td>Projetor, computador, fogao, etc.</td><td>pertence a sala</td></tr>
+                    <tr><td><strong>curso</strong></td><td>Nome, area e carga horaria</td><td>1:N turma</td></tr>
+                    <tr><td><strong>turma</strong></td><td>Codigo, professor, turno, dias da semana</td><td>pertence a curso; 1:N reserva, dia_cancelado</td></tr>
+                    <tr><td><strong>reserva</strong></td><td>Alocacao: sala + turma + data + turno</td><td>pertence a sala e turma; criada por usuario</td></tr>
+                    <tr><td><strong>dia_cancelado</strong></td><td>Dias sem aula (RN01)</td><td>pertence a turma</td></tr>
+                    <tr><td><strong>feriado</strong></td><td>Datas bloqueadas por unidade</td><td>pertence a unidade</td></tr>
+                    <tr><td><strong>usuario</strong></td><td>Login, perfil e permissoes</td><td>pertence a unidade; 1:N log, reserva</td></tr>
+                    <tr><td><strong>log_alteracao</strong></td><td>Auditoria: quem fez o que</td><td>pertence a usuario</td></tr>
+                </tbody>
+            </table>
+            <div class="destaque">
+                <strong>Constraint critica:</strong> <code>UNIQUE(id_sala, data, turno)</code> na tabela reserva garante no nivel do banco de dados que conflitos sao fisicamente impossiveis, mesmo se o codigo da aplicacao tiver bugs.
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. CRONOGRAMA SUGERIDO -->
+    <div class="secao">
+        <h2 class="verde">7. Cronograma Sugerido</h2>
+        <div class="secao-corpo">
+            <p>Sugestao de divisao em 4 sprints de 2 semanas, focando nos Must Have primeiro.</p>
+            <div class="timeline">
+                <div class="sprint">
+                    <div class="sprint-header">Sprint 1 (Sem 1-2)</div>
+                    <div class="sprint-body">
+                        <strong>Base + Cadastros</strong>
+                        <ul>
+                            <li>Criar banco de dados (schema.sql)</li>
+                            <li>RF01: Login e autenticacao</li>
+                            <li>RF02: CRUD de salas</li>
+                            <li>RF03: CRUD de cursos</li>
+                            <li>RF04: CRUD de turmas</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sprint">
+                    <div class="sprint-header s2">Sprint 2 (Sem 3-4)</div>
+                    <div class="sprint-body">
+                        <strong>Reservas + Validacao</strong>
+                        <ul>
+                            <li>RF06: Criar reserva c/ validacao</li>
+                            <li>RF07: Reserva recorrente</li>
+                            <li>RF10: Alterar status da sala</li>
+                            <li>RN02: Constraint de conflito</li>
+                            <li>RN05: Bloqueio por manutencao</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sprint">
+                    <div class="sprint-header s3">Sprint 3 (Sem 5-6)</div>
+                    <div class="sprint-body">
+                        <strong>Visualizacao + Filtros</strong>
+                        <ul>
+                            <li>RF11: Painel/calendario geral</li>
+                            <li>RF12: Filtros diversos</li>
+                            <li>RF13: Historico por turma</li>
+                            <li>RF14: Progresso automatico</li>
+                            <li>RF05: Cadastro de feriados</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sprint">
+                    <div class="sprint-header s4">Sprint 4 (Sem 7-8)</div>
+                    <div class="sprint-body">
+                        <strong>Relatorios + Polish</strong>
+                        <ul>
+                            <li>RF09: Dia sem aula (+1 termino)</li>
+                            <li>RF15: Impressao/exportacao</li>
+                            <li>RF08: Realocar turma</li>
+                            <li>RF16: Log de alteracoes</li>
+                            <li>Testes e ajustes finais</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. RISCOS -->
+    <div class="secao">
+        <h2 class="cinza">8. Riscos e Mitigacoes</h2>
+        <div class="secao-corpo">
+            <div class="risco-grid">
+                <div class="risco-card">
+                    <div class="risco-titulo">Resistencia a mudanca</div>
+                    <div class="risco-desc">A equipe esta acostumada com a planilha Excel ha anos. Podem rejeitar o sistema novo.</div>
+                    <div class="risco-mitigacao">Mitigacao: manter a interface parecida com a planilha (formato calendario/Gantt). Treinar com a planilha real como referencia.</div>
+                </div>
+                <div class="risco-card">
+                    <div class="risco-titulo">Calculo de termino incorreto</div>
+                    <div class="risco-desc">A regra RN01 (+1 dia por cancelamento) e complexa: precisa pular feriados, fins de semana e dias nao letivos da turma.</div>
+                    <div class="risco-mitigacao">Mitigacao: criar testes automatizados exaustivos para esse calculo. Validar com dados reais de 2026.</div>
+                </div>
+                <div class="risco-card medio">
+                    <div class="risco-titulo">Escopo cresce durante o projeto</div>
+                    <div class="risco-desc">A cliente pode pedir funcionalidades novas no meio do desenvolvimento (integracao com chamados, app mobile, etc.).</div>
+                    <div class="risco-mitigacao">Mitigacao: PRD aprovado com MoSCoW claro. Novos pedidos entram como Won't Have ate a V2.</div>
+                </div>
+                <div class="risco-card medio">
+                    <div class="risco-titulo">Dados da planilha atual</div>
+                    <div class="risco-desc">Se a cliente quiser migrar os dados historicos da planilha, o formato pode ser inconsistente.</div>
+                    <div class="risco-mitigacao">Mitigacao: lancar o sistema limpo (dados novos). Historico fica na planilha como consulta. Migrar apenas se houver tempo.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. CRITERIOS DE ACEITE -->
+    <div class="secao">
+        <h2>9. Criterios de Aceite do MVP</h2>
+        <div class="secao-corpo">
+            <p>O MVP e considerado <strong>pronto para uso</strong> quando todos os itens abaixo forem verdadeiros:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:5%">#</th>
+                        <th style="width:55%">Criterio</th>
+                        <th style="width:40%">Como verificar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Supervisao consegue visualizar todas as salas ocupadas do dia no painel</td><td>Abrir o sistema e ver a tela principal com dados reais</td></tr>
+                    <tr><td>2</td><td>Suporte consegue criar uma reserva em menos de 2 minutos</td><td>Cronometrar com usuario real do perfil Suporte</td></tr>
+                    <tr><td>3</td><td>O sistema impede reserva duplicada (mesma sala + turno + dia)</td><td>Tentar reservar sala ja ocupada e confirmar que o sistema bloqueia</td></tr>
+                    <tr><td>4</td><td>Docente consegue filtrar suas turmas e ver em qual sala cada uma esta</td><td>Login como Docente, filtrar por nome do professor</td></tr>
+                    <tr><td>5</td><td>Ao consultar uma turma, todas as salas por onde ela passou aparecem</td><td>Filtrar turma de Gastronomia e confirmar que cozinha, lab e sala aparecem</td></tr>
+                    <tr><td>6</td><td>Ao marcar sala como Manutencao, o sistema alerta sobre reservas futuras</td><td>Mudar status de sala com reservas e verificar o alerta</td></tr>
+                    <tr><td>7</td><td>Docente nao consegue editar reservas (somente leitura)</td><td>Login como Docente e tentar criar/editar reserva — deve ser bloqueado</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 10. ESTRUTURA DO PROJETO -->
+    <div class="secao">
+        <h2>10. Estrutura de Arquivos do Projeto</h2>
+        <div class="secao-corpo">
+<pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; font-size: 12px; overflow-x: auto;">
+mapa_de_salas/
+├── documentos/
+│   ├── Ficha_Requisitos_Mapa_de_Salas.html   -- Requisitos completos (17 RF + 6 RN)
+│   └── PRD_Mapa_de_Salas.html                -- Este documento
+│
+├── modelagem/
+│   ├── DER_Mapa_de_Salas.html                -- Diagrama ER visual (10 tabelas)
+│   └── schema.sql                            -- DDL completo (MySQL)
+│
+└── src/                                       -- Codigo fonte (a definir stack)
+</pre>
+        </div>
+    </div>
+
+    <!-- 11. STACK SUGERIDA -->
+    <div class="secao">
+        <h2>11. Stack Tecnologica (Sugestao)</h2>
+        <div class="secao-corpo">
+            <p>Stack definida pelo professor. PHP + MySQL e a combinacao padrao do curso e amplamente usada no mercado para sistemas web internos.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Camada</th>
+                        <th>Tecnologia</th>
+                        <th>Justificativa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Frontend</strong></td><td>HTML + CSS + JavaScript + Bootstrap 5</td><td>Interface responsiva, componentes prontos (tabelas, modais, formularios)</td></tr>
+                    <tr><td><strong>Backend</strong></td><td>PHP 8+</td><td>Definido pelo professor. Linguagem do curso, boa documentacao em PT-BR</td></tr>
+                    <tr><td><strong>Banco de dados</strong></td><td>MySQL 8</td><td>Compativel com o schema.sql ja criado. PDO para conexao segura</td></tr>
+                    <tr><td><strong>Autenticacao</strong></td><td>PHP Sessions + password_hash()</td><td>Nativo do PHP, sem dependencia externa. Senhas com bcrypt</td></tr>
+                    <tr><td><strong>Servidor</strong></td><td>Apache (XAMPP / Laragon)</td><td>Ambiente de desenvolvimento local facil de instalar</td></tr>
+                    <tr><td><strong>Arquitetura</strong></td><td>MVC simples (sem framework)</td><td>Separar responsabilidades sem complexidade de Laravel/Symfony</td></tr>
+                </tbody>
+            </table>
+            <div class="destaque">
+                <strong>Nota sobre seguranca:</strong> Usar PDO com prepared statements (nunca concatenar SQL). Senhas com <code>password_hash()</code> e <code>password_verify()</code>. Sessoes com <code>session_regenerate_id()</code> apos login. Escapar saida com <code>htmlspecialchars()</code>.
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        PRD — Mapa de Salas SENAC Minas BH | Versao 1.0 | Junho 2026<br>
+        Elaborado por Thais Oliveira | Tecnico em Desenvolvimento de Sistemas — Senac Minas
+    </div>
+
+</body>
+</html>

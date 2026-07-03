@@ -17,7 +17,8 @@ Sistema web para gerenciamento de reservas, monitoramento e organizacao de salas
 | Backend | PHP 8 (MVC puro, sem framework) |
 | Banco de dados | MySQL 8 |
 | Frontend | HTML + CSS + JS + Bootstrap 5 |
-| Servidor | Apache (XAMPP / Laragon) |
+| Servidor dev | Apache (XAMPP / Laragon) |
+| Hospedagem | InfinityFree (PHP + MySQL, SSL gratuito) |
 | Autenticacao | PHP Sessions + password_hash() |
 | Seguranca | PDO com prepared statements |
 
@@ -40,7 +41,9 @@ projeto-mapa-de-sala-senac/
 │
 ├── docs/                              # Documentacao do projeto
 │   ├── 01-levantamento/               # Requisitos (RF, RNF, RN)
+│   │   ├── Documento_de_Requisitos_Unificado.html  # v3.0 definitiva
 │   │   ├── Documento_de_Requisitos.html
+│   │   ├── Roteiro_Analise_Requisitos.html
 │   │   └── Ficha_Requisitos_Mapa_de_Salas.html
 │   ├── 02-analise/                    # PRD e modelagem
 │   │   ├── PRD_Mapa_de_Salas.html
