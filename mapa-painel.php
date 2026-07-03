@@ -186,11 +186,11 @@
                 <span class="badge bg-primary fs-5 px-3 py-2">MS</span>
             </div>
             <nav class="nav flex-column">
-                <a class="nav-link" href="mapa-painel.php"><i class="bi bi-grid-1x2-fill"></i> Painel</a>
-                <a class="nav-link ativo" href="#"><i class="bi bi-door-open"></i> Salas</a>
-                <a class="nav-link" href="#"><i class="bi bi-people"></i> Turmas</a>
+                <a class="nav-link ativo" href="#"><i class="bi bi-grid-1x2-fill"></i> Painel</a>
+                <a class="nav-link" href="#"><i class="bi bi-door-open"></i> Salas</a>
+                <a class="nav-link" href="#"><i class="bi bi-people"></i> Mapa de Sala</a>
                 <a class="nav-link" href="#"><i class="bi bi-calendar-event"></i> Reservas</a>
-                <a class="nav-link" href="mapa-relatorio.php"><i class="bi bi-bar-chart-line"></i> Relatórios</a>
+                <a class="nav-link" href="#"><i class="bi bi-bar-chart-line"></i> Relatórios</a>
             </nav>
         </div>
 
