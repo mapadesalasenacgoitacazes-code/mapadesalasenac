@@ -99,7 +99,7 @@
 
 <!-- SIDEBAR -->
 <div class="sidebar p-3">
-    <h5 class="text-center mb-4">MS</h5>
+    <h5 class="badge bg-primary fs-5 px-3 py-2">MS</h5>
 
     <a href="mapa-painel.php"><i class="bi bi-house"></i> Painel</a>
     <a href="#"><i class="bi bi-door-open"></i> Salas</a>
