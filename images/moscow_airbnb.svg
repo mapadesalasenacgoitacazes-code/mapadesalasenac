@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" font-family="Segoe UI, sans-serif">
+  <defs>
+    <filter id="shadow2"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.1"/></filter>
+  </defs>
+  <rect width="800" height="320" rx="12" fill="#f5f7fa" stroke="#ddd" stroke-width="1"/>
+  <text x="400" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1a1a">MoSCoW - Airbnb</text>
+
+  <!-- Must Have -->
+  <rect x="20" y="50" width="370" height="125" rx="8" fill="#fff" stroke="#e53935" stroke-width="2" filter="url(#shadow2)"/>
+  <rect x="20" y="50" width="370" height="32" rx="8" fill="#e53935"/>
+  <rect x="20" y="70" width="370" height="12" fill="#e53935"/>
+  <text x="32" y="72" font-size="14" font-weight="700" fill="#fff">M - Must Have (Obrigatorio)</text>
+  <text x="32" y="102" font-size="12" fill="#333">#1. Buscar acomodacoes</text>
+  <text x="32" y="120" font-size="12" fill="#333">#2. Cadastrar anuncio</text>
+  <text x="32" y="138" font-size="12" fill="#333">#3. Reservar com pagamento</text>
+  <text x="32" y="156" font-size="12" fill="#333">#4. Gerenciar calendario</text>
+  <text x="32" y="168" font-size="10" fill="#888" font-style="italic">Sem isso, o sistema nao entrega valor minimo.</text>
+
+  <!-- Should Have -->
+  <rect x="410" y="50" width="370" height="125" rx="8" fill="#fff" stroke="#FB8C00" stroke-width="2" filter="url(#shadow2)"/>
+  <rect x="410" y="50" width="370" height="32" rx="8" fill="#FB8C00"/>
+  <rect x="410" y="70" width="370" height="12" fill="#FB8C00"/>
+  <text x="422" y="72" font-size="14" font-weight="700" fill="#fff">S - Should Have (Importante)</text>
+  <text x="422" y="102" font-size="12" fill="#333">#7. Filtrar resultados</text>
+  <text x="422" y="120" font-size="12" fill="#333">#8. Chat interno</text>
+  <text x="422" y="138" font-size="12" fill="#333">#9. Cancelar reserva</text>
+  <text x="422" y="158" font-size="10" fill="#888" font-style="italic">Faz falta, mas da para lancar sem.</text>
+
+  <!-- Could Have -->
+  <rect x="20" y="190" width="370" height="115" rx="8" fill="#fff" stroke="#43A047" stroke-width="2" filter="url(#shadow2)"/>
+  <rect x="20" y="190" width="370" height="32" rx="8" fill="#43A047"/>
+  <rect x="20" y="210" width="370" height="12" fill="#43A047"/>
+  <text x="32" y="212" font-size="14" font-weight="700" fill="#fff">C - Could Have (Desejavel)</text>
+  <text x="32" y="242" font-size="12" fill="#333">#5. Avaliar estadia (double-blind)</text>
+  <text x="32" y="260" font-size="12" fill="#333">#6. Avaliar hospede</text>
+  <text x="32" y="278" font-size="12" fill="#333">#10. Mapa com localizacao</text>
+  <text x="32" y="295" font-size="10" fill="#888" font-style="italic">Diferencial competitivo, nao essencial.</text>
+
+  <!-- Won't Have -->
+  <rect x="410" y="190" width="370" height="115" rx="8" fill="#fff" stroke="#757575" stroke-width="2" filter="url(#shadow2)"/>
+  <rect x="410" y="190" width="370" height="32" rx="8" fill="#757575"/>
+  <rect x="410" y="210" width="370" height="12" fill="#757575"/>
+  <text x="422" y="212" font-size="14" font-weight="700" fill="#fff">W - Won't Have (Fora do escopo)</text>
+  <text x="422" y="242" font-size="12" fill="#333">Experiencias Airbnb</text>
+  <text x="422" y="260" font-size="12" fill="#333">Programa de fidelidade</text>
+  <text x="422" y="278" font-size="12" fill="#333">Seguro-viagem integrado</text>
+  <text x="422" y="295" font-size="10" fill="#888" font-style="italic">Fica para versoes futuras.</text>
+</svg>

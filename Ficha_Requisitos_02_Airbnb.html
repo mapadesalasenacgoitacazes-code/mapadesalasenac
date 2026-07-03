@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Requisitos - Airbnb (Análise Aprofundada)</title>
+    <style>
+        @page { size: A4; margin: 15mm; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1a1a1a; line-height: 1.5; padding: 30px 35px; max-width: 900px; margin: 0 auto; background: #fff; }
+        .cabecalho-senac { border: 2px solid #1565C0; border-radius: 8px; padding: 18px 22px; margin-bottom: 10px; background: #f8faff; }
+        .cabecalho-senac .instituicao { font-size: 16px; font-weight: 700; color: #1565C0; margin-bottom: 2px; }
+        .cabecalho-senac .curso { font-size: 13px; color: #333; margin-bottom: 1px; }
+        .cabecalho-senac .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 20px; margin-top: 8px; font-size: 13px; color: #444; }
+        .cabecalho-senac .info-grid span { font-weight: 600; color: #1a1a1a; }
+        .exercicio-badge { background: #E3F2FD; border: 1px solid #90CAF9; border-radius: 6px; padding: 8px 14px; margin-bottom: 20px; font-size: 12px; color: #1565C0; font-style: italic; text-align: center; }
+        .titulo-roteiro { text-align: center; margin-bottom: 5px; }
+        .titulo-roteiro h1 { font-size: 26px; color: #1a1a1a; font-weight: 800; }
+        .titulo-roteiro h1 em { font-style: normal; color: #1565C0; }
+        .titulo-roteiro .subtitulo { font-size: 13px; color: #666; margin-top: 3px; }
+        .ficha-id { margin: 18px 0 25px 0; font-size: 14px; }
+        .ficha-id .campo { margin-bottom: 5px; }
+        .ficha-id .campo strong { color: #1a1a1a; }
+        .ficha-id .campo .valor { border-bottom: 2px solid #1565C0; padding-bottom: 1px; margin-left: 4px; color: #333; }
+        .secao { background: #f5f7fa; border-radius: 8px; padding: 20px 22px; margin-bottom: 22px; }
+        .secao-titulo { font-size: 18px; font-weight: 700; color: #1a1a1a; background: #e8eef5; margin: -20px -22px 15px -22px; padding: 12px 22px; border-radius: 8px 8px 0 0; }
+        .secao-instrucao { font-size: 12.5px; color: #555; font-style: italic; border-left: 3px solid #1565C0; padding-left: 10px; margin-bottom: 14px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+        table th { background: #1565C0; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+        table td { padding: 9px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+        table tr:nth-child(even) td { background: #eef2f7; }
+        .moscow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .moscow-card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; background: #fff; }
+        .moscow-card .letra { font-size: 18px; font-weight: 800; margin-right: 6px; }
+        .moscow-card .label { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+        .moscow-card .desc { font-size: 11.5px; color: #666; font-style: italic; margin: 4px 0 8px 0; }
+        .moscow-card .conteudo { font-size: 13px; color: #333; background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 4px; padding: 8px 10px; min-height: 50px; }
+        .letra-m { color: #e53935; } .letra-s { color: #FB8C00; } .letra-c { color: #43A047; } .letra-w { color: #757575; }
+        .rnf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .rnf-card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; background: #fff; }
+        .rnf-card .rnf-titulo { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+        .rnf-card .rnf-label { font-size: 12px; font-weight: 700; color: #444; }
+        .rnf-card .rnf-valor { font-size: 13px; color: #333; border-bottom: 2px solid #1565C0; padding-bottom: 3px; margin-bottom: 8px; }
+        .rnf-card-full { grid-column: 1 / -1; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 10px 0 14px 0; font-size: 13px; }
+        .checkbox-group label { display: flex; align-items: center; gap: 5px; }
+        .excecao-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .excecao-card { border: 1px solid #ddd; border-radius: 8px; padding: 12px; background: #fff; }
+        .excecao-card .exc-titulo { font-size: 13px; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+        .excecao-card .exc-valor { font-size: 13px; color: #333; border-bottom: 2px solid #1565C0; padding-bottom: 3px; }
+        .excecao-card-full { grid-column: 1 / -1; }
+        .validacao-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .validacao-item { border: 1px solid #ddd; border-radius: 6px; padding: 10px 12px; background: #fff; display: flex; align-items: flex-start; gap: 8px; font-size: 13px; }
+        .validacao-item input[type="checkbox"] { margin-top: 2px; width: 16px; height: 16px; }
+        .validacao-item .obs { font-size: 11px; color: #999; border-bottom: 1px dashed #ccc; margin-left: auto; padding-bottom: 2px; min-width: 60px; }
+        .validacao-full { grid-column: 1 / -1; }
+        .obs-textarea { width: 100%; min-height: 90px; border: 1px solid #ccc; border-radius: 6px; padding: 12px; font-size: 13px; font-family: inherit; resize: vertical; background: #fff; color: #333; }
+        .fonte { font-size: 11px; color: #888; margin-top: 6px; font-style: italic; }
+        .fonte a { color: #1565C0; text-decoration: none; }
+        .footer { margin-top: 25px; padding-top: 10px; border-top: 3px solid #1565C0; font-size: 12px; color: #888; text-align: center; }
+        @media print { body { padding: 15px; } .secao { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+    <div class="cabecalho-senac">
+        <div class="instituicao">Senac Minas</div>
+        <div class="curso">Curso: Técnico em Desenvolvimento de Sistemas</div>
+        <div class="info-grid">
+            <div>Disciplina: <span>UC 7, Aplicações em Desenvolvimento Web</span></div>
+            <div>Data: <span>25 de junho de 2026</span></div>
+            <div>Aluna: <span>Thaís Oliveira</span></div>
+            <div>Professor: <span>Cleiton de Jesus Pereira</span></div>
+        </div>
+    </div>
+
+    <div class="exercicio-badge">
+        Exercício solicitado em sala de aula. Análise de requisitos de sistemas reais (Ficha 2 de 4). Versão com análise aprofundada
+    </div>
+
+    <div class="titulo-roteiro">
+        <h1>Roteiro de <em>Análise de Requisitos</em></h1>
+        <p class="subtitulo">Análise do sistema Airbnb, marketplace bilateral de hospedagens | 8 milhões de anúncios ativos em 220 países</p>
+    </div>
+
+    <div class="ficha-id">
+        <div class="campo"><strong>Sistema analisado:</strong> <span class="valor">Airbnb</span></div>
+        <div class="campo"><strong>Data:</strong> <span class="valor">25/06/2026</span></div>
+        <div class="campo"><strong>Analista:</strong> <span class="valor">Thaís Oliveira</span></div>
+    </div>
+
+    <!-- 1. ATORES -->
+    <div class="secao">
+        <div class="secao-titulo">1. Mapeie os Atores</div>
+        <p class="secao-instrucao">O Airbnb é um marketplace bilateral: dois atores com interesses opostos operam sobre o mesmo recurso (o espaço físico).</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">Tipo de Ator</th>
+                    <th style="width:38%">Descrição resumida</th>
+                    <th style="width:40%">Objetivo principal no sistema</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Ator 1 (Principal)</strong></td>
+                    <td>Hóspede, viajante que busca acomodação temporária. A plataforma registra ~1,34 milhão de reservas por dia (~491 milhões de noites em 2024).</td>
+                    <td>Encontrar e reservar um espaço com bom custo-benefício, de forma segura e rápida.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 2 (Mediador)</strong></td>
+                    <td>Suporte ao Cliente, equipe com poder de decisão: processa reembolsos, media disputas e pode cancelar reservas. Executa ações com impacto financeiro direto.</td>
+                    <td>Mediar conflitos com critérios de alçada definidos, garantindo satisfação de ambas as partes e conformidade com as políticas da plataforma.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 3 (Fornecedor)</strong></td>
+                    <td>Anfitrião, proprietário que disponibiliza seu imóvel. São 5+ milhões de anfitriões ativos gerenciando 8 milhões de anúncios. Penalidade por double-booking: $50–$100 + bloqueio de calendário.</td>
+                    <td>Cadastrar espaço, gerenciar disponibilidade/preços e receber pagamentos. Gross Booking Value da plataforma: ~$82 bilhões/ano (2024).</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 4 (Administrador)</strong></td>
+                    <td>Administrador da Plataforma, equipe interna que modera anúncios, verifica identidades e define políticas de cancelamento (6 tipos distintos).</td>
+                    <td>Garantir qualidade e segurança dos anúncios, removendo conteúdo fraudulento e mantendo conformidade regulatória (LGPD, PSD2, PCI-DSS).</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="fonte">Fontes: Airbnb Q4 2024 Earnings (SEC 8-K) | DemandSage Statistics 2025 | Hostify Blog</p>
+    </div>
+
+    <!-- 2. FUNCIONALIDADES -->
+    <div class="secao">
+        <div class="secao-titulo">2. Liste 10 Funcionalidades Principais</div>
+        <p class="secao-instrucao">Use verbos no infinitivo. Em um marketplace bilateral, cada funcionalidade deve ser avaliada sob a ótica de ambos os lados.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:6%">#</th>
+                    <th style="width:64%">Funcionalidade</th>
+                    <th style="width:30%">Ator que executa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Buscar acomodações por destino, datas de check-in/check-out e número de hóspedes</td><td>Hóspede</td></tr>
+                <tr><td>2</td><td>Cadastrar anúncio com fotos, descrição, preço por noite e regras da casa</td><td>Anfitrião</td></tr>
+                <tr><td>3</td><td>Reservar acomodação com pagamento on-line seguro (cartão ou Pix), processado via Braintree (PCI-DSS Nível 1)</td><td>Hóspede</td></tr>
+                <tr><td>4</td><td>Gerenciar calendário de disponibilidade com datas abertas, bloqueadas e preços especiais. Suporta sincronização iCal para múltiplas plataformas</td><td>Anfitrião</td></tr>
+                <tr><td>5</td><td>Avaliar a estadia com nota de 1 a 5 estrelas e comentário. Sistema double-blind (cego duplo): nenhum lado vê a avaliação do outro até que ambos enviem ou 14 dias expirem</td><td>Hóspede</td></tr>
+                <tr><td>6</td><td>Avaliar o hóspede com nota e comentário após a estadia (mesmo sistema double-blind)</td><td>Anfitrião</td></tr>
+                <tr><td>7</td><td>Filtrar resultados por preço, tipo de espaço, comodidades e avaliação mínima</td><td>Hóspede</td></tr>
+                <tr><td>8</td><td>Enviar e receber mensagens entre hóspede e anfitrião pelo chat interno</td><td>Hóspede / Anfitrião</td></tr>
+                <tr><td>9</td><td>Cancelar reserva conforme 1 das 6 políticas definidas (Flexível, Moderada, Limitada, Firme, Rigorosa, Super Rigorosa). Janela universal de 24h grátis se confirmada 7+ dias antes</td><td>Hóspede / Anfitrião</td></tr>
+                <tr><td>10</td><td>Visualizar localização do imóvel no mapa com pontos de interesse próximos</td><td>Hóspede</td></tr>
+            </tbody>
+        </table>
+        <p class="fonte">Fontes: Airbnb Help Center (artigos 13, 475) | Uplisting Review Policy Guide | Zeevou Cancellation Policy Guide</p>
+    </div>
+
+    <!-- 3. MoSCoW -->
+    <div class="secao">
+        <div class="secao-titulo">3. Priorize com MoSCoW</div>
+        <p class="secao-instrucao">Must Have ≤ 60% do esforço (DSDM). Em marketplace bilateral, funcionalidades de back-office podem ser tão críticas quanto as de front-end.</p>
+        <div class="moscow-grid">
+            <div class="moscow-card">
+                <span class="letra letra-m">M</span><span class="label">Must Have (Obrigatório)</span>
+                <p class="desc">Sem isso, o sistema NÃO entrega valor mínimo. O negócio para.</p>
+                <div class="conteudo">#1. Buscar acomodações<br>#2. Cadastrar anúncio<br>#3. Reservar com pagamento<br>#4. Gerenciar calendário</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-s">S</span><span class="label">Should Have (Importante)</span>
+                <p class="desc">Faz falta, mas dá para lançar sem e resolver depois.</p>
+                <div class="conteudo">#7. Filtrar resultados<br>#8. Chat interno<br>#9. Cancelar reserva</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-c">C</span><span class="label">Could Have (Desejável)</span>
+                <p class="desc">É um diferencial competitivo, mas não essencial.</p>
+                <div class="conteudo">#5. Avaliar estadia (double-blind)<br>#6. Avaliar hóspede<br>#10. Mapa com localização</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-w">W</span><span class="label">Won't Have (Fora do escopo)</span>
+                <p class="desc">Fica para versões futuras (v2, v3).</p>
+                <div class="conteudo">Experiências Airbnb (atividades turísticas guiadas)<br>Programa de fidelidade com pontos e descontos<br>Seguro-viagem integrado à reserva</div>
+            </div>
+        </div>
+        <p class="fonte">Nota analítica: o calendário (#4) é Must Have porque sem ele o anfitrião não controla disponibilidade, inviabilizando toda a operação de reserva. Funcionalidades de bastidor (back-office) podem ser tão críticas quanto as voltadas ao usuário final.</p>
+    </div>
+
+    <!-- 4. RNF -->
+    <div class="secao">
+        <div class="secao-titulo">4. Requisitos Não Funcionais</div>
+        <p class="secao-instrucao">Baseados no modelo ISO 25010 e em dados reais da infraestrutura do Airbnb.</p>
+        <div class="rnf-grid">
+            <div class="rnf-card">
+                <div class="rnf-titulo">Desempenho</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">A busca de acomodações deve retornar resultados em até 3 segundos, mesmo com filtros avançados. O sistema processa ~1,34 milhão de reservas/dia (~17 escritas/segundo), com leituras estimadas em ~1.000 QPS, fortemente cacheadas.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Tempo de resposta da busca &lt; 3s (P95); latência da API &lt; 500ms.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Segurança</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">Dados de pagamento processados via Braintree (PayPal), certificado PCI-DSS Nível 1. O Airbnb nunca armazena números de cartão e usa tokenização delegada ao processador. Internamente, o framework Orpheus garante 99,999% de consistência em pagamentos via chaves de idempotência e DAGs de operações retentáveis.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Certificação PCI-DSS ativa (via processador); zero senhas ou PANs em texto puro; conformidade com LGPD, GDPR, PSD2/PSD3 e SCA.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Disponibilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">O Airbnb não publica SLA formal de uptime. Roda na AWS com Multi-AZ (AWS garante 99,99% para deployments multi-AZ). Monitoramento indica mediana de 8h40min por incidente e ~3,4 incidentes/mês.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Monitoramento contínuo via IsDown/StatusGator; meta implícita de ≥ 99,9% mensal baseada na infraestrutura AWS.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Usabilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">O fluxo de reserva deve ser concluído em no máximo 4 cliques. A interface deve ser responsiva (Mobile First) e disponível em pelo menos 10 idiomas. O frontend usa chave de idempotência (reservationId) para evitar duplicação por duplo clique.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Máximo de 4 cliques até confirmação; teste em dispositivos de 5" a 13".</div>
+            </div>
+            <div class="rnf-card rnf-card-full">
+                <div class="rnf-titulo">Escalabilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">O sistema deve suportar 200 milhões de usuários ativos, 8 milhões de anúncios e 5–10 check-ins por segundo contínuos. Arquitetura evoluiu de monolito Rails para ~2.000 microsserviços organizados em Service Blocks com interfaces de fachada limpas (SOA v2).</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Kubernetes com auto-scaling na AWS; database-per-service com PostgreSQL (reservas) e MySQL/RDS (dados gerais); Kafka para eventos assíncronos.</div>
+            </div>
+        </div>
+        <p class="fonte">Fontes: Airbnb Tech Blog (Orpheus, Payment Orchestration) | Airbnb SEC 10-K FY2024 | ByteByteGo Architecture | Braintree PCI Compliance</p>
+    </div>
+
+    <!-- 5. CENÁRIO DE EXCEÇÃO -->
+    <div class="secao">
+        <div class="secao-titulo">5. Cenário de Exceção</div>
+        <p class="secao-instrucao">Cenário baseado em arquitetura real documentada pelo Airbnb Engineering Blog.</p>
+        <div class="checkbox-group">
+            <label><input type="checkbox" checked> Falha de pagamento / conflito financeiro</label>
+            <label><input type="checkbox"> Indisponibilidade de serviço externo</label>
+            <label><input type="checkbox"> Dado inválido / inconsistente</label>
+            <label><input type="checkbox"> Timeout / lentidão extrema</label>
+            <label><input type="checkbox"> Tentativa de invasão / fraude</label>
+            <label><input type="checkbox"> Estoque zerado</label>
+            <label><input type="checkbox" checked> Conflito de agendamento (double-booking)</label>
+        </div>
+        <div class="excecao-grid">
+            <div class="excecao-card">
+                <div class="exc-titulo">O que aconteceu?</div>
+                <div class="exc-valor">Dois hóspedes tentam reservar o mesmo imóvel nas mesmas datas simultaneamente. A ~17 transações de escrita por segundo, esse cenário é estatisticamente frequente. Há também o risco de double-booking cross-platform (Airbnb + Booking.com + Vrbo) quando o anfitrião lista em múltiplas plataformas.</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Quem foi afetado?</div>
+                <div class="exc-valor">Segundo hóspede: tem a reserva recusada. Anfitrião: pode receber notificações contraditórias. No caso cross-platform, o anfitrião sofre penalidade de $50–$100 e bloqueio de calendário.</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Qual a ação esperada do sistema?</div>
+                <div class="exc-valor">O Airbnb usa transações ACID com PostgreSQL e lock de linha (row-level locking), com reserva e inventário colocados no mesmo banco para evitar inconsistência. A decisão arquitetural deliberada foi NÃO usar padrões distribuídos (saga, two-phase commit) porque eles introduzem consistência eventual, inaceitável para integridade de reservas. O frontend envia uma chave de idempotência (reservationId) para evitar duplicação por duplo clique.</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Qual mensagem o usuário deve ver?</div>
+                <div class="exc-valor">"Este espaço acabou de ser reservado para as datas selecionadas. Veja datas disponíveis ou acomodações semelhantes na região."</div>
+            </div>
+            <div class="excecao-card excecao-card-full">
+                <div class="exc-titulo">O que acontece com os dados?</div>
+                <div class="exc-valor">A reserva do primeiro hóspede é confirmada e as datas são bloqueadas instantaneamente no calendário via lock de linha no PostgreSQL. Nenhuma cobrança é feita ao segundo hóspede. O framework Orpheus converte a entrega "at-least-once" do Kafka em garantia "exactly-once" para pagamentos, usando DAGs de operações idempotentes. Para sincronização cross-platform, o protocolo iCal pode levar 20 min a horas; a solução profissional é channel manager com API direta.</div>
+            </div>
+        </div>
+        <p class="fonte">Fontes: Airbnb Tech Blog, "Avoiding Double Payments in a Distributed Payments System" | ITNEXT, "Solving Double Booking at Scale" | Hostaway, Double Booking Prevention</p>
+    </div>
+
+    <!-- 6. PÓS-ANÁLISE -->
+    <div class="secao">
+        <div class="secao-titulo">6. Pós-Análise (Validação com o app real)</div>
+        <p class="secao-instrucao">Após preencher tudo, abra o sistema real e marque os itens abaixo.</p>
+        <div class="validacao-grid">
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>Todos os atores estão corretos?</span>
+                <span class="obs">Sim. Suporte reclassificado como "Mediador" por ter poder de decisão financeira.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>As 10 funcionalidades existem no sistema?</span>
+                <span class="obs">Todas verificadas. Detalhes do double-blind e 6 políticas de cancelamento confirmados no Help Center.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>A priorização MoSCoW bate com a realidade?</span>
+                <span class="obs">Calendário como Must Have validado, pois sem ele não há operação de reserva.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>Os requisitos não funcionais são viáveis?</span>
+                <span class="obs">PCI-DSS via Braintree confirmado. Orpheus 99,999% confirmado no Tech Blog.</span>
+            </div>
+            <div class="validacao-item validacao-full">
+                <input type="checkbox" checked>
+                <span>O cenário de exceção é tratado pelo sistema?</span>
+                <span class="obs">Row-level locking com PostgreSQL confirmado na documentação de arquitetura. Chave de idempotência no frontend confirmada.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. OBSERVAÇÕES -->
+    <div class="secao">
+        <div class="secao-titulo">7. Observações Finais / Aprendizados</div>
+        <p class="secao-instrucao">Análise técnica dos aprendizados obtidos com este exercício.</p>
+        <div class="obs-textarea" style="white-space: pre-wrap;">A análise do Airbnb introduz um aspecto que o Google Maps não possui: a existência de dois atores com interesses opostos operando sobre o mesmo recurso. O hóspede quer disponibilidade e preço baixo; o anfitrião quer ocupação e preço alto. O sistema funciona como intermediário que precisa equilibrar essas tensões. Essa dinâmica de marketplace bilateral tem implicações diretas na modelagem de requisitos, porque cada funcionalidade precisa ser avaliada sob a ótica de ambos os lados, pois um requisito que beneficia um ator pode gerar atrito para o outro.
+
+O mapeamento de atores revelou que o Suporte ao Cliente não é apenas um canal de atendimento, mas um ator com poder de decisão: ele processa reembolsos, media disputas e pode cancelar reservas. Isso significa que, em termos de casos de uso, o Suporte executa ações com impacto financeiro direto, o que exige requisitos de segurança e auditoria específicos (log de ações, aprovação em cadeia, limites de alçada). Na análise de sistemas reais, identificar o nível de autoridade de cada ator é tão importante quanto identificar o ator em si.
+
+Na priorização MoSCoW, a inclusão do calendário de disponibilidade como Must Have foi uma decisão analítica relevante. Sem o calendário, o anfitrião não consegue controlar quando o imóvel está livre, o que inviabiliza toda a operação de reserva. Isso demonstra que funcionalidades de bastidor (back-office), menos visíveis para o usuário final, podem ser tão críticas quanto as de front-end. É um erro comum priorizar apenas o que o usuário vê na tela. Segundo o IIBA (2024), 54% das falhas de projeto vêm de requisitos mal interpretados, frequentemente por ignorar processos de bastidor.
+
+Os requisitos não funcionais trouxeram o conceito de PCI-DSS, um padrão de segurança obrigatório para qualquer sistema que processa dados de cartão de crédito. O Airbnb não armazena cartões e delega a tokenização ao Braintree (PCI-DSS Nível 1), reduzindo drasticamente seu escopo de auditoria. Internamente, o framework Orpheus garante 99,999% de consistência em pagamentos usando DAGs de operações idempotentes e leitura exclusiva do banco master (sem réplicas, para evitar lag de replicação). Isso demonstra que requisitos não funcionais nem sempre são decisões técnicas internas. Alguns são imposições regulatórias externas (PCI-DSS, LGPD, PSD2).
+
+O cenário de exceção, conflito de reserva simultânea, revelou uma decisão arquitetural deliberada: o Airbnb usa transações ACID com lock de linha em PostgreSQL, colocando reserva e inventário no mesmo banco. A decisão de NÃO usar padrões distribuídos (saga, two-phase commit) foi consciente, pois consistência eventual é inaceitável quando dinheiro está envolvido. Para o projeto Mapa de Sala, cenários de conflito de alocação são uma possibilidade real que deverá ser mapeada nas entrevistas com os stakeholders, e a criticidade da operação definirá a estratégia de concorrência adequada.</div>
+    </div>
+
+    <div class="footer">
+        Roteiro de Análise de Requisitos, Airbnb | Ficha 2 de 4 | Análise Aprofundada com Dados Reais
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento de Requisitos - Mapa de Salas SENAC Minas</title>
+    <style>
+        @page { size: A4; margin: 15mm; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1a1a1a; line-height: 1.6; padding: 30px 35px; max-width: 900px; margin: 0 auto; background: #fff; font-size: 14px; }
+
+        .header-box { border: 2px solid #004C94; border-radius: 8px; padding: 20px 24px; margin-bottom: 20px; background: #f8faff; }
+        .header-box h1 { font-size: 22px; color: #004C94; margin-bottom: 4px; }
+        .header-box .subtitle { font-size: 13px; color: #666; margin-bottom: 12px; }
+        .header-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; font-size: 13px; }
+        .header-meta .label { color: #666; }
+        .header-meta .valor { font-weight: 600; border-bottom: 2px solid #004C94; padding-bottom: 1px; }
+
+        .secao { margin-bottom: 28px; }
+        .secao-titulo { font-size: 18px; font-weight: 700; color: #fff; background: #004C94; padding: 10px 18px; border-radius: 6px; margin-bottom: 14px; }
+        .secao-titulo.laranja { background: #F7941D; }
+        .subsecao-titulo { font-size: 15px; font-weight: 700; color: #004C94; border-bottom: 2px solid #004C94; padding-bottom: 4px; margin: 20px 0 12px 0; }
+
+        p { margin-bottom: 10px; }
+        ul, ol { margin: 8px 0 14px 24px; }
+        li { margin-bottom: 6px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 10px 0 16px 0; font-size: 13px; }
+        table th { background: #004C94; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+        table td { padding: 9px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+        table tr:nth-child(even) td { background: #f0f4fa; }
+
+        .req-box { background: #f5f7fa; border-left: 4px solid #004C94; border-radius: 0 6px 6px 0; padding: 14px 18px; margin-bottom: 14px; }
+        .req-box.rn { border-left-color: #F7941D; }
+        .req-id { font-size: 13px; font-weight: 700; color: #004C94; }
+        .req-box.rn .req-id { color: #F7941D; }
+        .req-desc { font-size: 13px; margin-top: 4px; }
+        .req-regras { font-size: 12px; color: #555; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #ddd; }
+        .req-regras strong { color: #333; }
+
+        .moscow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0; }
+        .moscow-card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; background: #fff; }
+        .moscow-card .letra { font-size: 20px; font-weight: 800; margin-right: 6px; }
+        .moscow-card .label { font-size: 14px; font-weight: 700; }
+        .moscow-card .desc { font-size: 11px; color: #666; font-style: italic; margin: 4px 0 10px 0; }
+        .moscow-card .conteudo { font-size: 13px; color: #333; background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 4px; padding: 10px 12px; }
+        .letra-m { color: #e53935; } .letra-s { color: #FB8C00; } .letra-c { color: #43A047; } .letra-w { color: #757575; }
+
+        .glossario-item { display: grid; grid-template-columns: 200px 1fr; gap: 8px; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 13px; }
+        .glossario-item strong { color: #004C94; }
+
+        .checklist { list-style: none; margin-left: 0; }
+        .checklist li { padding: 8px 12px; border-bottom: 1px solid #eee; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .checklist li::before { content: ""; display: inline-block; width: 16px; height: 16px; border: 2px solid #004C94; border-radius: 3px; flex-shrink: 0; }
+        .checklist li.done::before { background: #004C94; }
+
+        .alerta { background: #FFF8E1; border: 1px solid #FFE082; border-radius: 6px; padding: 12px 16px; margin: 12px 0; font-size: 13px; color: #5D4037; }
+        .alerta strong { color: #E65100; }
+
+        .footer { margin-top: 30px; padding-top: 12px; border-top: 3px solid #004C94; font-size: 12px; color: #888; text-align: center; }
+
+        @media print { body { padding: 15px; } .secao { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+    <!-- CABECALHO -->
+    <div class="header-box">
+        <h1>Guia para Coleta e Analise de Requisitos de Software</h1>
+        <div class="subtitle">Documento preenchido conforme modelo do professor</div>
+        <div class="header-meta">
+            <div><span class="label">Versao:</span> <span class="valor">2.0</span></div>
+            <div><span class="label">Data:</span> <span class="valor">30/06/2026</span></div>
+            <div><span class="label">Projeto:</span> <span class="valor">Mapa de Salas — SENAC Minas BH</span></div>
+            <div><span class="label">Responsavel:</span> <span class="valor">Thais Oliveira</span></div>
+        </div>
+    </div>
+
+    <!-- 1. OBJETIVO -->
+    <div class="secao">
+        <div class="secao-titulo">1. Objetivo da Etapa</div>
+        <p>O objetivo desta fase de Coleta e Analise de Requisitos e entender profundamente como funciona a alocacao de salas de cursos no SENAC Minas (unidade BH), mapear as dores do processo atual (planilha Excel) e transformar as necessidades da equipe administrativa em requisitos funcionais e nao funcionais claros, mensuraveis e testaveis para o desenvolvimento do sistema Mapa de Salas.</p>
+    </div>
+
+    <!-- 2. PAPEIS -->
+    <div class="secao">
+        <div class="secao-titulo">2. Papeis e Responsabilidades</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 28%;">Papel</th>
+                    <th>Responsabilidade na Coleta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Analista de Requisitos</strong></td>
+                    <td>Conduzir as entrevistas com a supervisao, aplicar as tecnicas de levantamento, documentar os requisitos e validar com a cliente. <em>Responsavel: Thais Oliveira (aluna).</em></td>
+                </tr>
+                <tr>
+                    <td><strong>Stakeholder (Cliente)</strong></td>
+                    <td>Supervisao / Coordenacao Pedagogica do SENAC BH. Validar os requisitos, informar regras de negocio, aprovar prototipos e priorizar funcionalidades.</td>
+                </tr>
+                <tr>
+                    <td><strong>Usuarios-chave (Operacionais)</strong></td>
+                    <td>Equipe de Suporte (reserva e manipula salas no dia a dia) e Docentes (consultam salas e reportam problemas). Descrevem as tarefas diarias, dores e fluxos de trabalho.</td>
+                </tr>
+                <tr>
+                    <td><strong>Time Tecnico</strong></td>
+                    <td>Equipe de desenvolvimento (alunos do curso Tec. Desenvolvimento de Sistemas). Analise de viabilidade tecnica, definicao de stack (PHP + MySQL definido pelo professor) e implementacao.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 3. TECNICAS -->
+    <div class="secao">
+        <div class="secao-titulo">3. Tecnicas de Coleta Utilizadas</div>
+        <ul>
+            <li><strong>Entrevista Individual (1:1):</strong> Realizada com a supervisao/cliente para capturar as dores do processo atual, regras de negocio e necessidades especificas (ex: filtro de salas por turma, calculo de progresso).</li>
+            <li><strong>Observacao Direta:</strong> Analise da planilha Excel atualmente utilizada (fotos da tela projetada em sala), identificando campos, estrutura de dados, erros (#N/D) e fluxos de uso.</li>
+            <li><strong>Analise de Documentos:</strong> Estudo da planilha "Mapa de Salas — ANO 2026" com dados reais: tipos de sala, codigos de turma, nomes de professores, datas, turnos e progresso.</li>
+            <li><strong>Prototipacao (Media Fidelidade):</strong> Criacao de wireframes das 6 telas principais usando a paleta oficial do SENAC (Azul #004C94, Laranja #F7941D) para validacao com a cliente antes do desenvolvimento.</li>
+        </ul>
+    </div>
+
+    <!-- 4. ESTRUTURA DO DOCUMENTO -->
+    <div class="secao">
+        <div class="secao-titulo">4. Estrutura do Documento de Requisitos</div>
+
+        <!-- 4.1 CONTEXTO -->
+        <div class="subsecao-titulo">4.1. Contexto e Visao Geral do Projeto</div>
+
+        <p><strong>Problema / Oportunidade:</strong> A equipe de supervisao do SENAC BH gerencia a alocacao de mais de 20 turmas em diversas salas usando uma planilha Excel com formato Gantt anual. A planilha apresenta problemas reais: erros de formula (#N/D) em linhas vazias, impossibilidade de filtrar "por quais salas uma turma passou", risco de conflitos de alocacao (duas turmas na mesma sala/turno) detectados apenas visualmente, e limitacao de visualizacao por ano (cursos que cruzam dez/jan ficam partidos entre planilhas).</p>
+
+        <p><strong>Objetivos de Negocio:</strong></p>
+        <ul>
+            <li>Eliminar conflitos de sala (duas turmas no mesmo horario) com validacao automatica.</li>
+            <li>Permitir consulta instantanea do historico de salas por turma (hoje leva minutos na planilha).</li>
+            <li>Calcular automaticamente o progresso dos cursos e a data de termino quando dias sao cancelados.</li>
+            <li>Centralizar a gestao de salas em um sistema com controle de acesso por perfil.</li>
+        </ul>
+
+        <p><strong>Publico-alvo / Personas:</strong></p>
+        <ul>
+            <li><strong>Supervisao:</strong> Coordenacao pedagogica. Visao geral de todas as salas e turmas. Decisoes estrategicas.</li>
+            <li><strong>Suporte:</strong> Equipe operacional. Cria reservas, altera status de salas, resolve conflitos no dia a dia.</li>
+            <li><strong>Docente:</strong> Professores. Consultam onde suas turmas estao alocadas. Reportam problemas via canal oficial.</li>
+            <li><strong>Administrador (futuro):</strong> Perfil a ser criado quando a unidade eleger um responsavel pelo sistema.</li>
+        </ul>
+
+        <p><strong>Premissas:</strong></p>
+        <ul>
+            <li>A propria equipe cadastra as salas (quantidade, tipo, capacidade) — o sistema nao precisa saber o total antecipadamente.</li>
+            <li>Cada turma ja tem seus dias da semana definidos (fixos), cadastrados pela equipe.</li>
+            <li>Cada unidade define seu proprio calendario de feriados e recessos.</li>
+            <li>O sabado e letivo apenas para algumas turmas (ha turmas Seg-Sex e turmas somente Sabado).</li>
+            <li>O professor definiu PHP + MySQL como stack obrigatoria.</li>
+            <li>No futuro o sistema pode ser adotado por outras unidades do SENAC Minas.</li>
+        </ul>
+
+        <p><strong>Restricoes:</strong></p>
+        <ul>
+            <li>Stack: PHP 8+ com MySQL 8 (definido pelo professor).</li>
+            <li>Prazo: projeto academico, semestre letivo 2026.2.</li>
+            <li>O sistema de chamados de manutencao e externo (canal oficial do SENAC) — nao sera integrado nesta versao.</li>
+            <li>Deve rodar em navegador (Chrome/Edge). Nao ha necessidade de app mobile nativo.</li>
+        </ul>
+
+        <!-- 4.2 REQUISITOS FUNCIONAIS -->
+        <div class="subsecao-titulo">4.2. Requisitos Funcionais (O que o sistema DEVE FAZER)</div>
+
+        <div class="req-box">
+            <div class="req-id">RF01 — Autenticacao e Controle de Acesso</div>
+            <div class="req-desc">O sistema deve permitir login com e-mail e senha, com perfis diferenciados (Supervisao, Suporte, Docente, Admin).</div>
+            <div class="req-regras"><strong>Regras:</strong> Senha deve ter no minimo 8 caracteres. E-mail deve ser unico. Sessao expira apos 30 minutos de inatividade. Perfil define permissoes de leitura/escrita. Senhas armazenadas com password_hash() (bcrypt).</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF02 — Cadastro de Salas e Ambientes</div>
+            <div class="req-desc">O sistema deve permitir que a equipe cadastre salas informando: numero/nome, tipo (Sala de Aula, Laboratorio, Auditorio, Cozinha, Especial), capacidade (vagas), andar/pavimento (Terreo, 1o andar, 2o andar, etc.), recursos disponiveis e observacoes.</div>
+            <div class="req-regras"><strong>Regras:</strong> Numero da sala deve ser unico por unidade. Tipo, capacidade e andar sao obrigatorios. Status inicial: Disponivel. Apenas perfis Supervisao e Suporte podem cadastrar. A equipe define livremente os andares ao cadastrar.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF03 — Cadastro de Cursos</div>
+            <div class="req-desc">O sistema deve permitir cadastrar cursos com: nome, tipo de curso (Cursos Ageis, Graduacao, Pos Graduacao, Tecnico), programa (Todos os cursos, Senac+, PSG), area de conhecimento (23 areas padrao SENAC: Gestao, Comercio, Comunicacao, Artes, Design, Saude, TI, Idioma, Educacional, Lazer, Moda, Beleza, Turismo, Social, Producao de Alimentos, Seguranca, Hospedagem, Gastronomia, Eventos, Asseio e Conservacao, Meio Ambiente e Saude, Meio Ambiente e Recursos Naturais, Games) e carga horaria total.</div>
+            <div class="req-regras"><strong>Regras:</strong> Nome, tipo de curso, area e carga horaria sao obrigatorios. Tipo, programa e area sao listas fechadas (ENUM) baseadas no catalogo oficial do SENAC. Programa padrao: "Todos os cursos".</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF04 — Cadastro e Edicao de Turmas</div>
+            <div class="req-desc">O sistema deve permitir cadastrar e editar turmas com: codigo (formato 006.2026.XXXX), curso vinculado, um ou mais professores (com indicacao do principal), turno (Manha/Tarde/Noite), data de inicio, data de termino prevista, dias da semana fixos (Ex: Seg a Sex, somente Sabado, Seg/Qua/Sex), descricao da turma e observacoes. A edicao deve estar disponivel a qualquer momento para atualizar professores, descricao, observacao e demais dados.</div>
+            <div class="req-regras"><strong>Regras:</strong> Codigo da turma deve ser unico. Cada turma tem seu proprio padrao de dias. Data de termino deve ser posterior a data de inicio. Curso e pelo menos um professor sao obrigatorios. Uma turma pode ter mais de um professor vinculado (relacao N:N via tabela professor_turma). Descricao e observacao sao opcionais, disponiveis tanto no cadastro quanto na edicao.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF05 — Cadastro de Feriados e Recessos</div>
+            <div class="req-desc">O sistema deve permitir que cada unidade cadastre seus proprios feriados e recessos (datas bloqueadas), impedindo alocacao nesses dias e recalculando automaticamente a data de termino dos cursos afetados.</div>
+            <div class="req-regras"><strong>Regras:</strong> Tipos: Nacional, Estadual, Municipal, Recesso. Data e descricao sao obrigatorios. Ao cadastrar feriado, o sistema deve verificar reservas existentes naquele dia e alertar.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF06 — Criar Reserva de Sala</div>
+            <div class="req-desc">O sistema deve permitir alocar uma turma em uma sala para uma data e turno especificos. O sistema deve impedir automaticamente reservas conflitantes (mesma sala + mesmo turno + mesmo dia).</div>
+            <div class="req-regras"><strong>Regras:</strong> Se houver conflito, o sistema deve exibir mensagem clara indicando qual turma ja ocupa aquele horario e sugerir salas disponiveis no mesmo turno. Sala em manutencao nao aceita reserva. Apenas Supervisao e Suporte podem criar reservas.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF07 — Reserva Recorrente (Automatica)</div>
+            <div class="req-desc">Ao cadastrar uma turma, o sistema deve gerar automaticamente as reservas para todos os dias do curso com base no padrao de dias da semana, turno e sala, excluindo feriados e recessos cadastrados.</div>
+            <div class="req-regras"><strong>Regras:</strong> Gerar apenas nos dias definidos no padrao da turma. Pular feriados/recessos. Se alguma data gerar conflito, alertar antes de confirmar a geracao em lote.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF08 — Desocupar / Realocar Turma</div>
+            <div class="req-desc">O sistema deve permitir mover uma turma de uma sala para outra (troca pontual ou permanente), mantendo o historico da sala anterior.</div>
+            <div class="req-regras"><strong>Regras:</strong> A sala de destino deve estar disponivel no turno/dia desejado. O motivo da troca deve ser registrado. O historico da sala anterior deve ser preservado para consulta.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF09 — Registrar Dia sem Aula</div>
+            <div class="req-desc">Quando um dia de aula e cancelado (falta do professor, evento, etc.), o sistema deve registrar a ausencia e automaticamente acrescentar +1 dia util ao termino do curso.</div>
+            <div class="req-regras"><strong>Regras:</strong> O dia adicionado deve pular feriados, recessos e dias que nao fazem parte do padrao da turma. O motivo do cancelamento e obrigatorio. O progresso (%) deve ser recalculado.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF10 — Alterar Status da Sala</div>
+            <div class="req-desc">O sistema deve permitir mudar o status de uma sala para: Disponivel, Ocupada ou Manutencao.</div>
+            <div class="req-regras"><strong>Regras:</strong> Quando muda para Manutencao, o sistema deve listar todas as reservas futuras afetadas e alertar o Suporte. Novas reservas sao bloqueadas para salas em manutencao. Apenas o perfil Suporte pode alterar status.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF11 — Visualizacao Geral (Painel / Calendario)</div>
+            <div class="req-desc">O sistema deve exibir um painel com 4 modos de visualizacao (como Google Agenda): Dia (detalhe de um unico dia), Semana (7 dias), Mes (calendario mensal) e Ano (visao anual quando aplicavel). As salas aparecem nas linhas e os dias/periodos nas colunas. Cada reserva mostra o codigo da turma e o turno (cor diferenciada). Feriados e recessos devem ser indicados visualmente.</div>
+            <div class="req-regras"><strong>Regras:</strong> O usuario pode alternar entre os 4 modos de visualizacao a qualquer momento. A visao padrao e Semana. A visualizacao deve ser semelhante ao Gantt da planilha atual para facilitar a transicao. Salas em manutencao devem aparecer destacadas em vermelho. Todos os perfis podem visualizar.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF12 — Filtros Diversos</div>
+            <div class="req-desc">O sistema deve permitir filtrar reservas e turmas ativas por: data, turno (Manha/Tarde/Noite), turma, professor(es), tipo de sala, andar, curso, tipo de curso (Cursos Ageis/Graduacao/Pos Graduacao/Tecnico), area de conhecimento (22 areas SENAC), status da sala, dias da semana e faixa de progresso. Os filtros devem estar disponiveis tanto no painel de calendario quanto na listagem de turmas ativas.</div>
+            <div class="req-regras"><strong>Regras:</strong> Filtros devem ser combinaveis (ex: turno Tarde + tipo Laboratorio + area Gastronomia). Todos os perfis podem usar filtros. Resultados devem atualizar em tempo real ou ao clicar "Filtrar". Os filtros de tipo de curso e area seguem o catalogo oficial do SENAC.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF13 — Historico de Salas por Turma</div>
+            <div class="req-desc">Ao consultar uma turma pelo codigo, o sistema deve exibir todas as salas pelas quais ela passou ao longo do curso, com datas, tipo de sala e motivo da troca.</div>
+            <div class="req-regras"><strong>Regras:</strong> Pedido direto da cliente. Deve funcionar bem para turmas que usam muitas salas (ex: Gastronomia usa cozinha + sala convencional + laboratorio). Todos os perfis podem consultar.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF14 — Calculo e Exibicao do Progresso</div>
+            <div class="req-desc">O sistema deve calcular automaticamente o percentual de progresso de cada turma: (dias de aula realizados / total de dias previstos) x 100%. Exibir com indicador visual (barra de progresso).</div>
+            <div class="req-regras"><strong>Regras:</strong> Dias cancelados nao contam como realizados. Feriados e recessos nao contam como previstos. O calculo deve ser atualizado diariamente. Exibir na listagem de turmas e no painel.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF15 — Impressao e Exportacao de Relatorios</div>
+            <div class="req-desc">O sistema deve gerar relatorios filtrados por sala, turma ou turno, com opcao de imprimir diretamente ou exportar em PDF.</div>
+            <div class="req-regras"><strong>Regras:</strong> O relatorio deve incluir: cabecalho com unidade e data, dados filtrados em formato de tabela, e rodape com responsavel. Apenas Supervisao e Suporte podem gerar relatorios.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF16 — Log de Alteracoes (Auditoria)</div>
+            <div class="req-desc">O sistema deve registrar automaticamente quem fez cada alteracao (criacao, edicao, exclusao de reserva, troca de status), com data/hora e descricao da acao.</div>
+            <div class="req-regras"><strong>Regras:</strong> O log nao pode ser editado ou excluido. Consultavel apenas pela Supervisao. Deve registrar: usuario, acao, tabela afetada, data/hora.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RF17 — Dashboard de Ocupacao</div>
+            <div class="req-desc">Painel gerencial mostrando: salas livres/ocupadas no momento, taxa de ocupacao por turno, salas em manutencao e turmas com maior demanda de salas.</div>
+            <div class="req-regras"><strong>Regras:</strong> Apenas Supervisao pode acessar. Dados atualizados em tempo real. Exibir cards com numeros e graficos simples.</div>
+        </div>
+
+        <!-- 4.3 REQUISITOS NAO FUNCIONAIS -->
+        <div class="subsecao-titulo">4.3. Requisitos Nao Funcionais (Qualidade e Restricoes Tecnicas)</div>
+
+        <div class="req-box">
+            <div class="req-id">RNF01 — Desempenho</div>
+            <div class="req-desc">A tela principal (painel/calendario) deve carregar em menos de 3 segundos. O sistema deve suportar ate 20 usuarios simultaneos sem queda de performance (volume real da equipe administrativa do SENAC BH).</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RNF02 — Seguranca</div>
+            <div class="req-desc">Senhas armazenadas com bcrypt (password_hash do PHP). Todas as consultas SQL via PDO com prepared statements. Saida HTML escapada com htmlspecialchars(). Sessoes com session_regenerate_id() apos login. Log de todas as acoes dos usuarios (RF16).</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RNF03 — Usabilidade</div>
+            <div class="req-desc">O sistema deve ser responsivo (funcionar em computador e tablet). A interface deve lembrar a planilha atual (formato calendario) para facilitar a transicao. Um usuario novo (perfil Suporte) deve conseguir criar uma reserva em menos de 2 minutos sem treinamento. Seguir a identidade visual do SENAC (Azul #004C94, Laranja #F7941D).</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RNF04 — Disponibilidade</div>
+            <div class="req-desc">O sistema deve estar disponivel durante o horario comercial (7h as 22h, segunda a sabado). Backup diario automatico dos dados com retencao de 30 dias.</div>
+        </div>
+
+        <div class="req-box">
+            <div class="req-id">RNF05 — Plataforma</div>
+            <div class="req-desc">Deve rodar em navegadores baseados em Chromium (Chrome, Edge). Backend em PHP 8+ com MySQL 8. Servidor Apache (XAMPP ou Laragon para desenvolvimento). Arquitetura MVC simples, sem framework.</div>
+        </div>
+
+        <!-- 4.4 REGRAS DE NEGOCIO -->
+        <div class="subsecao-titulo">4.4. Regras de Negocio (RN)</div>
+
+        <div class="req-box rn">
+            <div class="req-id">RN01 — Dia sem aula estende o termino do curso</div>
+            <div class="req-desc">Quando um dia letivo e cancelado (feriado, falta, evento), a data de termino do curso deve ser automaticamente recalculada, adicionando +1 dia util ao final. O dia adicionado deve pular feriados, recessos e dias que nao fazem parte do padrao da turma. O progresso (%) deve refletir apenas os dias efetivamente realizados.</div>
+        </div>
+
+        <div class="req-box rn">
+            <div class="req-id">RN02 — Proibido conflito de sala + turno + dia</div>
+            <div class="req-desc">O sistema nao deve permitir que duas turmas sejam alocadas na mesma sala, no mesmo turno, no mesmo dia. Deve validar no momento da reserva e exibir mensagem clara indicando o conflito e qual turma ja ocupa aquele horario. Implementado como UNIQUE(id_sala, data, turno) no banco de dados.</div>
+        </div>
+
+        <div class="req-box rn">
+            <div class="req-id">RN03 — Uma turma pode ocupar varias salas no mesmo dia</div>
+            <div class="req-desc">Cursos como Gastronomia usam cozinha, sala convencional e laboratorio em dias diferentes ou ate no mesmo dia (turnos diferentes). A reserva e por turno, nao por dia inteiro, permitindo que uma turma tenha reservas em salas distintas no mesmo dia.</div>
+        </div>
+
+        <div class="req-box rn">
+            <div class="req-id">RN04 — Progresso calculado automaticamente</div>
+            <div class="req-desc">Formula: progresso = (dias de aula realizados / total de dias previstos) x 100%. Dias cancelados nao contam como realizados. Feriados e recessos nao contam como previstos.</div>
+        </div>
+
+        <div class="req-box rn">
+            <div class="req-id">RN05 — Sala em manutencao bloqueia novas reservas</div>
+            <div class="req-desc">Quando o status de uma sala muda para "Manutencao", nenhuma nova reserva pode ser feita para essa sala. Reservas futuras ja existentes devem gerar um alerta para que o Suporte realoque as turmas afetadas.</div>
+        </div>
+
+        <div class="req-box rn">
+            <div class="req-id">RN06 — Cursos podem cruzar a virada do ano</div>
+            <div class="req-desc">Um curso que comeca em outubro de 2026 pode terminar em marco de 2027. O sistema nao deve ser limitado a um ano especifico — deve tratar cursos por suas datas reais de inicio e termino, independente do ano.</div>
+        </div>
+
+        <!-- 4.5 GLOSSARIO -->
+        <div class="subsecao-titulo">4.5. Glossario / Dicionario de Dados</div>
+
+        <div class="glossario-item"><strong>Sala</strong><span>Ambiente fisico onde as aulas acontecem. Pode ser: Sala de Aula, Laboratorio de Informatica, Auditorio, Cozinha Industrial ou Especial.</span></div>
+        <div class="glossario-item"><strong>Turma</strong><span>Grupo de alunos matriculados em um curso especifico, identificado por um codigo unico (formato 006.2026.XXXX). Cada turma tem turno, professor e dias da semana fixos.</span></div>
+        <div class="glossario-item"><strong>Reserva</strong><span>Alocacao de uma turma em uma sala para uma data e turno especificos. A unidade minima de ocupacao e: sala + dia + turno.</span></div>
+        <div class="glossario-item"><strong>Turno</strong><span>Periodo do dia: Manha, Tarde ou Noite. Uma sala pode ter ate 3 turmas diferentes no mesmo dia (uma por turno).</span></div>
+        <div class="glossario-item"><strong>Progresso</strong><span>Percentual de andamento do curso. Formula: (dias de aula realizados / total de dias previstos) x 100%.</span></div>
+        <div class="glossario-item"><strong>Dia cancelado</strong><span>Dia em que a aula estava prevista mas nao aconteceu (falta, evento, etc.). Cada cancelamento adiciona +1 dia util ao termino do curso.</span></div>
+        <div class="glossario-item"><strong>Status da sala</strong><span>Situacao atual: Disponivel (pronta para uso), Ocupada (com turma alocada no turno atual) ou Manutencao (indisponivel por problema tecnico).</span></div>
+        <div class="glossario-item"><strong>Unidade</strong><span>Filial do SENAC. Nesta versao, somente SENAC BH. No futuro, o sistema pode atender outras unidades.</span></div>
+        <div class="glossario-item"><strong>Padrao de dias</strong><span>Dias da semana em que uma turma tem aula. Ex: "Seg a Sex", "Somente Sabado", "Seg/Qua/Sex". Definido no momento do cadastro da turma.</span></div>
+        <div class="glossario-item"><strong>Andar</strong><span>Pavimento do predio onde a sala esta localizada. Confirmado com a cliente: o predio tem salas em andares diferentes e o numero do andar e importante para a organizacao. A equipe cadastra livremente (Terreo, 1o andar, 2o andar, etc.).</span></div>
+        <div class="glossario-item"><strong>Tipo de Curso</strong><span>Classificacao do curso segundo o catalogo SENAC: Cursos Ageis, Graduacao, Pos Graduacao ou Tecnico.</span></div>
+        <div class="glossario-item"><strong>Area de Conhecimento</strong><span>Segmento tematico do curso (23 areas do SENAC): Gestao, Comercio, Comunicacao, Artes, Design, Saude, TI, Idioma, Educacional, Lazer, Moda, Beleza, Turismo, Social, Producao de Alimentos, Seguranca, Hospedagem, Gastronomia, Eventos, Asseio e Conservacao, Meio Ambiente e Saude, Meio Ambiente e Recursos Naturais, Games.</span></div>
+        <div class="glossario-item"><strong>Programa</strong><span>Classificacao do curso por programa do SENAC: "Todos os cursos" (oferta regular), "Senac+" (programa de beneficios/assinatura) ou "PSG" (Programa SENAC de Gratuidade).</span></div>
+    </div>
+
+    <!-- 5. ROTEIRO DE PERGUNTAS -->
+    <div class="secao">
+        <div class="secao-titulo">5. Roteiro de Perguntas-Chave</div>
+        <p>Perguntas utilizadas e planejadas para as entrevistas com a supervisao:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 55%;">Pergunta</th>
+                    <th style="width: 40%;">Resposta obtida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>"Quando uma turma troca de sala, quem decide e como e comunicado hoje?"</td><td>O Suporte decide. Comunicacao informal. No futuro, terao um Admin.</td></tr>
+                <tr><td>2</td><td>"Ja aconteceu de duas turmas serem alocadas na mesma sala, turno e dia?"</td><td>Sim, ja aconteceu. Hoje a supervisao detecta visualmente e resolve antes.</td></tr>
+                <tr><td>3</td><td>"Alem de voce, mais alguem precisa consultar ou editar o mapa de salas?"</td><td>Sim, varias pessoas tem acesso a planilha. Supervisao, Suporte, Docentes consultam.</td></tr>
+                <tr><td>4</td><td>"Salas entram em manutencao? Como registra que uma sala esta indisponivel?"</td><td>Sim. Professor abre chamado no canal oficial, Suporte altera o status na planilha.</td></tr>
+                <tr><td>5</td><td>"Qual informacao voce mais demora pra encontrar na planilha hoje?"</td><td>Historico de salas por turma (por quais salas cada turma passou ao longo do curso).</td></tr>
+                <tr><td>6</td><td>"O progresso e calculado automaticamente?"</td><td>Sim, pela planilha. Quando nao tem aula, aumenta +1 dia no termino.</td></tr>
+                <tr><td>7</td><td>"O sabado e letivo para todos?"</td><td>Nao. Tem turmas Seg-Sex e turmas somente Sabado.</td></tr>
+                <tr><td>8</td><td>"O predio tem andares? Precisa informar o andar da sala?"</td><td>Sim, salas ficam em andares diferentes. O numero do andar e importante. A equipe cadastra livremente.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 6. TECNICAS DE MODELAGEM -->
+    <div class="secao">
+        <div class="secao-titulo">6. Tecnicas de Modelagem e Analise</div>
+        <p>Artefatos produzidos durante a fase de analise:</p>
+        <ul>
+            <li><strong>Diagrama Entidade-Relacionamento (DER):</strong> 11 tabelas + 4 views. Arquivo: <code>modelagem/DER_Mapa_de_Salas.html</code></li>
+            <li><strong>Script SQL (DDL):</strong> Banco de dados completo com tabelas, constraints, chaves estrangeiras e views. Arquivo: <code>modelagem/schema.sql</code></li>
+            <li><strong>Prototipacao (Media Fidelidade):</strong> 6 telas principais com paleta SENAC. Arquivo: <code>documentos/Prototipos_Telas.html</code></li>
+            <li><strong>PRD (Product Requirements Document):</strong> Documento de produto com cronograma, riscos e criterios de aceite. Arquivo: <code>documentos/PRD_Mapa_de_Salas.html</code></li>
+        </ul>
+    </div>
+
+    <!-- 7. MOSCOW -->
+    <div class="secao">
+        <div class="secao-titulo">7. Criterios de Priorizacao (MoSCoW)</div>
+        <p>Criterio: o que e necessario para substituir a planilha sem perder funcionalidade. Must Have &le; 60% do esforco (regra DSDM).</p>
+        <div class="moscow-grid">
+            <div class="moscow-card">
+                <span class="letra letra-m">M</span><span class="label">Must Have (Obrigatorio)</span>
+                <p class="desc">Sem isso, o sistema nao substitui a planilha.</p>
+                <div class="conteudo">
+                    RF01. Autenticacao e perfis<br>
+                    RF02. Cadastro de salas<br>
+                    RF04. Cadastro de turmas<br>
+                    RF06. Reserva com validacao de conflito<br>
+                    RF10. Alterar status da sala<br>
+                    RF11. Painel/calendario geral<br>
+                    RF12. Filtros diversos<br>
+                    RN02. Constraint de conflito
+                </div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-s">S</span><span class="label">Should Have (Importante)</span>
+                <p class="desc">Importante, mas da para lancar o MVP sem.</p>
+                <div class="conteudo">
+                    RF03. Cadastro de cursos<br>
+                    RF05. Feriados e recessos<br>
+                    RF07. Reserva recorrente<br>
+                    RF09. Dia sem aula (+1 termino)<br>
+                    RF13. Historico por turma<br>
+                    RF14. Progresso automatico<br>
+                    RF15. Impressao/exportacao
+                </div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-c">C</span><span class="label">Could Have (Desejavel)</span>
+                <p class="desc">Diferencial, implementar se der tempo.</p>
+                <div class="conteudo">
+                    RF08. Realocar com historico<br>
+                    RF16. Log de alteracoes<br>
+                    RF17. Dashboard de ocupacao<br>
+                    Exportar PDF
+                </div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-w">W</span><span class="label">Won't Have (Versao 2.0)</span>
+                <p class="desc">Fora do escopo desta versao.</p>
+                <div class="conteudo">
+                    Integracao com sistema de chamados<br>
+                    Notificacoes push/email<br>
+                    App mobile nativo<br>
+                    Sugestao automatica de sala<br>
+                    Multi-unidade
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. VALIDACAO -->
+    <div class="secao">
+        <div class="secao-titulo">8. Processo de Validacao e Aprovacao</div>
+        <ol>
+            <li><strong>Review Interno:</strong> A equipe de desenvolvimento revisa o documento para garantir que nao ha contradicoes entre requisitos e regras de negocio.</li>
+            <li><strong>Apresentacao (Walkthrough):</strong> Apresentar para a supervisao/cliente os prototipos de tela, o DER e a lista de requisitos priorizados.</li>
+            <li><strong>Ajustes:</strong> Coletar feedback da cliente, corrigir interpretacoes incorretas, adicionar requisitos faltantes (ex: campo "andar" da sala).</li>
+            <li><strong>Aprovacao:</strong> Cliente aprova o documento. A partir deste ponto, mudancas de escopo implicam em renegociacao de prazo.</li>
+        </ol>
+
+        <div class="alerta" style="background: #DCFCE7; border-color: #86EFAC;">
+            <strong style="color: #166534;">Pendencia resolvida (v2.0):</strong> Confirmado com a cliente que as salas possuem andares diferentes e que o numero do andar e importante. Campo "andar" adicionado na tabela <code>sala</code>, no DER, nos formularios de cadastro e nos prototipos. Tambem adicionado: multiplos professores por turma, campos descricao/observacao na turma, tipos de curso e 22 areas de conhecimento do SENAC, visualizacao do calendario em 4 modos (Dia/Semana/Mes/Ano) e filtros avancados nas turmas ativas.
+        </div>
+    </div>
+
+    <!-- 9. CHECKLIST -->
+    <div class="secao">
+        <div class="secao-titulo">9. Checklist de Encerramento da Etapa</div>
+        <ul class="checklist">
+            <li class="done">Todos os stakeholders-chave foram entrevistados?</li>
+            <li class="done">Os requisitos funcionais estao escritos de forma clara e testavel?</li>
+            <li class="done">Os requisitos nao funcionais (performance, seguranca, usabilidade) estao definidos?</li>
+            <li class="done">As regras de negocio estao documentadas?</li>
+            <li class="done">As prioridades (MoSCoW) estao definidas?</li>
+            <li class="done">O prototipo de interface foi validado com os usuarios?</li>
+            <li>O documento foi aprovado e assinado pelo patrocinador do projeto?</li>
+        </ul>
+
+        <div class="alerta" style="margin-top: 16px;">
+            <strong>Dica de Ouro (do guia do professor):</strong> "Nunca escreva requisitos usando 'etc', 'entre outros' ou 'diversos'. Se voce colocou isso no documento, significa que a coleta nao terminou. Seja especifico." — Todos os requisitos deste documento listam campos, regras e atores de forma explicita.
+        </div>
+    </div>
+
+    <div class="footer">
+        Documento de Requisitos — Mapa de Salas SENAC Minas BH | Versao 2.0 | Junho 2026<br>
+        Elaborado por Thais Oliveira | Tecnico em Desenvolvimento de Sistemas — Senac Minas<br>
+        Modelo conforme guia do professor Cleiton de Jesus Pereira
+    </div>
+
+</body>
+</html>

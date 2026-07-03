@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Requisitos - Trello (Análise Aprofundada)</title>
+    <style>
+        @page { size: A4; margin: 15mm; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1a1a1a; line-height: 1.5; padding: 30px 35px; max-width: 900px; margin: 0 auto; background: #fff; }
+        .cabecalho-senac { border: 2px solid #1565C0; border-radius: 8px; padding: 18px 22px; margin-bottom: 10px; background: #f8faff; }
+        .cabecalho-senac .instituicao { font-size: 16px; font-weight: 700; color: #1565C0; margin-bottom: 2px; }
+        .cabecalho-senac .curso { font-size: 13px; color: #333; margin-bottom: 1px; }
+        .cabecalho-senac .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 20px; margin-top: 8px; font-size: 13px; color: #444; }
+        .cabecalho-senac .info-grid span { font-weight: 600; color: #1a1a1a; }
+        .exercicio-badge { background: #E3F2FD; border: 1px solid #90CAF9; border-radius: 6px; padding: 8px 14px; margin-bottom: 20px; font-size: 12px; color: #1565C0; font-style: italic; text-align: center; }
+        .titulo-roteiro { text-align: center; margin-bottom: 5px; }
+        .titulo-roteiro h1 { font-size: 26px; color: #1a1a1a; font-weight: 800; }
+        .titulo-roteiro h1 em { font-style: normal; color: #1565C0; }
+        .titulo-roteiro .subtitulo { font-size: 13px; color: #666; margin-top: 3px; }
+        .ficha-id { margin: 18px 0 25px 0; font-size: 14px; }
+        .ficha-id .campo { margin-bottom: 5px; }
+        .ficha-id .campo strong { color: #1a1a1a; }
+        .ficha-id .campo .valor { border-bottom: 2px solid #1565C0; padding-bottom: 1px; margin-left: 4px; color: #333; }
+        .secao { background: #f5f7fa; border-radius: 8px; padding: 20px 22px; margin-bottom: 22px; }
+        .secao-titulo { font-size: 18px; font-weight: 700; color: #1a1a1a; background: #e8eef5; margin: -20px -22px 15px -22px; padding: 12px 22px; border-radius: 8px 8px 0 0; }
+        .secao-instrucao { font-size: 12.5px; color: #555; font-style: italic; border-left: 3px solid #1565C0; padding-left: 10px; margin-bottom: 14px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+        table th { background: #1565C0; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+        table td { padding: 9px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+        table tr:nth-child(even) td { background: #eef2f7; }
+        .moscow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .moscow-card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; background: #fff; }
+        .moscow-card .letra { font-size: 18px; font-weight: 800; margin-right: 6px; }
+        .moscow-card .label { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+        .moscow-card .desc { font-size: 11.5px; color: #666; font-style: italic; margin: 4px 0 8px 0; }
+        .moscow-card .conteudo { font-size: 13px; color: #333; background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 4px; padding: 8px 10px; min-height: 50px; }
+        .letra-m { color: #e53935; } .letra-s { color: #FB8C00; } .letra-c { color: #43A047; } .letra-w { color: #757575; }
+        .rnf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .rnf-card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; background: #fff; }
+        .rnf-card .rnf-titulo { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+        .rnf-card .rnf-label { font-size: 12px; font-weight: 700; color: #444; }
+        .rnf-card .rnf-valor { font-size: 13px; color: #333; border-bottom: 2px solid #1565C0; padding-bottom: 3px; margin-bottom: 8px; }
+        .rnf-card-full { grid-column: 1 / -1; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 10px 0 14px 0; font-size: 13px; }
+        .checkbox-group label { display: flex; align-items: center; gap: 5px; }
+        .excecao-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .excecao-card { border: 1px solid #ddd; border-radius: 8px; padding: 12px; background: #fff; }
+        .excecao-card .exc-titulo { font-size: 13px; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+        .excecao-card .exc-valor { font-size: 13px; color: #333; border-bottom: 2px solid #1565C0; padding-bottom: 3px; }
+        .excecao-card-full { grid-column: 1 / -1; }
+        .validacao-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .validacao-item { border: 1px solid #ddd; border-radius: 6px; padding: 10px 12px; background: #fff; display: flex; align-items: flex-start; gap: 8px; font-size: 13px; }
+        .validacao-item input[type="checkbox"] { margin-top: 2px; width: 16px; height: 16px; }
+        .validacao-item .obs { font-size: 11px; color: #999; border-bottom: 1px dashed #ccc; margin-left: auto; padding-bottom: 2px; min-width: 60px; }
+        .validacao-full { grid-column: 1 / -1; }
+        .obs-textarea { width: 100%; min-height: 90px; border: 1px solid #ccc; border-radius: 6px; padding: 12px; font-size: 13px; font-family: inherit; resize: vertical; background: #fff; color: #333; }
+        .fonte { font-size: 11px; color: #888; margin-top: 6px; font-style: italic; }
+        .fonte a { color: #1565C0; text-decoration: none; }
+        .footer { margin-top: 25px; padding-top: 10px; border-top: 3px solid #1565C0; font-size: 12px; color: #888; text-align: center; }
+        @media print { body { padding: 15px; } .secao { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+    <div class="cabecalho-senac">
+        <div class="instituicao">Senac Minas</div>
+        <div class="curso">Curso: Técnico em Desenvolvimento de Sistemas</div>
+        <div class="info-grid">
+            <div>Disciplina: <span>UC 7, Aplicações em Desenvolvimento Web</span></div>
+            <div>Data: <span>25 de junho de 2026</span></div>
+            <div>Aluna: <span>Thaís Oliveira</span></div>
+            <div>Professor: <span>Cleiton de Jesus Pereira</span></div>
+        </div>
+    </div>
+
+    <div class="exercicio-badge">
+        Exercício solicitado em sala de aula. Análise de requisitos de sistemas reais (Ficha 4 de 4). Versão com análise aprofundada
+    </div>
+
+    <div class="titulo-roteiro">
+        <h1>Roteiro de <em>Análise de Requisitos</em></h1>
+        <p class="subtitulo">Análise do sistema Trello, ferramenta de gestão visual de projetos baseada em Kanban | 50+ milhões de usuários registrados</p>
+    </div>
+
+    <div class="ficha-id">
+        <div class="campo"><strong>Sistema analisado:</strong> <span class="valor">Trello</span></div>
+        <div class="campo"><strong>Data:</strong> <span class="valor">25/06/2026</span></div>
+        <div class="campo"><strong>Analista:</strong> <span class="valor">Thaís Oliveira</span></div>
+    </div>
+
+    <!-- 1. ATORES -->
+    <div class="secao">
+        <div class="secao-titulo">1. Mapeie os Atores</div>
+        <p class="secao-instrucao">O Trello é um sistema colaborativo: múltiplos atores operam simultaneamente sobre o mesmo recurso (o quadro). Isso cria desafios de concorrência distintos dos sistemas anteriores.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">Tipo de Ator</th>
+                    <th style="width:38%">Descrição resumida</th>
+                    <th style="width:40%">Objetivo principal no sistema</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Ator 1 (Principal)</strong></td>
+                    <td>Membro do Quadro: usuário que cria, move e edita cartões dentro de um quadro. A plataforma tem 50+ milhões de usuários registrados. No plano gratuito, quadros são limitados a 10 colaboradores.</td>
+                    <td>Organizar tarefas visualmente em colunas (listas), movendo cartões entre etapas do fluxo de trabalho.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 2 (Administrador)</strong></td>
+                    <td>Administrador do Workspace: gerencia membros, permissões e configurações do workspace. Existem 3 níveis de papel no workspace (admin, normal, guest) e 3 no quadro (admin, normal, observer).</td>
+                    <td>Controlar acesso, gerenciar licenças (Free, Standard, Premium, Enterprise) e definir políticas de visibilidade dos quadros.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 3 (Sistema)</strong></td>
+                    <td>Power-Ups / Automações (Butler): integrações e automações que executam ações automaticamente. Butler permite regras, botões e comandos de calendário. Power-Ups conectam Slack, GitHub, Google Drive, etc.</td>
+                    <td>Automatizar ações repetitivas (ex.: mover cartão quando checklist completa, notificar no Slack quando prazo vence) e integrar dados externos.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 4 (Observador)</strong></td>
+                    <td>Observer: papel com permissão somente leitura, disponível nos planos Premium e Enterprise. Pode visualizar quadros mas não editar cartões, listas ou configurações.</td>
+                    <td>Acompanhar progresso do projeto sem risco de alteração acidental. Útil para stakeholders e gestores que precisam de visibilidade sem participação operacional.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="fonte">Fontes: Trello Help, Board Permissions | Atlassian Pricing Page | Business of Apps, Trello Statistics 2025</p>
+    </div>
+
+    <!-- 2. FUNCIONALIDADES -->
+    <div class="secao">
+        <div class="secao-titulo">2. Liste 10 Funcionalidades Principais</div>
+        <p class="secao-instrucao">O modelo mental do Trello é o Kanban: quadro → listas (colunas) → cartões (itens de trabalho). Todas as funcionalidades derivam dessa hierarquia.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:6%">#</th>
+                    <th style="width:64%">Funcionalidade</th>
+                    <th style="width:30%">Ator que executa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Criar quadro com listas (colunas) personalizáveis representando etapas do fluxo de trabalho</td><td>Membro / Admin</td></tr>
+                <tr><td>2</td><td>Criar, editar e excluir cartões dentro de listas, com título, descrição (Markdown), membros atribuídos, etiquetas coloridas e data de entrega</td><td>Membro</td></tr>
+                <tr><td>3</td><td>Arrastar e soltar cartões entre listas (drag-and-drop), sincronizado em tempo real via WebSocket (Socket.io modificado) para todos os membros do quadro</td><td>Membro</td></tr>
+                <tr><td>4</td><td>Adicionar checklists com itens marcáveis e barra de progresso percentual dentro do cartão</td><td>Membro</td></tr>
+                <tr><td>5</td><td>Anexar arquivos ao cartão (upload direto, Google Drive, Dropbox, OneDrive). Limite de 10MB/arquivo no plano Free, 250MB nos planos pagos</td><td>Membro</td></tr>
+                <tr><td>6</td><td>Comentar em cartões com menções (@membro) que geram notificação por e-mail e push</td><td>Membro</td></tr>
+                <tr><td>7</td><td>Filtrar cartões por etiqueta, membro atribuído, data de entrega ou texto no título/descrição</td><td>Membro</td></tr>
+                <tr><td>8</td><td>Configurar automações via Butler: regras (quando X acontecer, faça Y), botões de quadro/cartão e comandos agendados por calendário</td><td>Membro / Admin</td></tr>
+                <tr><td>9</td><td>Gerenciar permissões de membros no quadro (admin, normal, observer) e visibilidade (privado, workspace, público)</td><td>Admin do Workspace</td></tr>
+                <tr><td>10</td><td>Visualizar atividade do quadro em feed cronológico (Activity Log) com histórico completo de ações</td><td>Membro / Observer</td></tr>
+            </tbody>
+        </table>
+        <p class="fonte">Fontes: Trello Help Center | Trello Developer API Docs | Atlassian Community</p>
+    </div>
+
+    <!-- 3. MoSCoW -->
+    <div class="secao">
+        <div class="secao-titulo">3. Priorize com MoSCoW</div>
+        <p class="secao-instrucao">Must Have ≤ 60% do esforço (DSDM). O Trello é intencionalmente simples: o valor está na restrição, não na abundância de funcionalidades.</p>
+        <div class="moscow-grid">
+            <div class="moscow-card">
+                <span class="letra letra-m">M</span><span class="label">Must Have (Obrigatório)</span>
+                <p class="desc">Sem isso, o sistema NÃO entrega valor mínimo.</p>
+                <div class="conteudo">#1. Criar quadro com listas<br>#2. Criar/editar cartões<br>#3. Drag-and-drop com sync em tempo real<br>#9. Gerenciar permissões</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-s">S</span><span class="label">Should Have (Importante)</span>
+                <p class="desc">Faz falta, mas dá para lançar sem.</p>
+                <div class="conteudo">#4. Checklists<br>#6. Comentários com @menções<br>#7. Filtrar cartões</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-c">C</span><span class="label">Could Have (Desejável)</span>
+                <p class="desc">Diferencial competitivo, não essencial.</p>
+                <div class="conteudo">#5. Anexar arquivos<br>#8. Automações Butler<br>#10. Activity Log</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-w">W</span><span class="label">Won't Have (Fora do escopo)</span>
+                <p class="desc">Fica para versões futuras.</p>
+                <div class="conteudo">Visualização Timeline (Gantt)<br>Dashboard com métricas de produtividade<br>Integração nativa com Jira (bridge bidirecional)</div>
+            </div>
+        </div>
+        <p class="fonte">Nota analítica: o drag-and-drop com sync em tempo real (#3) é Must Have porque é o diferencial fundante do Trello. Sem sincronização instantânea, o sistema seria apenas um editor de listas estático. A decisão de colocar automações (#8) como Could Have reflete a história do produto: o Trello operou por anos sem Butler, que só foi adquirido e integrado em 2018.</p>
+    </div>
+
+    <!-- 4. RNF -->
+    <div class="secao">
+        <div class="secao-titulo">4. Requisitos Não Funcionais</div>
+        <p class="secao-instrucao">Baseados no modelo ISO 25010 e na stack tecnológica real do Trello.</p>
+        <div class="rnf-grid">
+            <div class="rnf-card">
+                <div class="rnf-titulo">Desempenho</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">A sincronização de drag-and-drop deve refletir em todos os clientes conectados em &lt;500ms. O Trello usa WebSockets via Socket.io modificado, com fallback para HTTP long-polling em redes restritivas. O sistema impõe limite de 5.000 cartões abertos por quadro (hard limit), e a performance degrada perceptivelmente a partir de ~1.000 cartões por lista.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Latência de sync P95 &lt; 500ms; tempo de abertura de quadro com 500 cartões &lt; 3s; limite documentado de 5.000 cartões/quadro.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Segurança</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">Dados em trânsito via TLS 1.2+. Dados em repouso criptografados (AES-256). Autenticação via Atlassian Account com suporte a SSO (SAML 2.0) nos planos Premium/Enterprise. 2FA disponível para todos os planos. Conformidade com SOC 2 Type II e ISO 27001 (herdada da Atlassian Cloud).</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Certificações SOC 2 e ISO 27001 ativas; zero dados de cartão em texto puro em logs; sessões expiram após inatividade configurável.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Disponibilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">A Atlassian Cloud (que hospeda o Trello) publica SLA de 99,9% de uptime para planos Premium e Enterprise. O Trello Status Page (status.trello.com, via Statuspage.io) registra incidentes com transparência, e interrupções maiores são tipicamente resolvidas em &lt;4h. A stack roda em AWS com Node.js, MongoDB (banco principal), Redis (cache/sessões) e HAProxy (balanceamento).</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Uptime ≥ 99,9% mensal (≤ 43 min downtime/mês); MTTR &lt; 4h para incidentes críticos.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Usabilidade / Acessibilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">Interface responsiva (Mobile First). Modo de acessibilidade para daltonismo disponível desde 2014. Esse modo adiciona padrões de textura às etiquetas coloridas para distinguibilidade sem depender exclusivamente de cor (WCAG 2.1 nível AA). Suporte a navegação por teclado para todas as operações principais.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">WCAG 2.1 AA em todas as páginas; modo colorblind ativável em configurações; todas as ações acessíveis via teclado (Tab, Enter, Esc).</div>
+            </div>
+            <div class="rnf-card rnf-card-full">
+                <div class="rnf-titulo">Escalabilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">O sistema deve suportar 50+ milhões de usuários registrados com múltiplos quadros simultâneos. Stack: Node.js (servidor), MongoDB (banco NoSQL, escolha natural para o modelo flexível de cartões com campos variáveis), Redis (cache e gerenciamento de sessões WebSocket), HAProxy (balanceamento de carga). A escolha de MongoDB (documento) em vez de PostgreSQL (relacional) reflete o modelo de dados do Trello: cartões têm campos variáveis (checklists, anexos, campos customizados) que mapeariam em múltiplas tabelas de junção no modelo relacional.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Horizontal scaling via sharding MongoDB; Redis Cluster para distribuição de sessões WebSocket; auto-scaling de instâncias Node.js na AWS.</div>
+            </div>
+        </div>
+        <p class="fonte">Fontes: Trello Engineering Blog (Stack Overview) | Atlassian Trust Center (SOC 2, ISO 27001) | Trello Help, Limits | Atlassian Cloud SLA</p>
+    </div>
+
+    <!-- 5. CENÁRIO DE EXCEÇÃO -->
+    <div class="secao">
+        <div class="secao-titulo">5. Cenário de Exceção</div>
+        <p class="secao-instrucao">Cenário baseado na estratégia real de resolução de conflitos do Trello.</p>
+        <div class="checkbox-group">
+            <label><input type="checkbox" checked> Edição simultânea / conflito de dados</label>
+            <label><input type="checkbox"> Indisponibilidade de serviço externo</label>
+            <label><input type="checkbox"> Dado inválido / inconsistente</label>
+            <label><input type="checkbox" checked> Perda de conexão WebSocket</label>
+            <label><input type="checkbox"> Tentativa de invasão / fraude</label>
+            <label><input type="checkbox"> Estoque zerado</label>
+        </div>
+        <div class="excecao-grid">
+            <div class="excecao-card">
+                <div class="exc-titulo">O que aconteceu?</div>
+                <div class="exc-valor">Dois membros editam o mesmo cartão simultaneamente: um altera o título enquanto o outro modifica a descrição. Em paralelo, um terceiro membro arrasta o cartão para outra lista. As três operações chegam ao servidor em ordem diferente da que foram executadas nos clientes.</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Quem foi afetado?</div>
+                <div class="exc-valor">Todos os membros do quadro, que podem ver estados inconsistentes por frações de segundo até a sincronização convergir. O membro cuja edição chegou por último tem sua versão preservada (last-write-wins).</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Qual a ação esperada do sistema?</div>
+                <div class="exc-valor">O Trello usa estratégia server-authoritative last-write-wins: o servidor é a fonte de verdade e a última operação recebida prevalece. O Trello NÃO usa CRDTs (Conflict-free Replicated Data Types) nem Operational Transformation (OT). Essas técnicas são usadas por editores de texto colaborativo (Google Docs), mas o modelo de dados do Trello (campos discretos: título, descrição, posição) torna last-write-wins suficiente. Cada campo é atualizado independentemente, e editar o título não conflita com editar a descrição do mesmo cartão. Para drag-and-drop, o servidor recalcula a posição ordinal do cartão na lista e propaga via WebSocket.</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Qual mensagem o usuário deve ver?</div>
+                <div class="exc-valor">O Trello não exibe mensagem explícita de conflito. A interface simplesmente atualiza para o estado mais recente via WebSocket. Se a conexão WebSocket cair, o sistema faz fallback para HTTP long-polling e exibe indicador de reconexão ("Reconectando..."). Ao reconectar, o cliente solicita o estado completo do quadro e atualiza a interface.</div>
+            </div>
+            <div class="excecao-card excecao-card-full">
+                <div class="exc-titulo">O que acontece com os dados?</div>
+                <div class="exc-valor">Todas as operações são registradas no Activity Log com timestamp e autor, permitindo auditoria completa. Não há "undo" global, e o membro que perdeu sua edição precisa refazê-la manualmente. Para operações destrutivas (excluir cartão, arquivar lista), o Trello usa soft-delete: o item vai para o arquivo e pode ser restaurado. A escolha de last-write-wins é uma decisão de trade-off consciente: simplicidade de implementação e previsibilidade de comportamento vs. risco de perda silenciosa de edições. Para o volume típico de edição do Trello (dezenas de operações/minuto por quadro, não milhares), esse trade-off é adequado.</div>
+            </div>
+        </div>
+        <p class="fonte">Fontes: Trello Engineering Blog (WebSocket Architecture) | Trello API Docs, Actions | Atlassian Community, Concurrent Editing</p>
+    </div>
+
+    <!-- 6. PÓS-ANÁLISE -->
+    <div class="secao">
+        <div class="secao-titulo">6. Pós-Análise (Validação com o app real)</div>
+        <div class="validacao-grid">
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>Todos os atores estão corretos?</span>
+                <span class="obs">Sim. Observer como ator distinto validado, papel exclusivo Premium/Enterprise.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>As 10 funcionalidades existem no sistema?</span>
+                <span class="obs">Todas verificadas. Limites de 5.000 cartões e 10MB/arquivo confirmados na documentação oficial.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>A priorização MoSCoW bate com a realidade?</span>
+                <span class="obs">Butler como Could Have validado, adquirido e integrado apenas em 2018, anos após o lançamento.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>Os requisitos não funcionais são viáveis?</span>
+                <span class="obs">Stack Node.js + MongoDB + Redis confirmada. SLA 99,9% da Atlassian Cloud verificado.</span>
+            </div>
+            <div class="validacao-item validacao-full">
+                <input type="checkbox" checked>
+                <span>O cenário de exceção é tratado pelo sistema?</span>
+                <span class="obs">Last-write-wins confirmado, sem CRDTs/OT. Fallback HTTP long-polling verificado na prática.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. OBSERVAÇÕES -->
+    <div class="secao">
+        <div class="secao-titulo">7. Observações Finais / Aprendizados</div>
+        <div class="obs-textarea" style="white-space: pre-wrap;">A análise do Trello encerra o ciclo das quatro fichas introduzindo o conceito de colaboração em tempo real sobre dados compartilhados, um problema de natureza diferente dos anteriores. No Google Maps, os dados são predominantemente lidos; no Airbnb, as escritas são transações discretas (reservar/cancelar); no Uber, o matching é efêmero e descartável. No Trello, múltiplos usuários editam o mesmo recurso persistente continuamente, o que coloca o problema de concorrência no centro da arquitetura.
+
+A estratégia de resolução de conflitos do Trello, server-authoritative last-write-wins, é deliberadamente simples. O sistema NÃO usa CRDTs (Conflict-free Replicated Data Types) nem Operational Transformation (OT), técnicas empregadas por editores de texto colaborativo como Google Docs. A razão é que o modelo de dados do Trello opera em campos discretos (título, descrição, posição, membros), não em texto contínuo. Quando dois usuários editam campos diferentes do mesmo cartão, não há conflito real, pois cada campo é atualizado independentemente. Quando editam o mesmo campo, o último a chegar ao servidor prevalece. Essa é uma decisão de trade-off documentável: simplicidade e previsibilidade vs. risco de perda silenciosa de edições. Para o volume típico do Trello (dezenas de operações por minuto por quadro), o trade-off é adequado. Para um editor de texto com dezenas de keystrokes por segundo, seria inaceitável.
+
+O mapeamento de atores revelou o papel de Observer, um ator com permissão exclusivamente de leitura, disponível apenas nos planos Premium e Enterprise. A existência desse papel reflete uma necessidade real de organizações: stakeholders e gestores precisam de visibilidade sobre o progresso do projeto sem risco de alteração acidental. Em termos de requisitos, isso significa que o sistema de permissões não é binário (acesso/sem acesso), mas granular, e a granularidade cresce com o tier do plano, o que cria uma interseção entre requisitos funcionais e modelo de negócio.
+
+A escolha de MongoDB como banco de dados principal não é arbitrária. O modelo de dados do Trello, com cartões de campos variáveis (checklists com N itens, anexos de tipos diversos, campos customizados definidos pelo usuário), mapeia naturalmente em documentos JSON aninhados. Em um modelo relacional (PostgreSQL), o mesmo dado exigiria múltiplas tabelas de junção (cartão_checklist, checklist_item, cartão_anexo, cartão_campo_custom), com consultas N+1 e complexidade crescente. O MongoDB permite armazenar o cartão inteiro como um documento único, o que simplifica leitura e escrita. O trade-off é que consultas analíticas complexas (ex.: "todos os cartões atrasados de todos os quadros de um workspace") são mais difíceis em documento do que em relacional. Para o projeto Mapa de Sala, onde o modelo de dados é mais estruturado (salas, turmas, horários com relações bem definidas), o modelo relacional é provavelmente mais adequado.
+
+O limite de 5.000 cartões abertos por quadro, com degradação perceptível a partir de ~1.000 por lista, é um exemplo de requisito não funcional que emerge da implementação. A interface carrega todos os cartões visíveis no DOM, sem virtualização de lista (técnica onde apenas os itens visíveis na viewport são renderizados). Isso significa que o limite não é uma decisão de produto, mas uma consequência da arquitetura de frontend. Na especificação de requisitos, limites operacionais como esse devem ser documentados explicitamente, para que os stakeholders não assumam capacidade ilimitada.
+
+A funcionalidade de acessibilidade para daltonismo, implementada desde 2014 com padrões de textura nas etiquetas, é um exemplo de requisito não funcional que vai além da conformidade legal (WCAG 2.1 AA). É uma decisão de design inclusivo que demonstra maturidade no tratamento de acessibilidade. Em vez de apenas garantir contraste mínimo, o sistema oferece um canal de informação redundante (cor + textura) que elimina a dependência exclusiva de percepção cromática.</div>
+    </div>
+
+    <div class="footer">
+        Roteiro de Análise de Requisitos, Trello | Ficha 4 de 4 | Análise Aprofundada com Dados Reais
+    </div>
+
+</body>
+</html>

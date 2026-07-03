@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Requisitos - Google Maps (Análise Aprofundada)</title>
+    <style>
+        @page { size: A4; margin: 15mm; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1a1a1a; line-height: 1.5; padding: 30px 35px;
+            max-width: 900px; margin: 0 auto; background: #fff;
+        }
+        .cabecalho-senac {
+            border: 2px solid #1565C0; border-radius: 8px;
+            padding: 18px 22px; margin-bottom: 10px; background: #f8faff;
+        }
+        .cabecalho-senac .instituicao { font-size: 16px; font-weight: 700; color: #1565C0; margin-bottom: 2px; }
+        .cabecalho-senac .curso { font-size: 13px; color: #333; margin-bottom: 1px; }
+        .cabecalho-senac .info-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 2px 20px; margin-top: 8px; font-size: 13px; color: #444;
+        }
+        .cabecalho-senac .info-grid span { font-weight: 600; color: #1a1a1a; }
+        .exercicio-badge {
+            background: #E3F2FD; border: 1px solid #90CAF9; border-radius: 6px;
+            padding: 8px 14px; margin-bottom: 20px; font-size: 12px;
+            color: #1565C0; font-style: italic; text-align: center;
+        }
+        .titulo-roteiro { text-align: center; margin-bottom: 5px; }
+        .titulo-roteiro h1 { font-size: 26px; color: #1a1a1a; font-weight: 800; }
+        .titulo-roteiro h1 em { font-style: normal; color: #1565C0; }
+        .titulo-roteiro .subtitulo { font-size: 13px; color: #666; margin-top: 3px; }
+        .ficha-id { margin: 18px 0 25px 0; font-size: 14px; }
+        .ficha-id .campo { margin-bottom: 5px; }
+        .ficha-id .campo strong { color: #1a1a1a; }
+        .ficha-id .campo .valor { border-bottom: 2px solid #1565C0; padding-bottom: 1px; margin-left: 4px; color: #333; }
+        .secao { background: #f5f7fa; border-radius: 8px; padding: 20px 22px; margin-bottom: 22px; }
+        .secao-titulo {
+            font-size: 18px; font-weight: 700; color: #1a1a1a; background: #e8eef5;
+            margin: -20px -22px 15px -22px; padding: 12px 22px; border-radius: 8px 8px 0 0;
+        }
+        .secao-instrucao {
+            font-size: 12.5px; color: #555; font-style: italic;
+            border-left: 3px solid #1565C0; padding-left: 10px; margin-bottom: 14px;
+        }
+        table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+        table th { background: #1565C0; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+        table td { padding: 9px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+        table tr:nth-child(even) td { background: #eef2f7; }
+        .moscow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .moscow-card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; background: #fff; }
+        .moscow-card .letra { font-size: 18px; font-weight: 800; margin-right: 6px; }
+        .moscow-card .label { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+        .moscow-card .desc { font-size: 11.5px; color: #666; font-style: italic; margin: 4px 0 8px 0; }
+        .moscow-card .conteudo { font-size: 13px; color: #333; background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 4px; padding: 8px 10px; min-height: 50px; }
+        .letra-m { color: #e53935; } .letra-s { color: #FB8C00; }
+        .letra-c { color: #43A047; } .letra-w { color: #757575; }
+        .rnf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .rnf-card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; background: #fff; }
+        .rnf-card .rnf-titulo { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+        .rnf-card .rnf-label { font-size: 12px; font-weight: 700; color: #444; }
+        .rnf-card .rnf-valor { font-size: 13px; color: #333; border-bottom: 2px solid #1565C0; padding-bottom: 3px; margin-bottom: 8px; }
+        .rnf-card-full { grid-column: 1 / -1; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 10px 0 14px 0; font-size: 13px; }
+        .checkbox-group label { display: flex; align-items: center; gap: 5px; }
+        .excecao-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .excecao-card { border: 1px solid #ddd; border-radius: 8px; padding: 12px; background: #fff; }
+        .excecao-card .exc-titulo { font-size: 13px; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+        .excecao-card .exc-valor { font-size: 13px; color: #333; border-bottom: 2px solid #1565C0; padding-bottom: 3px; }
+        .excecao-card-full { grid-column: 1 / -1; }
+        .validacao-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .validacao-item {
+            border: 1px solid #ddd; border-radius: 6px; padding: 10px 12px; background: #fff;
+            display: flex; align-items: flex-start; gap: 8px; font-size: 13px;
+        }
+        .validacao-item input[type="checkbox"] { margin-top: 2px; width: 16px; height: 16px; }
+        .validacao-item .obs { font-size: 11px; color: #999; border-bottom: 1px dashed #ccc; margin-left: auto; padding-bottom: 2px; min-width: 60px; }
+        .validacao-full { grid-column: 1 / -1; }
+        .obs-textarea {
+            width: 100%; min-height: 90px; border: 1px solid #ccc; border-radius: 6px;
+            padding: 12px; font-size: 13px; font-family: inherit; resize: vertical; background: #fff; color: #333;
+        }
+        .fonte { font-size: 11px; color: #888; margin-top: 6px; font-style: italic; }
+        .fonte a { color: #1565C0; text-decoration: none; }
+        .footer { margin-top: 25px; padding-top: 10px; border-top: 3px solid #1565C0; font-size: 12px; color: #888; text-align: center; }
+        @media print { body { padding: 15px; } .secao { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+    <div class="cabecalho-senac">
+        <div class="instituicao">Senac Minas</div>
+        <div class="curso">Curso: Técnico em Desenvolvimento de Sistemas</div>
+        <div class="info-grid">
+            <div>Disciplina: <span>UC 7: Aplicações em Desenvolvimento Web</span></div>
+            <div>Data: <span>25 de junho de 2026</span></div>
+            <div>Aluna: <span>Thaís Oliveira</span></div>
+            <div>Professor: <span>Cleiton de Jesus Pereira</span></div>
+        </div>
+    </div>
+
+    <div class="exercicio-badge">
+        Exercício solicitado em sala de aula. Análise de requisitos de sistemas reais (Ficha 1 de 4). Versão com análise aprofundada
+    </div>
+
+    <div class="titulo-roteiro">
+        <h1>Roteiro de <em>Análise de Requisitos</em></h1>
+        <p class="subtitulo">Análise do sistema Google Maps, plataforma de mapas e navegação | 2 bilhões de usuários mensais ativos</p>
+    </div>
+
+    <div class="ficha-id">
+        <div class="campo"><strong>Sistema analisado:</strong> <span class="valor">Google Maps</span></div>
+        <div class="campo"><strong>Data:</strong> <span class="valor">25/06/2026</span></div>
+        <div class="campo"><strong>Analista:</strong> <span class="valor">Thaís Oliveira</span></div>
+    </div>
+
+    <!-- 1. ATORES -->
+    <div class="secao">
+        <div class="secao-titulo">1. Mapeie os Atores</div>
+        <p class="secao-instrucao">Quem usa o sistema? Pense em: Usuário final, Administrador, Fornecedor/Vendedor, Prestador de serviço, Suporte técnico.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">Tipo de Ator</th>
+                    <th style="width:38%">Descrição resumida</th>
+                    <th style="width:40%">Objetivo principal no sistema</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Ator 1 (Principal)</strong></td>
+                    <td>Usuário comum, pessoa que busca endereços, rotas e informações de locais. Representa a maior base: 2 bilhões de usuários mensais ativos (Alphabet Q3 2024).</td>
+                    <td>Encontrar um endereço e obter a melhor rota até o destino de forma rápida e precisa.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 2 (Colaborador)</strong></td>
+                    <td>Contribuidor Local (Local Guide), usuário voluntário do programa que conta com 150 milhões de inscritos em 24.000 cidades. Ganha pontos por ações (review = 10 pts, foto = 5 pts, novo local = 15 pts), sem remuneração.</td>
+                    <td>Manter as informações do mapa atualizadas adicionando avaliações, fotos e correções. Alimenta a base de dados que os outros atores consomem.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 3 (Negócio)</strong></td>
+                    <td>Comerciante, proprietário de estabelecimento que cadastra seu negócio via Google Meu Negócio. São mais de 250 milhões de locais cadastrados na plataforma.</td>
+                    <td>Tornar seu estabelecimento visível no mapa para atrair clientes, exibindo horário, telefone e fotos.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 4 (Integrador)</strong></td>
+                    <td>Desenvolvedor, profissional que utiliza a Google Maps Platform API. Mais de 1,2 milhão de empresas e 5 milhões de apps/sites integram a API.</td>
+                    <td>Incorporar funcionalidades de mapa (rotas, geocodificação) em sistemas externos via API, sujeito ao SLA de 99,9%.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="fonte">Fontes: Alphabet Q3 2024 Earnings Call | Google Local Guides Program | Google Maps Platform Documentation</p>
+    </div>
+
+    <!-- 2. FUNCIONALIDADES -->
+    <div class="secao">
+        <div class="secao-titulo">2. Liste 10 Funcionalidades Principais</div>
+        <p class="secao-instrucao">Use verbos no infinitivo: Cadastrar, Buscar, Visualizar, Editar, Excluir, Processar, Gerar, etc.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:6%">#</th>
+                    <th style="width:64%">Funcionalidade</th>
+                    <th style="width:30%">Ator que executa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Buscar endereço, nome de estabelecimento ou coordenadas no mapa</td><td>Usuário</td></tr>
+                <tr><td>2</td><td>Calcular rota entre origem e destino com opções de transporte (carro, ônibus, a pé, bicicleta)</td><td>Usuário</td></tr>
+                <tr><td>3</td><td>Navegar em tempo real com instruções de voz e direção passo a passo via GPS (precisão de ETA: 97% via DeepMind AI)</td><td>Usuário</td></tr>
+                <tr><td>4</td><td>Visualizar informações detalhadas de um local (horário, telefone, avaliações, fotos)</td><td>Usuário</td></tr>
+                <tr><td>5</td><td>Avaliar e comentar sobre um estabelecimento, contribuindo com a base de dados colaborativa</td><td>Contribuidor Local</td></tr>
+                <tr><td>6</td><td>Cadastrar estabelecimento comercial com endereço, categoria e dados de contato via Google Meu Negócio</td><td>Comerciante</td></tr>
+                <tr><td>7</td><td>Baixar área do mapa para uso off-line (navegação sem conexão com a internet)</td><td>Usuário</td></tr>
+                <tr><td>8</td><td>Compartilhar localização em tempo real com contatos selecionados</td><td>Usuário</td></tr>
+                <tr><td>9</td><td>Visualizar condições de trânsito em tempo real com indicadores de cores no mapa (verde, amarelo, vermelho)</td><td>Usuário</td></tr>
+                <tr><td>10</td><td>Salvar locais favoritos (casa, trabalho, restaurantes) para acesso rápido</td><td>Usuário</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 3. MoSCoW -->
+    <div class="secao">
+        <div class="secao-titulo">3. Priorize com MoSCoW</div>
+        <p class="secao-instrucao">Distribua as 10 funcionalidades. Segundo o DSDM (criador do MoSCoW), Must Have deve consumir no máximo 60% do esforço total.</p>
+        <div class="moscow-grid">
+            <div class="moscow-card">
+                <span class="letra letra-m">M</span><span class="label">Must Have (Obrigatório)</span>
+                <p class="desc">Sem isso, o sistema NÃO entrega valor mínimo. O negócio para.</p>
+                <div class="conteudo">#1. Buscar endereço<br>#2. Calcular rota<br>#4. Visualizar informações do local</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-s">S</span><span class="label">Should Have (Importante)</span>
+                <p class="desc">Faz falta, mas dá para lançar sem e resolver depois.</p>
+                <div class="conteudo">#3. Navegação GPS em tempo real<br>#9. Trânsito em tempo real<br>#6. Cadastrar estabelecimento<br>#10. Salvar locais favoritos</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-c">C</span><span class="label">Could Have (Desejável)</span>
+                <p class="desc">É um diferencial competitivo, mas não essencial.</p>
+                <div class="conteudo">#5. Avaliar estabelecimentos<br>#7. Mapa off-line<br>#8. Compartilhar localização</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-w">W</span><span class="label">Won't Have (Fora do escopo)</span>
+                <p class="desc">Fica para versões futuras (v2, v3).</p>
+                <div class="conteudo">Street View (visualização 360° das ruas)<br>Reserva de restaurantes direto pelo mapa<br>Integração com assistente de voz para comandos mãos-livres</div>
+            </div>
+        </div>
+        <p class="fonte">Nota: #9 (trânsito em tempo real) foi reclassificado de Must para Should porque o Google Maps existiu por anos sem esse recurso. A busca e o cálculo de rota são suficientes para um MVP funcional.</p>
+    </div>
+
+    <!-- 4. RNF -->
+    <div class="secao">
+        <div class="secao-titulo">4. Requisitos Não Funcionais</div>
+        <p class="secao-instrucao">Baseados no modelo de qualidade ISO 25010: desempenho, segurança, disponibilidade, usabilidade e escalabilidade.</p>
+        <div class="rnf-grid">
+            <div class="rnf-card">
+                <div class="rnf-titulo">Desempenho</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">O mapa deve carregar em até 3 segundos em conexão 4G. As sugestões de busca devem aparecer em até 500 milissegundos. A API de Geocoding responde em ~120ms em condições normais.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Tempo de carregamento &lt; 3s (4G); latência de autocomplete &lt; 500ms. O próprio SLA do Google define "downtime" como resposta acima de 3 segundos por 10 minutos consecutivos.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Segurança</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">A localização do usuário deve ser coletada somente com consentimento explícito (conforme LGPD/GDPR). Toda transmissão de dados deve usar HTTPS com TLS 1.2+ (o Google suporta TLS 1.2 e 1.3).</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">100% das conexões via HTTPS; zero coletas de localização sem permissão explícita do usuário.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Disponibilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">O sistema deve manter 99,9% de uptime mensal, conforme o SLA oficial da Google Maps Platform. Isso equivale a no máximo ~43 minutos de indisponibilidade por mês.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Uptime ≥ 99,9% mensal; monitoramento via Google Maps Platform Status Dashboard. Créditos financeiros de 10% a 50% são emitidos quando o SLA é descumprido.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Usabilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">O aplicativo deve ser operável com uma mão só (uso em movimento). Deve oferecer suporte a leitor de tela, navegação por teclado e voz. O banco de dados contém 50+ milhões de locais com informações de acessibilidade (cadeirante, banheiro adaptado).</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Tamanho mínimo de botões: 48×48px. O Google não possui certificação WCAG formal para o Maps, e o mapa interativo é reconhecidamente difícil para leitores de tela.</div>
+            </div>
+            <div class="rnf-card rnf-card-full">
+                <div class="rnf-titulo">Escalabilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">O sistema deve suportar 2 bilhões de usuários mensais ativos (~50 sessões/mês por usuário) e processar mais de 20 milhões de contribuições diárias (avaliações, fotos, edições) sem degradação perceptível.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Infraestrutura global do Google Cloud com auto-scaling; 13 APIs cobertas pelo SLA; dashboard de métricas por projeto (Traffic, Errors, Median Latency).</div>
+            </div>
+        </div>
+        <p class="fonte">Fontes: Google Maps Platform SLA (cloud.google.com/maps-platform/terms/sla) | ISO 25010 Software Quality Model | Google GAAD 2024 Accessibility Update</p>
+    </div>
+
+    <!-- 5. CENÁRIO DE EXCEÇÃO -->
+    <div class="secao">
+        <div class="secao-titulo">5. Cenário de Exceção</div>
+        <p class="secao-instrucao">Escolha uma situação crítica e descreva o comportamento esperado do sistema. Cenário baseado em comportamento real documentado.</p>
+
+        <div class="checkbox-group">
+            <label><input type="checkbox"> Falha de pagamento</label>
+            <label><input type="checkbox" checked> Indisponibilidade de serviço externo (ex.: API de dados de trânsito)</label>
+            <label><input type="checkbox"> Dado inválido / inconsistente</label>
+            <label><input type="checkbox" checked> Timeout / lentidão extrema</label>
+            <label><input type="checkbox"> Tentativa de invasão / fraude</label>
+            <label><input type="checkbox"> Estoque zerado</label>
+            <label><input type="checkbox"> Conflito de agendamento</label>
+        </div>
+
+        <div class="excecao-grid">
+            <div class="excecao-card">
+                <div class="exc-titulo">O que aconteceu?</div>
+                <div class="exc-valor">O serviço de dados de trânsito em tempo real ficou indisponível, impedindo o cálculo de rotas otimizadas. Incidente real de referência: em fevereiro de 2026, as APIs de Geocoding e Places ficaram instáveis por ~36 horas na América do Norte (Incidente 163VbP2njo8deNYScb4v).</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Quem foi afetado?</div>
+                <div class="exc-valor">Usuário (motorista em navegação ativa): recebe rota sem considerar o trânsito, podendo pegar caminhos congestionados. Desenvolvedores: APIs retornam erros 5xx ou latência elevada (P90 e P99).</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Qual a ação esperada do sistema?</div>
+                <div class="exc-valor">A Routes API alterna automaticamente para o modo TRAFFIC_UNAWARE, que calcula rotas usando dados históricos/estáticos de distância. No app mobile, ativa mapas off-line baixados previamente. O sistema aplica degradação graciosa (graceful degradation): perde precisão de trânsito, mas mantém a navegação funcional.</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Qual mensagem o usuário deve ver?</div>
+                <div class="exc-valor">"Informações de trânsito temporariamente indisponíveis. A rota sugerida pode não refletir as condições atuais."</div>
+            </div>
+            <div class="excecao-card excecao-card-full">
+                <div class="exc-titulo">O que acontece com os dados?</div>
+                <div class="exc-valor">A rota é calculada normalmente usando dados estáticos. O sistema utiliza dados em cache da última atualização disponível e tenta reconectar ao serviço periodicamente de forma automática. A camada de trânsito no mapa simplesmente desaparece ou mostra o último estado conhecido. A média histórica é de ~1,3 incidentes por mês na plataforma (dados do Status Dashboard, últimos 5 anos: 80+ incidentes documentados).</div>
+            </div>
+        </div>
+        <p class="fonte">Fontes: Google Maps Platform Status Dashboard | Routes API Documentation (config_trade_offs) | Incidente 163VbP2njo8deNYScb4v</p>
+    </div>
+
+    <!-- 6. PÓS-ANÁLISE -->
+    <div class="secao">
+        <div class="secao-titulo">6. Pós-Análise (Validação com o app real)</div>
+        <p class="secao-instrucao">Após preencher tudo, abra o sistema real e marque os itens abaixo.</p>
+        <div class="validacao-grid">
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>Todos os atores estão corretos?</span>
+                <span class="obs">Sim. Dados de escala verificados em fontes oficiais.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>As 10 funcionalidades existem no sistema?</span>
+                <span class="obs">Todas verificadas no app mobile e web.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>A priorização MoSCoW bate com a realidade?</span>
+                <span class="obs">#9 reclassificado de Must para Should após análise histórica.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>Os requisitos não funcionais são viáveis?</span>
+                <span class="obs">SLA de 99,9% confirmado na documentação oficial do Google.</span>
+            </div>
+            <div class="validacao-item validacao-full">
+                <input type="checkbox" checked>
+                <span>O cenário de exceção é tratado pelo sistema?</span>
+                <span class="obs">Confirmado: ao desativar dados móveis, o Maps navega com mapas off-line e avisa sobre indisponibilidade de trânsito.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. OBSERVAÇÕES -->
+    <div class="secao">
+        <div class="secao-titulo">7. Observações Finais / Aprendizados</div>
+        <p class="secao-instrucao">Análise técnica dos aprendizados obtidos com este exercício.</p>
+        <div class="obs-textarea" style="white-space: pre-wrap;">A análise do Google Maps como exercício de engenharia de requisitos evidencia a diferença entre a perspectiva de usuário final e a perspectiva de analista. Do ponto de vista do usuário, o Maps é um app de rotas. Do ponto de vista técnico, trata-se de uma plataforma com múltiplas camadas: busca geoespacial, renderização cartográfica, processamento de rotas em tempo real, coleta colaborativa de dados (crowdsourcing com 150 milhões de contribuidores) e uma API aberta para integração com sistemas externos (1,2 milhão de empresas clientes).
+
+Na identificação dos atores, o caso do Contribuidor Local demonstra que nem todos os atores são óbvios. Esse ator não é cliente pagante nem funcionário, mas sem ele a base de dados do sistema perderia qualidade, pois são 20 milhões de contribuições diárias. Isso reforça que o mapeamento de atores exige investigar toda a cadeia de valor: quem alimenta os dados, quem consome, quem mantém e quem administra. Requisitos levantados a partir de um único perfil de ator tendem a ser incompletos.
+
+A priorização MoSCoW expôs uma armadilha recorrente: confundir "funcionalidade que agrada o usuário" com "funcionalidade que sustenta a proposta de valor do negócio". O trânsito em tempo real (#9) foi reclassificado de Must para Should após verificar que o Maps existiu por anos sem esse recurso. Segundo o DSDM (criador do MoSCoW), Must Have deve consumir no máximo 60% do esforço total, e ultrapassar esse limite é indicador de risco no projeto.
+
+Os requisitos não funcionais demonstram que as restrições de qualidade são tão determinantes quanto as funcionalidades. O SLA oficial de 99,9% de uptime (máximo ~43 min/mês de queda) é um compromisso contratual com créditos financeiros em caso de descumprimento, e não é um número arbitrário. Isso indica que RNFs devem ser derivados do cenário real de operação, com métricas mensuráveis e justificáveis, conforme preconiza a norma ISO 25010 e o padrão IEEE 830.
+
+O cenário de exceção foi a seção de maior valor analítico. O Maps implementa degradação graciosa (graceful degradation): quando os dados de trânsito ficam indisponíveis, a Routes API alterna para o modo TRAFFIC_UNAWARE, usando dados históricos. O sistema perde precisão, mas não interrompe a operação. O incidente real de fevereiro de 2026 (~36 horas de instabilidade) demonstra que esse cenário não é teórico, pois ocorre na prática com frequência média de 1,3 vezes por mês. Para a fase de levantamento de requisitos do projeto Mapa de Sala, isso implica que as perguntas aos stakeholders não devem se limitar a "o que o sistema deve fazer", mas incluir "o que acontece hoje quando o processo falha", porque o procedimento manual atual é o ponto de partida para o desenho da contingência no sistema.</div>
+    </div>
+
+    <div class="footer">
+        Roteiro de Análise de Requisitos, Google Maps | Ficha 1 de 4 | Análise Aprofundada com Dados Reais
+    </div>
+
+</body>
+</html>

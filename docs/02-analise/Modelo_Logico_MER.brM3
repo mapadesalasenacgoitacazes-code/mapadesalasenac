@@ -1,0 +1,54 @@
+{
+  "type": "logical",
+  "name": "Mapa de Salas SENAC - Modelo Logico",
+  "cells": [
+
+    {"type":"uml.Class","id":"t_unidade","position":{"x":750,"y":30},"size":{"width":250,"height":160},"name":"unidade","attributes":["PK id_unidade INT AUTO_INCREMENT","nome VARCHAR(100) NOT NULL","cidade VARCHAR(60) NOT NULL","estado CHAR(2) NOT NULL DEFAULT 'MG'","endereco VARCHAR(200)","ativo BOOLEAN NOT NULL DEFAULT TRUE"],"z":1},
+
+    {"type":"uml.Class","id":"t_usuario","position":{"x":100,"y":250},"size":{"width":280,"height":200},"name":"usuario","attributes":["PK id_usuario INT AUTO_INCREMENT","FK id_unidade INT NOT NULL","nome VARCHAR(100) NOT NULL","email VARCHAR(100) NOT NULL UNIQUE","senha_hash VARCHAR(255) NOT NULL","perfil ENUM('Admin','Supervisao','Suporte','Docente') NOT NULL","ativo BOOLEAN NOT NULL DEFAULT TRUE","criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP"],"z":1},
+
+    {"type":"uml.Class","id":"t_sala","position":{"x":750,"y":280},"size":{"width":290,"height":210},"name":"sala","attributes":["PK id_sala INT AUTO_INCREMENT","FK id_unidade INT NOT NULL","numero VARCHAR(20) NOT NULL","tipo ENUM('Sala de Aula','Laboratorio','Auditorio','Cozinha','Especial') NOT NULL","capacidade INT NOT NULL","andar VARCHAR(20)","status ENUM('Disponivel','Ocupada','Manutencao') NOT NULL DEFAULT 'Disponivel'","observacao VARCHAR(255)","UNIQUE(id_unidade, numero)"],"z":1},
+
+    {"type":"uml.Class","id":"t_recurso","position":{"x":1200,"y":300},"size":{"width":250,"height":130},"name":"recurso_sala","attributes":["PK id_recurso INT AUTO_INCREMENT","FK id_sala INT NOT NULL (CASCADE)","descricao VARCHAR(100) NOT NULL","quantidade INT NOT NULL DEFAULT 1"],"z":1},
+
+    {"type":"uml.Class","id":"t_curso","position":{"x":50,"y":600},"size":{"width":280,"height":190},"name":"curso","attributes":["PK id_curso INT AUTO_INCREMENT","nome VARCHAR(150) NOT NULL","tipo_curso ENUM('Cursos Ageis','Graduacao','Pos Graduacao','Tecnico') NOT NULL","area ENUM(23 areas SENAC) NOT NULL","programa ENUM('Todos','Senac Mais','PSG') NOT NULL DEFAULT 'Todos'","carga_horaria_total INT NOT NULL","ativo BOOLEAN NOT NULL DEFAULT TRUE"],"z":1},
+
+    {"type":"uml.Class","id":"t_turma","position":{"x":450,"y":580},"size":{"width":300,"height":260},"name":"turma","attributes":["PK id_turma INT AUTO_INCREMENT","codigo VARCHAR(20) NOT NULL UNIQUE","FK id_curso INT NOT NULL","turno ENUM('Manha','Tarde','Noite') NOT NULL","data_inicio DATE NOT NULL","data_termino_prevista DATE NOT NULL","data_termino_calculada DATE (derivado)","dias_semana VARCHAR(30) NOT NULL","descricao TEXT","observacao TEXT","ativa BOOLEAN NOT NULL DEFAULT TRUE"],"z":1},
+
+    {"type":"uml.Class","id":"t_prof_turma","position":{"x":250,"y":480},"size":{"width":260,"height":140},"name":"professor_turma","attributes":["PK id_professor_turma INT AUTO_INCREMENT","FK id_turma INT NOT NULL (CASCADE)","FK id_usuario INT NOT NULL","principal BOOLEAN NOT NULL DEFAULT FALSE","UNIQUE(id_turma, id_usuario)"],"z":1},
+
+    {"type":"uml.Class","id":"t_reserva","position":{"x":850,"y":600},"size":{"width":290,"height":230},"name":"reserva","attributes":["PK id_reserva INT AUTO_INCREMENT","FK id_sala INT NOT NULL","FK id_turma INT NOT NULL","data DATE NOT NULL","turno ENUM('Manha','Tarde','Noite') NOT NULL","status ENUM('Ativa','Cancelada') NOT NULL DEFAULT 'Ativa'","observacao VARCHAR(255)","criada_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP","FK criada_por INT","UNIQUE(id_sala, data, turno)"],"z":1},
+
+    {"type":"uml.Class","id":"t_feriado","position":{"x":1200,"y":50},"size":{"width":250,"height":150},"name":"feriado","attributes":["PK id_feriado INT AUTO_INCREMENT","FK id_unidade INT NOT NULL","data DATE NOT NULL","descricao VARCHAR(100) NOT NULL","tipo ENUM('Nacional','Estadual','Municipal','Recesso') NOT NULL","UNIQUE(id_unidade, data)"],"z":1},
+
+    {"type":"uml.Class","id":"t_diacanc","position":{"x":500,"y":920},"size":{"width":280,"height":160},"name":"dia_cancelado","attributes":["PK id_cancelamento INT AUTO_INCREMENT","FK id_turma INT NOT NULL","data DATE NOT NULL","motivo VARCHAR(200) NOT NULL","registrado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP","FK registrado_por INT","UNIQUE(id_turma, data)"],"z":1},
+
+    {"type":"uml.Class","id":"t_log","position":{"x":50,"y":870},"size":{"width":280,"height":170},"name":"log_alteracao","attributes":["PK id_log INT AUTO_INCREMENT","FK id_usuario INT NOT NULL","acao VARCHAR(50) NOT NULL","tabela_afetada VARCHAR(50) NOT NULL","id_registro INT","descricao VARCHAR(500)","data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP"],"z":1},
+
+    {"type":"standard.Link","id":"fk_usuario_unidade","source":{"id":"t_usuario"},"target":{"id":"t_unidade"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_unidade","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_sala_unidade","source":{"id":"t_sala"},"target":{"id":"t_unidade"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_unidade","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_feriado_unidade","source":{"id":"t_feriado"},"target":{"id":"t_unidade"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_unidade","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_recurso_sala","source":{"id":"t_recurso"},"target":{"id":"t_sala"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_sala (CASCADE)","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_turma_curso","source":{"id":"t_turma"},"target":{"id":"t_curso"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_curso","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_profturma_turma","source":{"id":"t_prof_turma"},"target":{"id":"t_turma"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_turma (CASCADE)","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_profturma_usuario","source":{"id":"t_prof_turma"},"target":{"id":"t_usuario"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_usuario","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_reserva_sala","source":{"id":"t_reserva"},"target":{"id":"t_sala"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_sala","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_reserva_turma","source":{"id":"t_reserva"},"target":{"id":"t_turma"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_turma","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_reserva_usuario","source":{"id":"t_reserva"},"target":{"id":"t_usuario"},"labels":[{"position":0.5,"attrs":{"text":{"text":"criada_por","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_diacanc_turma","source":{"id":"t_diacanc"},"target":{"id":"t_turma"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_turma","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_diacanc_usuario","source":{"id":"t_diacanc"},"target":{"id":"t_usuario"},"labels":[{"position":0.5,"attrs":{"text":{"text":"registrado_por","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0},
+
+    {"type":"standard.Link","id":"fk_log_usuario","source":{"id":"t_log"},"target":{"id":"t_usuario"},"labels":[{"position":0.5,"attrs":{"text":{"text":"id_usuario","font-size":10}}}],"attrs":{"line":{"stroke":"#000","strokeWidth":1.5,"targetMarker":{"type":"path","d":"M 0 -8 L 12 0 L 0 8 z"}}},"z":0}
+  ]
+}

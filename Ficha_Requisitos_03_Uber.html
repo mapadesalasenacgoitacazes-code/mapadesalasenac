@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Requisitos - Uber (Análise Aprofundada)</title>
+    <style>
+        @page { size: A4; margin: 15mm; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1a1a1a; line-height: 1.5; padding: 30px 35px; max-width: 900px; margin: 0 auto; background: #fff; }
+        .cabecalho-senac { border: 2px solid #1565C0; border-radius: 8px; padding: 18px 22px; margin-bottom: 10px; background: #f8faff; }
+        .cabecalho-senac .instituicao { font-size: 16px; font-weight: 700; color: #1565C0; margin-bottom: 2px; }
+        .cabecalho-senac .curso { font-size: 13px; color: #333; margin-bottom: 1px; }
+        .cabecalho-senac .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 20px; margin-top: 8px; font-size: 13px; color: #444; }
+        .cabecalho-senac .info-grid span { font-weight: 600; color: #1a1a1a; }
+        .exercicio-badge { background: #E3F2FD; border: 1px solid #90CAF9; border-radius: 6px; padding: 8px 14px; margin-bottom: 20px; font-size: 12px; color: #1565C0; font-style: italic; text-align: center; }
+        .titulo-roteiro { text-align: center; margin-bottom: 5px; }
+        .titulo-roteiro h1 { font-size: 26px; color: #1a1a1a; font-weight: 800; }
+        .titulo-roteiro h1 em { font-style: normal; color: #1565C0; }
+        .titulo-roteiro .subtitulo { font-size: 13px; color: #666; margin-top: 3px; }
+        .ficha-id { margin: 18px 0 25px 0; font-size: 14px; }
+        .ficha-id .campo { margin-bottom: 5px; }
+        .ficha-id .campo strong { color: #1a1a1a; }
+        .ficha-id .campo .valor { border-bottom: 2px solid #1565C0; padding-bottom: 1px; margin-left: 4px; color: #333; }
+        .secao { background: #f5f7fa; border-radius: 8px; padding: 20px 22px; margin-bottom: 22px; }
+        .secao-titulo { font-size: 18px; font-weight: 700; color: #1a1a1a; background: #e8eef5; margin: -20px -22px 15px -22px; padding: 12px 22px; border-radius: 8px 8px 0 0; }
+        .secao-instrucao { font-size: 12.5px; color: #555; font-style: italic; border-left: 3px solid #1565C0; padding-left: 10px; margin-bottom: 14px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+        table th { background: #1565C0; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+        table td { padding: 9px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+        table tr:nth-child(even) td { background: #eef2f7; }
+        .moscow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .moscow-card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; background: #fff; }
+        .moscow-card .letra { font-size: 18px; font-weight: 800; margin-right: 6px; }
+        .moscow-card .label { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+        .moscow-card .desc { font-size: 11.5px; color: #666; font-style: italic; margin: 4px 0 8px 0; }
+        .moscow-card .conteudo { font-size: 13px; color: #333; background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 4px; padding: 8px 10px; min-height: 50px; }
+        .letra-m { color: #e53935; } .letra-s { color: #FB8C00; } .letra-c { color: #43A047; } .letra-w { color: #757575; }
+        .rnf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .rnf-card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; background: #fff; }
+        .rnf-card .rnf-titulo { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+        .rnf-card .rnf-label { font-size: 12px; font-weight: 700; color: #444; }
+        .rnf-card .rnf-valor { font-size: 13px; color: #333; border-bottom: 2px solid #1565C0; padding-bottom: 3px; margin-bottom: 8px; }
+        .rnf-card-full { grid-column: 1 / -1; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 10px 0 14px 0; font-size: 13px; }
+        .checkbox-group label { display: flex; align-items: center; gap: 5px; }
+        .excecao-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .excecao-card { border: 1px solid #ddd; border-radius: 8px; padding: 12px; background: #fff; }
+        .excecao-card .exc-titulo { font-size: 13px; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+        .excecao-card .exc-valor { font-size: 13px; color: #333; border-bottom: 2px solid #1565C0; padding-bottom: 3px; }
+        .excecao-card-full { grid-column: 1 / -1; }
+        .validacao-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .validacao-item { border: 1px solid #ddd; border-radius: 6px; padding: 10px 12px; background: #fff; display: flex; align-items: flex-start; gap: 8px; font-size: 13px; }
+        .validacao-item input[type="checkbox"] { margin-top: 2px; width: 16px; height: 16px; }
+        .validacao-item .obs { font-size: 11px; color: #999; border-bottom: 1px dashed #ccc; margin-left: auto; padding-bottom: 2px; min-width: 60px; }
+        .validacao-full { grid-column: 1 / -1; }
+        .obs-textarea { width: 100%; min-height: 90px; border: 1px solid #ccc; border-radius: 6px; padding: 12px; font-size: 13px; font-family: inherit; resize: vertical; background: #fff; color: #333; }
+        .fonte { font-size: 11px; color: #888; margin-top: 6px; font-style: italic; }
+        .fonte a { color: #1565C0; text-decoration: none; }
+        .footer { margin-top: 25px; padding-top: 10px; border-top: 3px solid #1565C0; font-size: 12px; color: #888; text-align: center; }
+        @media print { body { padding: 15px; } .secao { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+    <div class="cabecalho-senac">
+        <div class="instituicao">Senac Minas</div>
+        <div class="curso">Curso: Técnico em Desenvolvimento de Sistemas</div>
+        <div class="info-grid">
+            <div>Disciplina: <span>UC 7, Aplicações em Desenvolvimento Web</span></div>
+            <div>Data: <span>25 de junho de 2026</span></div>
+            <div>Aluna: <span>Thaís Oliveira</span></div>
+            <div>Professor: <span>Cleiton de Jesus Pereira</span></div>
+        </div>
+    </div>
+
+    <div class="exercicio-badge">
+        Exercício solicitado em sala de aula. Análise de requisitos de sistemas reais (Ficha 3 de 4). Versão com análise aprofundada
+    </div>
+
+    <div class="titulo-roteiro">
+        <h1>Roteiro de <em>Análise de Requisitos</em></h1>
+        <p class="subtitulo">Análise do sistema Uber: plataforma de mobilidade sob demanda | 36 milhões de viagens/dia em 70+ países</p>
+    </div>
+
+    <div class="ficha-id">
+        <div class="campo"><strong>Sistema analisado:</strong> <span class="valor">Uber</span></div>
+        <div class="campo"><strong>Data:</strong> <span class="valor">25/06/2026</span></div>
+        <div class="campo"><strong>Analista:</strong> <span class="valor">Thaís Oliveira</span></div>
+    </div>
+
+    <!-- 1. ATORES -->
+    <div class="secao">
+        <div class="secao-titulo">1. Mapeie os Atores</div>
+        <p class="secao-instrucao">O Uber opera um marketplace bilateral de tempo real. A janela de decisão entre oferta e demanda é de segundos, não dias como no Airbnb.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">Tipo de Ator</th>
+                    <th style="width:38%">Descrição resumida</th>
+                    <th style="width:40%">Objetivo principal no sistema</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Ator 1 (Principal)</strong></td>
+                    <td>Passageiro: solicita viagem em tempo real. A plataforma registra ~161 milhões de usuários ativos mensais (Q4 2024) e ~36 milhões de viagens por dia globalmente.</td>
+                    <td>Solicitar e concluir uma viagem do ponto A ao ponto B com segurança, previsibilidade de preço e tempo de espera curto.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 2 (Fornecedor)</strong></td>
+                    <td>Motorista parceiro: aceita ou recusa corridas em tempo real. São ~9,7 milhões de motoristas ativos globalmente. Classificados como contratantes independentes (não empregados).</td>
+                    <td>Aceitar corridas, completar viagens e maximizar ganhos. Decisão de aceite deve ocorrer em &lt;10 segundos antes de timeout e reatribuição.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 3 (Sistema)</strong></td>
+                    <td>Algoritmo de Matching: sistema automatizado que pareia passageiros e motoristas. Usa modelagem de grafos bipartidos com janelas de ~10 segundos, otimizando múltiplos fatores simultaneamente.</td>
+                    <td>Minimizar tempo de espera do passageiro E tempo ocioso do motorista simultaneamente, considerando distância, direção, trânsito e categoria do veículo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ator 4 (Administrador)</strong></td>
+                    <td>Administrador da Plataforma: equipe que gerencia políticas de preço dinâmico (surge), regras de segurança, verificação de documentos e conformidade regulatória em 70+ países.</td>
+                    <td>Garantir operação segura e regulamentada, calibrar algoritmos de pricing e matching, e responder a incidentes de segurança.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="fonte">Fontes: Uber SEC 10-K FY2024 | DemandSage Uber Statistics 2025 | Uber Engineering Blog</p>
+    </div>
+
+    <!-- 2. FUNCIONALIDADES -->
+    <div class="secao">
+        <div class="secao-titulo">2. Liste 10 Funcionalidades Principais</div>
+        <p class="secao-instrucao">Em um sistema de tempo real, a latência de cada funcionalidade é um requisito implícito. Não basta funcionar, precisa funcionar em milissegundos.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:6%">#</th>
+                    <th style="width:64%">Funcionalidade</th>
+                    <th style="width:30%">Ator que executa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Solicitar viagem informando origem e destino, com estimativa de preço e tempo calculada em tempo real</td><td>Passageiro</td></tr>
+                <tr><td>2</td><td>Parear passageiro com motorista mais adequado via algoritmo de grafo bipartido com janelas de ~10 segundos (Hungarian Algorithm adaptado)</td><td>Sistema (Matching)</td></tr>
+                <tr><td>3</td><td>Rastrear posição do motorista em tempo real no mapa durante toda a viagem, com GPS adaptativo usando Filtro de Kalman e Algoritmo de Viterbi para map-matching (&lt;200ms de latência)</td><td>Passageiro / Motorista</td></tr>
+                <tr><td>4</td><td>Calcular preço dinâmico (surge pricing) com base na relação oferta/demanda por região geográfica, usando grid hexagonal H3 com recálculo a cada 1–2 minutos</td><td>Sistema (Pricing)</td></tr>
+                <tr><td>5</td><td>Aceitar ou recusar corrida com informações de destino, valor estimado e distância até o passageiro</td><td>Motorista</td></tr>
+                <tr><td>6</td><td>Avaliar motorista e viagem com nota de 1 a 5 estrelas ao final da corrida</td><td>Passageiro</td></tr>
+                <tr><td>7</td><td>Avaliar passageiro com nota de 1 a 5 estrelas ao final da corrida</td><td>Motorista</td></tr>
+                <tr><td>8</td><td>Processar pagamento automático ao final da viagem (cartão, Pix, dinheiro) com split instantâneo (comissão Uber ~25% vs. repasse motorista ~75%)</td><td>Sistema (Pagamento)</td></tr>
+                <tr><td>9</td><td>Compartilhar localização em tempo real e status da viagem com contatos de confiança</td><td>Passageiro</td></tr>
+                <tr><td>10</td><td>Navegar até o destino via GPS integrado com orientações turn-by-turn, usando provedores híbridos de mapa (Google Maps API + provedores regionais)</td><td>Motorista</td></tr>
+            </tbody>
+        </table>
+        <p class="fonte">Fontes: Uber Engineering Blog (Marketplace Matching, H3 Grid) | Business of Apps 2025</p>
+    </div>
+
+    <!-- 3. MoSCoW -->
+    <div class="secao">
+        <div class="secao-titulo">3. Priorize com MoSCoW</div>
+        <p class="secao-instrucao">Must Have ≤ 60% do esforço (DSDM). Em sistema de tempo real, o matching e o tracking são infraestrutura, e sem eles não existe produto.</p>
+        <div class="moscow-grid">
+            <div class="moscow-card">
+                <span class="letra letra-m">M</span><span class="label">Must Have (Obrigatório)</span>
+                <p class="desc">Sem isso, o sistema NÃO entrega valor mínimo.</p>
+                <div class="conteudo">#1. Solicitar viagem<br>#2. Matching passageiro-motorista<br>#3. Rastreamento GPS em tempo real<br>#5. Aceitar/recusar corrida<br>#8. Processar pagamento</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-s">S</span><span class="label">Should Have (Importante)</span>
+                <p class="desc">Faz falta, mas dá para lançar sem e resolver depois.</p>
+                <div class="conteudo">#4. Preço dinâmico (surge)<br>#10. Navegação GPS integrada</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-c">C</span><span class="label">Could Have (Desejável)</span>
+                <p class="desc">Diferencial competitivo, não essencial para o MVP.</p>
+                <div class="conteudo">#6. Avaliar motorista<br>#7. Avaliar passageiro<br>#9. Compartilhar viagem</div>
+            </div>
+            <div class="moscow-card">
+                <span class="letra letra-w">W</span><span class="label">Won't Have (Fora do escopo)</span>
+                <p class="desc">Fica para versões futuras.</p>
+                <div class="conteudo">Uber Eats (entrega de comida)<br>Uber Reserve (agendamento antecipado)<br>Uber Teen (contas para menores com supervisão parental)</div>
+            </div>
+        </div>
+        <p class="fonte">Nota analítica: o matching (#2) está como Must Have porque é o núcleo da proposta de valor, pois sem pareamento automatizado, o sistema é apenas um mural de anúncios. O surge pricing (#4) ficou em Should Have: a Uber pode operar com preço fixo (e operou assim inicialmente), mas o surge é essencial para equilibrar oferta/demanda em escala.</p>
+    </div>
+
+    <!-- 4. RNF -->
+    <div class="secao">
+        <div class="secao-titulo">4. Requisitos Não Funcionais</div>
+        <p class="secao-instrucao">Baseados no modelo ISO 25010 e em dados reais da infraestrutura da Uber.</p>
+        <div class="rnf-grid">
+            <div class="rnf-card">
+                <div class="rnf-titulo">Desempenho</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">O matching deve completar em &lt;10 segundos. O rastreamento GPS opera com &lt;200ms de latência usando Filtro de Kalman para suavização de posição e Algoritmo de Viterbi para map-matching (encaixar coordenadas brutas nas vias reais). A cada segundo, milhões de atualizações de localização são processadas globalmente.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Matching P95 &lt; 10s; GPS latency P99 &lt; 200ms; throughput &gt; 1M location updates/s.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Segurança</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">Autenticação multifator (MFA) para motoristas e passageiros. Em setembro de 2022, a Uber sofreu uma brecha de segurança via "MFA Fatigue". Um atacante (grupo Lapsus$) bombardeou um funcionário com notificações de MFA até que ele aceitou uma. Desde então, a Uber migrou para MFA baseado em hardware (FIDO2) para acesso interno e reforçou políticas de acesso zero-trust.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">100% dos motoristas com verificação de identidade e antecedentes; MFA obrigatório em todos os acessos internos; zero acessos admin sem FIDO2.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Disponibilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">A Uber não publica SLA formal, mas opera em arquitetura multi-região ativa-ativa. A infraestrutura roda em data centers próprios + cloud híbrida (Google Cloud + Oracle Cloud desde 2022). A criticidade é extrema: cada minuto de indisponibilidade afeta ~25.000 viagens em andamento (36M/dia ÷ 1440 min).</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Uptime ≥ 99,99% (≤ 4,3 min de downtime por mês); failover entre regiões &lt; 30s.</div>
+            </div>
+            <div class="rnf-card">
+                <div class="rnf-titulo">Usabilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">Solicitar viagem em no máximo 3 toques (abrir app → confirmar destino → solicitar). Interface otimizada para uso com uma mão em movimento. Mapa deve carregar em &lt;2s mesmo em conexões 3G.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Máximo de 3 toques até solicitação; First Contentful Paint &lt; 2s em 3G; suporte a acessibilidade (VoiceOver/TalkBack).</div>
+            </div>
+            <div class="rnf-card rnf-card-full">
+                <div class="rnf-titulo">Escalabilidade</div>
+                <div class="rnf-label">Requisito:</div>
+                <div class="rnf-valor">O sistema deve suportar 36 milhões de viagens/dia com 9,7 milhões de motoristas ativos. A arquitetura evoluiu de monolito Python para ~2.200 microsserviços organizados em 70 domínios sob o modelo DOMA (Domain-Oriented Microservice Architecture). O sistema de geolocalização usa H3, um grid hexagonal open-source criado pela Uber, que divide o planeta em hexágonos de resolução variável para indexação espacial eficiente.</div>
+                <div class="rnf-label">Como medir / Métrica:</div>
+                <div class="rnf-valor">Suporte a picos de 2x a demanda normal (ex.: Réveillon) sem degradação; auto-scaling horizontal por domínio; H3 resolution 7 (~5,16 km²) para surge pricing.</div>
+            </div>
+        </div>
+        <p class="fonte">Fontes: Uber Engineering Blog (DOMA, H3, Kalman Filter) | Uber SEC 10-K FY2024 | CSO Online, 2022 Uber Breach | InfoQ DOMA Architecture</p>
+    </div>
+
+    <!-- 5. CENÁRIO DE EXCEÇÃO -->
+    <div class="secao">
+        <div class="secao-titulo">5. Cenário de Exceção</div>
+        <p class="secao-instrucao">Cenário baseado em comportamento real documentado pela engenharia da Uber.</p>
+        <div class="checkbox-group">
+            <label><input type="checkbox" checked> Falha de GPS / perda de sinal</label>
+            <label><input type="checkbox"> Indisponibilidade de serviço externo</label>
+            <label><input type="checkbox"> Dado inválido / inconsistente</label>
+            <label><input type="checkbox"> Timeout / lentidão extrema</label>
+            <label><input type="checkbox"> Tentativa de invasão / fraude</label>
+            <label><input type="checkbox" checked> Nenhum motorista disponível</label>
+        </div>
+        <div class="excecao-grid">
+            <div class="excecao-card">
+                <div class="exc-titulo">O que aconteceu?</div>
+                <div class="exc-valor">O passageiro solicita uma viagem, mas o sistema não encontra motoristas disponíveis na região dentro da janela de matching (~10 segundos). Isso pode ocorrer por baixa oferta real, ou por desequilíbrio geográfico (motoristas concentrados em outra área). Em paralelo, o GPS do passageiro retorna coordenadas imprecisas (drift em áreas urbanas com prédios altos).</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Quem foi afetado?</div>
+                <div class="exc-valor">Passageiro: não consegue viagem. Motoristas próximos: podem estar em deslocamento e perder a janela de matching. O sistema de surge pricing pode interpretar a baixa oferta como sinal para aumentar preços.</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Qual a ação esperada do sistema?</div>
+                <div class="exc-valor">1) O matching expande o raio de busca progressivamente (1km → 3km → 5km) em rodadas adicionais. 2) Se ainda não encontrar, ativa surge pricing para atrair motoristas de regiões adjacentes, pois o preço funciona como mecanismo de redistribuição geográfica. 3) Para GPS impreciso, o Filtro de Kalman suaviza coordenadas e o Algoritmo de Viterbi faz snap-to-road, corrigindo a posição para a via mais provável. 4) Se o sinal GPS for completamente perdido, o sistema usa a última posição conhecida + interpolação baseada em velocidade e direção anteriores.</div>
+            </div>
+            <div class="excecao-card">
+                <div class="exc-titulo">Qual mensagem o usuário deve ver?</div>
+                <div class="exc-valor">"Nenhum motorista disponível no momento. Tentaremos novamente automaticamente. Ativar notificação quando um motorista estiver disponível?" Exibe também opções alternativas: categorias com mais disponibilidade (ex.: UberX vs. Comfort).</div>
+            </div>
+            <div class="excecao-card excecao-card-full">
+                <div class="exc-titulo">O que acontece com os dados?</div>
+                <div class="exc-valor">A solicitação sem match é registrada como "unfulfilled demand" e alimenta modelos de predição de demanda futura (Machine Learning). Os dados de GPS corrigidos pelo Filtro de Kalman são armazenados com flag de confiança (confidence score). Nenhuma cobrança é gerada para solicitações sem match. O histórico de regiões com déficit crônico de motoristas alimenta decisões de incentivo (bônus por zona/horário).</div>
+            </div>
+        </div>
+        <p class="fonte">Fontes: Uber Engineering Blog, "Matching in Real-Time" | Uber H3 Documentation | CSO Online, Uber MFA Breach 2022</p>
+    </div>
+
+    <!-- 6. PÓS-ANÁLISE -->
+    <div class="secao">
+        <div class="secao-titulo">6. Pós-Análise (Validação com o app real)</div>
+        <div class="validacao-grid">
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>Todos os atores estão corretos?</span>
+                <span class="obs">Sim. Algoritmo de Matching incluído como ator-sistema, pois tem autonomia de decisão.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>As 10 funcionalidades existem no sistema?</span>
+                <span class="obs">Todas verificadas. H3, Kalman Filter e DOMA confirmados na documentação da engenharia.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>A priorização MoSCoW bate com a realidade?</span>
+                <span class="obs">Surge pricing como Should Have validado. Uber operou sem ele inicialmente.</span>
+            </div>
+            <div class="validacao-item">
+                <input type="checkbox" checked>
+                <span>Os requisitos não funcionais são viáveis?</span>
+                <span class="obs">Breach de 2022 documentado como referência de segurança. DOMA e H3 open-source confirmados.</span>
+            </div>
+            <div class="validacao-item validacao-full">
+                <input type="checkbox" checked>
+                <span>O cenário de exceção é tratado pelo sistema?</span>
+                <span class="obs">Expansão de raio e surge como redistribuição geográfica confirmados no Engineering Blog.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. OBSERVAÇÕES -->
+    <div class="secao">
+        <div class="secao-titulo">7. Observações Finais / Aprendizados</div>
+        <div class="obs-textarea" style="white-space: pre-wrap;">A análise do Uber introduz uma dimensão ausente nos dois sistemas anteriores: o tempo real como requisito arquitetural fundante. Enquanto o Google Maps tolera alguns segundos de latência e o Airbnb opera em ciclos de dias (reserva → estadia → avaliação), o Uber exige que oferta e demanda sejam pareadas em uma janela de ~10 segundos. Essa restrição temporal não é apenas um requisito de desempenho. Ela define a arquitetura inteira do sistema.
+
+O mapeamento de atores levantou a questão de incluir um algoritmo como ator. O sistema de matching da Uber não é um componente passivo: ele toma decisões autônomas sobre quem será pareado com quem, considerando múltiplas variáveis simultâneas (distância, direção do motorista, categoria do veículo, histórico de avaliações). Essa autonomia de decisão configura um ator-sistema na modelagem UML, diferente de um componente que apenas responde a comandos. Para o analista de requisitos, a implicação prática é que algoritmos com autonomia de decisão precisam ter seus critérios documentados como requisitos auditáveis, especialmente quando há impacto financeiro (surge pricing) ou regulatório (discriminação algorítmica).
+
+O pareamento (matching) usa um modelo de grafo bipartido: passageiros de um lado, motoristas do outro, com arestas ponderadas por múltiplos fatores. Em vez de atribuir o motorista mais próximo ao primeiro passageiro da fila, o sistema acumula solicitações em janelas de ~10 segundos e otimiza o emparelhamento global. Isso significa que um passageiro pode esperar 5 segundos a mais para que o sistema encontre uma solução globalmente melhor. Esse trade-off (latência individual vs. eficiência global) é invisível ao usuário mas central na especificação de requisitos, e é um exemplo claro de requisito que não aparece em entrevistas com stakeholders, exigindo análise técnica independente.
+
+Os requisitos não funcionais trouxeram o caso real do breach de segurança de 2022 (grupo Lapsus$, via MFA Fatigue). O incidente demonstra que requisitos de segurança não são apenas sobre criptografia e firewalls, mas também incluem engenharia social e fadiga humana. A resposta da Uber (migração para FIDO2 e zero-trust) é um exemplo de como incidentes reais alimentam a evolução de requisitos não funcionais. Na documentação de requisitos, cenários de ataque baseados em engenharia social devem ser mapeados com o mesmo rigor que ataques técnicos.
+
+A arquitetura DOMA (Domain-Oriented Microservice Architecture) é uma resposta ao problema que a Uber enfrentou ao escalar de centenas para milhares de microsserviços: sem organização em domínios com interfaces de fachada limpas, o grafo de dependências se torna ingerenciável. Para o projeto Mapa de Sala, a escala é incomparavelmente menor, mas o princípio se aplica: agrupar funcionalidades em domínios coesos (ex.: alocação, cadastro, relatórios) desde o início evita acoplamento que se torna caro de desfazer depois.
+
+O sistema H3, criado pela Uber e disponibilizado como open-source, divide o planeta em hexágonos de resolução variável. A escolha por hexágonos (e não quadrados) é que hexágonos têm distância uniforme ao centro de todos os vizinhos, eliminando viés direcional em cálculos de proximidade. O surge pricing usa H3 resolution 7 (~5,16 km²) e é recalculado a cada 1–2 minutos. Esse é um exemplo de como requisitos de negócio (precificação dinâmica) geram requisitos de infraestrutura (indexação geoespacial eficiente) que, por sua vez, geram contribuições open-source reutilizáveis.</div>
+    </div>
+
+    <div class="footer">
+        Roteiro de Análise de Requisitos, Uber | Ficha 3 de 4 | Análise Aprofundada com Dados Reais
+    </div>
+
+</body>
+</html>
