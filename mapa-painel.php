@@ -1,23 +1,16 @@
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body></body>
-</html>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa de Salas</title>
-    <!-- Bootstrap 5 CSS via CDN -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
-    <!-- Bootstrap Icons para os ícones -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
+    <title>Painel - Mapa de Salas</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
     <style>
         /* --- ESTILOS GERAIS E PALETA DE CORES --- */
@@ -180,87 +173,6 @@
             vertical-align: top;
             padding: 12px;
             width: 16.66%;
-            /* Divide igualmente as colunas de dias da semana */
-        }
-
-        .coluna-sala {
-            background-color: #ffffff;
-            font-weight: bold;
-        }
-
-        .coluna-sala .capacidade {
-            font-size: 12px;
-            color: #6c757d;
-            font-weight: normal;
-        }
-
-        /* Bloco de Agendamento dentro da célula */
-        .bloco-reserva {
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-size: 12px;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .bloco-reserva:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Cores dos Blocos de Agendamento */
-        .reserva-tipo-apq {
-            background-color: var(--reserva-manha);
-            color: var(--texto-manha);
-        }
-
-        .reserva-tipo-logistica {
-            background-color: var(--reserva-tarde);
-            color: var(--texto-tarde);
-        }
-
-        .reserva-tipo-redes {
-            background-color: var(--reserva-tarde);
-            color: var(--texto-tarde);
-        }
-
-        .reserva-tipo-sistemas {
-            background-color: var(--reserva-noite);
-            color: var(--texto-noite);
-        }
-
-        .reserva-tipo-gastronomia {
-            background-color: var(--reserva-gastronomia);
-            color: var(--texto-gastronomia);
-        }
-
-        .reserva-tipo-manutencao {
-            background-color: var(--reserva-manutencao);
-            color: var(--texto-manutencao);
-            text-align: center;
-            padding: 20px 10px;
-        }
-
-        /* --- LEGENDA E INFORMAÇÕES --- */
-        .item-legenda {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-        }
-
-        .circulo-legenda {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .barra-informativa {
-            background-color: #e6f0ff;
-            color: #004085;
-            border-radius: 6px;
-            padding: 12px;
-            font-size: 14px;
         }
     </style>
 </head>
@@ -281,8 +193,11 @@
                 <a class="nav-link" href="#"><i class="bi bi-bar-chart-line"></i> Relatórios</a>
             </nav>
         </div>
+
         <div>
-            <a class="nav-link text-danger" href="#"><i class="bi bi-box-arrow-left"></i> Sair</a>
+            <a class="nav-link text-danger" href="#">
+                <i class="bi bi-box-arrow-left"></i> Sair
+            </a>
         </div>
     </div>
 
@@ -292,23 +207,28 @@
         <!-- CABEÇALHO SUPERIOR -->
         <header class="d-flex justify-content-between align-items-center mb-4">
             <h4 class="fw-bold text-dark m-0">Mapa de Salas</h4>
+
             <div class="d-flex align-items-center gap-3">
                 <button class="btn btn-light position-relative rounded-circle p-2">
                     <i class="bi bi-bell fs-5"></i>
                 </button>
+
                 <div class="d-flex align-items-center gap-2">
                     <span class="badge bg-primary rounded-circle p-2">MS</span>
+
                     <div class="text-end lh-1">
-                        <small class="fw-bold block d-block text-dark">Maria Silva</small>
-                        <small class="text-muted" style="font-size: 11px;">Supervisao <i
-                                class="bi bi-chevron-down"></i></small>
+                        <small class="fw-bold d-block text-dark">Maria Silva</small>
+                        <small class="text-muted" style="font-size: 11px;">
+                            Supervisão <i class="bi bi-chevron-down"></i>
+                        </small>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- DASHBOARD DE CARDS INDICADORES -->
+        <!-- DASHBOARD DE CARDS -->
         <section class="row g-3 mb-4">
+
             <div class="col-md-3">
                 <div class="card-contador card-cadastradas">
                     <div class="icone-wrapper"><i class="bi bi-building"></i></div>
@@ -318,6 +238,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-3">
                 <div class="card-contador card-disponiveis">
                     <div class="icone-wrapper"><i class="bi bi-check-circle"></i></div>
@@ -327,15 +248,17 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-3">
                 <div class="card-contador card-ocupadas">
                     <div class="icone-wrapper"><i class="bi bi-people"></i></div>
                     <div>
                         <h3 class="fw-bold m-0 text-dark">5</h3>
-                        ml <small class="text-muted">Ocupadas agora</small>
+                        <small class="text-muted">Ocupadas agora</small>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-3">
                 <div class="card-contador card-manutencao">
                     <div class="icone-wrapper"><i class="bi bi-wrench"></i></div>
@@ -345,38 +268,48 @@
                     </div>
                 </div>
             </div>
+
         </section>
+
         <!-- SEÇÃO DE FILTROS -->
         <section class="container-filtros mb-4">
             <div class="row g-3 align-items-end">
+
                 <div class="col-md-4">
                     <label class="form-label small fw-bold text-secondary">Período</label>
                     <div class="input-group">
-                        <span class="input-group-text bg-white"><i class="bi bi-calendar3"></i></span>
+                        <span class="input-group-text bg-white">
+                            <i class="bi bi-calendar3"></i>
+                        </span>
                         <select class="form-select">
                             <option>29/06 - 05/07/2026</option>
                         </select>
                     </div>
                 </div>
+
                 <div class="col-md-4">
                     <label class="form-label small fw-bold text-secondary">Turno</label>
                     <select class="form-select">
                         <option>Todos</option>
                     </select>
                 </div>
+
                 <div class="col-md-4 text-md-end">
-                    <label
-                        class="form-label small fw-bold text-secondary d-block text-start text-md-end">Visualização</label>
+                    <label class="form-label small fw-bold text-secondary d-block text-start text-md-end">
+                        Visualização
+                    </label>
+
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-outline-secondary px-4">Dia</button>
                         <button type="button" class="btn btn-primary px-4">Semana</button>
                         <button type="button" class="btn btn-outline-secondary px-4">Mês</button>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- TABELA CRONOGRAMA DE RESERVAS -->
+        <!-- TABELA -->
         <section class="table-responsive mb-4">
             <table class="table tabela-cronograma m-0">
                 <thead>
@@ -389,7 +322,9 @@
                         <th>Sex 03<br><small>03/07</small></th>
                     </tr>
                 </thead>
+
                 <tbody>
+                    
                     <!-- LINHA: SALA 1 -->
                     <tr>
                         <td class="coluna-sala">
