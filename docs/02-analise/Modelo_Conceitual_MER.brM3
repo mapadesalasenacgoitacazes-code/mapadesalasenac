@@ -1,0 +1,210 @@
+{
+  "type": "conceptual",
+  "name": "Mapa de Salas SENAC - Modelo Conceitual",
+  "cells": [
+
+    {"type":"erd.Entity","id":"e_unidade","position":{"x":900,"y":80},"size":{"width":160,"height":45},"attrs":{"text":{"text":"UNIDADE","font-size":14,"font-weight":"bold","fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Entity","id":"e_usuario","position":{"x":150,"y":370},"size":{"width":160,"height":45},"attrs":{"text":{"text":"USUARIO","font-size":14,"font-weight":"bold","fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Entity","id":"e_sala","position":{"x":900,"y":370},"size":{"width":160,"height":45},"attrs":{"text":{"text":"SALA","font-size":14,"font-weight":"bold","fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Entity","id":"e_feriado","position":{"x":1550,"y":250},"size":{"width":160,"height":45},"attrs":{"text":{"text":"FERIADO","font-size":14,"font-weight":"bold","fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Entity","id":"e_recurso","position":{"x":1550,"y":550},"size":{"width":190,"height":45},"attrs":{"text":{"text":"RECURSO_SALA","font-size":14,"font-weight":"bold","fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Entity","id":"e_curso","position":{"x":200,"y":750},"size":{"width":160,"height":45},"attrs":{"text":{"text":"CURSO","font-size":14,"font-weight":"bold","fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Entity","id":"e_turma","position":{"x":650,"y":750},"size":{"width":160,"height":45},"attrs":{"text":{"text":"TURMA","font-size":14,"font-weight":"bold","fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Entity","id":"e_reserva","position":{"x":1100,"y":750},"size":{"width":160,"height":45},"attrs":{"text":{"text":"RESERVA","font-size":14,"font-weight":"bold","fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Entity","id":"e_diacanc","position":{"x":500,"y":1050},"size":{"width":200,"height":45},"attrs":{"text":{"text":"DIA_CANCELADO","font-size":14,"font-weight":"bold","fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Entity","id":"e_log","position":{"x":30,"y":600},"size":{"width":200,"height":45},"attrs":{"text":{"text":"LOG_ALTERACAO","font-size":14,"font-weight":"bold","fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+
+    {"type":"erd.Key","id":"a_unidade_pk","position":{"x":810,"y":10},"size":{"width":110,"height":30},"attrs":{"text":{"text":"id_unidade","font-size":11,"fill":"#000","text-decoration":"underline"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_unidade_nome","position":{"x":940,"y":10},"size":{"width":80,"height":28},"attrs":{"text":{"text":"nome","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_unidade_cidade","position":{"x":1040,"y":10},"size":{"width":80,"height":28},"attrs":{"text":{"text":"cidade","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_unidade_estado","position":{"x":810,"y":150},"size":{"width":80,"height":28},"attrs":{"text":{"text":"estado","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_unidade_ender","position":{"x":920,"y":150},"size":{"width":100,"height":28},"attrs":{"text":{"text":"endereco","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_unidade_ativo","position":{"x":1040,"y":150},"size":{"width":80,"height":28},"attrs":{"text":{"text":"ativo","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Key","id":"a_usuario_pk","position":{"x":20,"y":290},"size":{"width":110,"height":30},"attrs":{"text":{"text":"id_usuario","font-size":11,"fill":"#000","text-decoration":"underline"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_usuario_nome","position":{"x":150,"y":290},"size":{"width":80,"height":28},"attrs":{"text":{"text":"nome","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_usuario_email","position":{"x":250,"y":290},"size":{"width":80,"height":28},"attrs":{"text":{"text":"email","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_usuario_senha","position":{"x":350,"y":340},"size":{"width":110,"height":28},"attrs":{"text":{"text":"senha_hash","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_usuario_perfil","position":{"x":20,"y":440},"size":{"width":80,"height":28},"attrs":{"text":{"text":"perfil","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_usuario_ativo","position":{"x":120,"y":440},"size":{"width":80,"height":28},"attrs":{"text":{"text":"ativo","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_usuario_criado","position":{"x":220,"y":440},"size":{"width":100,"height":28},"attrs":{"text":{"text":"criado_em","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Key","id":"a_sala_pk","position":{"x":810,"y":300},"size":{"width":90,"height":30},"attrs":{"text":{"text":"id_sala","font-size":11,"fill":"#000","text-decoration":"underline"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_sala_numero","position":{"x":920,"y":300},"size":{"width":90,"height":28},"attrs":{"text":{"text":"numero","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_sala_tipo","position":{"x":1030,"y":300},"size":{"width":80,"height":28},"attrs":{"text":{"text":"tipo","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_sala_capac","position":{"x":780,"y":440},"size":{"width":110,"height":28},"attrs":{"text":{"text":"capacidade","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_sala_andar","position":{"x":910,"y":440},"size":{"width":80,"height":28},"attrs":{"text":{"text":"andar","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_sala_status","position":{"x":1010,"y":440},"size":{"width":80,"height":28},"attrs":{"text":{"text":"status","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_sala_obs","position":{"x":1110,"y":380},"size":{"width":110,"height":28},"attrs":{"text":{"text":"observacao","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Key","id":"a_feriado_pk","position":{"x":1470,"y":180},"size":{"width":110,"height":30},"attrs":{"text":{"text":"id_feriado","font-size":11,"fill":"#000","text-decoration":"underline"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_feriado_data","position":{"x":1600,"y":180},"size":{"width":80,"height":28},"attrs":{"text":{"text":"data","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_feriado_desc","position":{"x":1710,"y":250},"size":{"width":100,"height":28},"attrs":{"text":{"text":"descricao","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_feriado_tipo","position":{"x":1710,"y":290},"size":{"width":80,"height":28},"attrs":{"text":{"text":"tipo","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Key","id":"a_recurso_pk","position":{"x":1480,"y":480},"size":{"width":110,"height":30},"attrs":{"text":{"text":"id_recurso","font-size":11,"fill":"#000","text-decoration":"underline"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_recurso_desc","position":{"x":1620,"y":480},"size":{"width":100,"height":28},"attrs":{"text":{"text":"descricao","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_recurso_qtd","position":{"x":1750,"y":560},"size":{"width":110,"height":28},"attrs":{"text":{"text":"quantidade","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Key","id":"a_curso_pk","position":{"x":100,"y":680},"size":{"width":100,"height":30},"attrs":{"text":{"text":"id_curso","font-size":11,"fill":"#000","text-decoration":"underline"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_curso_nome","position":{"x":220,"y":680},"size":{"width":80,"height":28},"attrs":{"text":{"text":"nome","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_curso_tipo","position":{"x":320,"y":680},"size":{"width":100,"height":28},"attrs":{"text":{"text":"tipo_curso","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_curso_area","position":{"x":80,"y":820},"size":{"width":80,"height":28},"attrs":{"text":{"text":"area","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_curso_prog","position":{"x":180,"y":820},"size":{"width":100,"height":28},"attrs":{"text":{"text":"programa","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_curso_ch","position":{"x":300,"y":820},"size":{"width":150,"height":28},"attrs":{"text":{"text":"carga_horaria_total","font-size":10,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_curso_ativo","position":{"x":380,"y":750},"size":{"width":80,"height":28},"attrs":{"text":{"text":"ativo","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Key","id":"a_turma_pk","position":{"x":550,"y":680},"size":{"width":100,"height":30},"attrs":{"text":{"text":"id_turma","font-size":11,"fill":"#000","text-decoration":"underline"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_turma_cod","position":{"x":670,"y":680},"size":{"width":90,"height":28},"attrs":{"text":{"text":"codigo","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_turma_turno","position":{"x":780,"y":680},"size":{"width":80,"height":28},"attrs":{"text":{"text":"turno","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_turma_dtini","position":{"x":530,"y":820},"size":{"width":110,"height":28},"attrs":{"text":{"text":"data_inicio","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_turma_dtprev","position":{"x":660,"y":820},"size":{"width":160,"height":28},"attrs":{"text":{"text":"data_termino_prevista","font-size":10,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Derived","id":"a_turma_dtcalc","position":{"x":840,"y":820},"size":{"width":160,"height":28},"attrs":{"text":{"text":"data_termino_calculada","font-size":10,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000","stroke-dasharray":"5,3"}},"z":2},
+    {"type":"erd.Normal","id":"a_turma_dias","position":{"x":530,"y":870},"size":{"width":120,"height":28},"attrs":{"text":{"text":"dias_semana","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_turma_desc","position":{"x":670,"y":870},"size":{"width":100,"height":28},"attrs":{"text":{"text":"descricao","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_turma_obs","position":{"x":790,"y":870},"size":{"width":110,"height":28},"attrs":{"text":{"text":"observacao","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_turma_ativa","position":{"x":830,"y":750},"size":{"width":80,"height":28},"attrs":{"text":{"text":"ativa","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Key","id":"a_reserva_pk","position":{"x":1020,"y":680},"size":{"width":110,"height":30},"attrs":{"text":{"text":"id_reserva","font-size":11,"fill":"#000","text-decoration":"underline"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_reserva_data","position":{"x":1150,"y":680},"size":{"width":80,"height":28},"attrs":{"text":{"text":"data","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_reserva_turno","position":{"x":1250,"y":700},"size":{"width":80,"height":28},"attrs":{"text":{"text":"turno","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_reserva_status","position":{"x":1050,"y":820},"size":{"width":80,"height":28},"attrs":{"text":{"text":"status","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_reserva_obs","position":{"x":1150,"y":820},"size":{"width":110,"height":28},"attrs":{"text":{"text":"observacao","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_reserva_criadaem","position":{"x":1270,"y":790},"size":{"width":100,"height":28},"attrs":{"text":{"text":"criada_em","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Key","id":"a_diacanc_pk","position":{"x":380,"y":980},"size":{"width":140,"height":30},"attrs":{"text":{"text":"id_cancelamento","font-size":10,"fill":"#000","text-decoration":"underline"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_diacanc_data","position":{"x":540,"y":980},"size":{"width":80,"height":28},"attrs":{"text":{"text":"data","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_diacanc_motivo","position":{"x":640,"y":1000},"size":{"width":90,"height":28},"attrs":{"text":{"text":"motivo","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_diacanc_regem","position":{"x":500,"y":1120},"size":{"width":120,"height":28},"attrs":{"text":{"text":"registrado_em","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Key","id":"a_log_pk","position":{"x":0,"y":530},"size":{"width":80,"height":30},"attrs":{"text":{"text":"id_log","font-size":11,"fill":"#000","text-decoration":"underline"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_log_acao","position":{"x":100,"y":530},"size":{"width":80,"height":28},"attrs":{"text":{"text":"acao","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_log_tabela","position":{"x":0,"y":670},"size":{"width":130,"height":28},"attrs":{"text":{"text":"tabela_afetada","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_log_idreg","position":{"x":150,"y":670},"size":{"width":110,"height":28},"attrs":{"text":{"text":"id_registro","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_log_desc","position":{"x":50,"y":720},"size":{"width":100,"height":28},"attrs":{"text":{"text":"descricao","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+    {"type":"erd.Normal","id":"a_log_dthora","position":{"x":170,"y":720},"size":{"width":100,"height":28},"attrs":{"text":{"text":"data_hora","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Relationship","id":"r_pertence","position":{"x":500,"y":200},"size":{"width":120,"height":55},"attrs":{"text":{"text":"pertence","font-size":12,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_possui","position":{"x":900,"y":220},"size":{"width":110,"height":55},"attrs":{"text":{"text":"possui","font-size":12,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_define","position":{"x":1280,"y":150},"size":{"width":110,"height":55},"attrs":{"text":{"text":"define","font-size":12,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_tem_rec","position":{"x":1280,"y":470},"size":{"width":130,"height":55},"attrs":{"text":{"text":"tem_recurso","font-size":11,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_reservada","position":{"x":1000,"y":540},"size":{"width":140,"height":55},"attrs":{"text":{"text":"reservada_em","font-size":11,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_oferece","position":{"x":430,"y":750},"size":{"width":110,"height":55},"attrs":{"text":{"text":"oferece","font-size":12,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_gera_res","position":{"x":900,"y":750},"size":{"width":130,"height":55},"attrs":{"text":{"text":"gera_reserva","font-size":11,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_leciona","position":{"x":400,"y":550},"size":{"width":110,"height":55},"attrs":{"text":{"text":"leciona","font-size":12,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_tem_canc","position":{"x":580,"y":920},"size":{"width":150,"height":55},"attrs":{"text":{"text":"tem_cancelamento","font-size":10,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_cria","position":{"x":630,"y":550},"size":{"width":80,"height":55},"attrs":{"text":{"text":"cria","font-size":12,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_registra","position":{"x":250,"y":700},"size":{"width":110,"height":55},"attrs":{"text":{"text":"registra","font-size":12,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+    {"type":"erd.Relationship","id":"r_gera_log","position":{"x":80,"y":480},"size":{"width":110,"height":55},"attrs":{"text":{"text":"gera_log","font-size":12,"fill":"#000"},".outer":{"fill":"#fff","stroke":"#000","stroke-width":2}},"z":1},
+
+    {"type":"erd.Normal","id":"a_leciona_princ","position":{"x":400,"y":620},"size":{"width":100,"height":28},"attrs":{"text":{"text":"principal","font-size":11,"fill":"#000"},"ellipse":{"fill":"#fff","stroke":"#000"}},"z":2},
+
+    {"type":"erd.Line","id":"la_un1","source":{"id":"e_unidade"},"target":{"id":"a_unidade_pk"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_un2","source":{"id":"e_unidade"},"target":{"id":"a_unidade_nome"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_un3","source":{"id":"e_unidade"},"target":{"id":"a_unidade_cidade"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_un4","source":{"id":"e_unidade"},"target":{"id":"a_unidade_estado"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_un5","source":{"id":"e_unidade"},"target":{"id":"a_unidade_ender"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_un6","source":{"id":"e_unidade"},"target":{"id":"a_unidade_ativo"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"la_us1","source":{"id":"e_usuario"},"target":{"id":"a_usuario_pk"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_us2","source":{"id":"e_usuario"},"target":{"id":"a_usuario_nome"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_us3","source":{"id":"e_usuario"},"target":{"id":"a_usuario_email"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_us4","source":{"id":"e_usuario"},"target":{"id":"a_usuario_senha"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_us5","source":{"id":"e_usuario"},"target":{"id":"a_usuario_perfil"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_us6","source":{"id":"e_usuario"},"target":{"id":"a_usuario_ativo"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_us7","source":{"id":"e_usuario"},"target":{"id":"a_usuario_criado"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"la_sa1","source":{"id":"e_sala"},"target":{"id":"a_sala_pk"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_sa2","source":{"id":"e_sala"},"target":{"id":"a_sala_numero"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_sa3","source":{"id":"e_sala"},"target":{"id":"a_sala_tipo"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_sa4","source":{"id":"e_sala"},"target":{"id":"a_sala_capac"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_sa5","source":{"id":"e_sala"},"target":{"id":"a_sala_andar"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_sa6","source":{"id":"e_sala"},"target":{"id":"a_sala_status"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_sa7","source":{"id":"e_sala"},"target":{"id":"a_sala_obs"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"la_fe1","source":{"id":"e_feriado"},"target":{"id":"a_feriado_pk"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_fe2","source":{"id":"e_feriado"},"target":{"id":"a_feriado_data"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_fe3","source":{"id":"e_feriado"},"target":{"id":"a_feriado_desc"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_fe4","source":{"id":"e_feriado"},"target":{"id":"a_feriado_tipo"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"la_re1","source":{"id":"e_recurso"},"target":{"id":"a_recurso_pk"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_re2","source":{"id":"e_recurso"},"target":{"id":"a_recurso_desc"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_re3","source":{"id":"e_recurso"},"target":{"id":"a_recurso_qtd"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"la_cu1","source":{"id":"e_curso"},"target":{"id":"a_curso_pk"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_cu2","source":{"id":"e_curso"},"target":{"id":"a_curso_nome"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_cu3","source":{"id":"e_curso"},"target":{"id":"a_curso_tipo"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_cu4","source":{"id":"e_curso"},"target":{"id":"a_curso_area"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_cu5","source":{"id":"e_curso"},"target":{"id":"a_curso_prog"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_cu6","source":{"id":"e_curso"},"target":{"id":"a_curso_ch"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_cu7","source":{"id":"e_curso"},"target":{"id":"a_curso_ativo"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"la_tu1","source":{"id":"e_turma"},"target":{"id":"a_turma_pk"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_tu2","source":{"id":"e_turma"},"target":{"id":"a_turma_cod"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_tu3","source":{"id":"e_turma"},"target":{"id":"a_turma_turno"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_tu4","source":{"id":"e_turma"},"target":{"id":"a_turma_dtini"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_tu5","source":{"id":"e_turma"},"target":{"id":"a_turma_dtprev"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_tu6","source":{"id":"e_turma"},"target":{"id":"a_turma_dtcalc"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_tu7","source":{"id":"e_turma"},"target":{"id":"a_turma_dias"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_tu8","source":{"id":"e_turma"},"target":{"id":"a_turma_desc"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_tu9","source":{"id":"e_turma"},"target":{"id":"a_turma_obs"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_tu10","source":{"id":"e_turma"},"target":{"id":"a_turma_ativa"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"la_rv1","source":{"id":"e_reserva"},"target":{"id":"a_reserva_pk"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_rv2","source":{"id":"e_reserva"},"target":{"id":"a_reserva_data"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_rv3","source":{"id":"e_reserva"},"target":{"id":"a_reserva_turno"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_rv4","source":{"id":"e_reserva"},"target":{"id":"a_reserva_status"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_rv5","source":{"id":"e_reserva"},"target":{"id":"a_reserva_obs"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_rv6","source":{"id":"e_reserva"},"target":{"id":"a_reserva_criadaem"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"la_dc1","source":{"id":"e_diacanc"},"target":{"id":"a_diacanc_pk"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_dc2","source":{"id":"e_diacanc"},"target":{"id":"a_diacanc_data"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_dc3","source":{"id":"e_diacanc"},"target":{"id":"a_diacanc_motivo"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_dc4","source":{"id":"e_diacanc"},"target":{"id":"a_diacanc_regem"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"la_lg1","source":{"id":"e_log"},"target":{"id":"a_log_pk"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_lg2","source":{"id":"e_log"},"target":{"id":"a_log_acao"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_lg3","source":{"id":"e_log"},"target":{"id":"a_log_tabela"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_lg4","source":{"id":"e_log"},"target":{"id":"a_log_idreg"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_lg5","source":{"id":"e_log"},"target":{"id":"a_log_desc"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+    {"type":"erd.Line","id":"la_lg6","source":{"id":"e_log"},"target":{"id":"a_log_dthora"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"la_lec_princ","source":{"id":"r_leciona"},"target":{"id":"a_leciona_princ"},"attrs":{".connection":{"stroke":"#000"}},"z":0},
+
+    {"type":"erd.Line","id":"lr_pertence_un","source":{"id":"e_unidade"},"target":{"id":"r_pertence"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(1,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_pertence_us","source":{"id":"r_pertence"},"target":{"id":"e_usuario"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(1,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_possui_un","source":{"id":"e_unidade"},"target":{"id":"r_possui"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(1,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_possui_sa","source":{"id":"r_possui"},"target":{"id":"e_sala"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(1,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_define_un","source":{"id":"e_unidade"},"target":{"id":"r_define"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_define_fe","source":{"id":"r_define"},"target":{"id":"e_feriado"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(1,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_temrec_sa","source":{"id":"e_sala"},"target":{"id":"r_tem_rec"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_temrec_re","source":{"id":"r_tem_rec"},"target":{"id":"e_recurso"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(1,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_reserv_sa","source":{"id":"e_sala"},"target":{"id":"r_reservada"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_reserv_rv","source":{"id":"r_reservada"},"target":{"id":"e_reserva"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(1,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_oferece_cu","source":{"id":"e_curso"},"target":{"id":"r_oferece"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_oferece_tu","source":{"id":"r_oferece"},"target":{"id":"e_turma"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(1,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_gerares_tu","source":{"id":"e_turma"},"target":{"id":"r_gera_res"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_gerares_rv","source":{"id":"r_gera_res"},"target":{"id":"e_reserva"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(1,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_leciona_us","source":{"id":"e_usuario"},"target":{"id":"r_leciona"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_leciona_tu","source":{"id":"r_leciona"},"target":{"id":"e_turma"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_temcanc_tu","source":{"id":"e_turma"},"target":{"id":"r_tem_canc"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_temcanc_dc","source":{"id":"r_tem_canc"},"target":{"id":"e_diacanc"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(1,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_cria_us","source":{"id":"e_usuario"},"target":{"id":"r_cria"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_cria_rv","source":{"id":"r_cria"},"target":{"id":"e_reserva"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(0,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_registra_us","source":{"id":"e_usuario"},"target":{"id":"r_registra"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_registra_dc","source":{"id":"r_registra"},"target":{"id":"e_diacanc"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(0,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+
+    {"type":"erd.Line","id":"lr_geralog_us","source":{"id":"e_usuario"},"target":{"id":"r_gera_log"},"labels":[{"position":0.3,"attrs":{"text":{"text":"(0,n)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0},
+    {"type":"erd.Line","id":"lr_geralog_lg","source":{"id":"r_gera_log"},"target":{"id":"e_log"},"labels":[{"position":0.7,"attrs":{"text":{"text":"(1,1)","font-size":12}}}],"attrs":{".connection":{"stroke":"#000","stroke-width":1.5}},"z":0}
+  ]
+}
