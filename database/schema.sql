@@ -1,8 +1,14 @@
 -- =============================================
 -- MAPA DE SALAS SENAC MINAS
 -- Script de criacao do banco de dados
--- Versao 2.0 | Junho 2026
+-- Versao 3.0 | Julho 2026
 -- =============================================
+
+CREATE DATABASE IF NOT EXISTS mapa_de_salas
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+USE mapa_de_salas;
 
 -- 1. UNIDADE
 CREATE TABLE unidade (
@@ -32,10 +38,10 @@ CREATE TABLE sala (
     id_sala INT PRIMARY KEY AUTO_INCREMENT,
     id_unidade INT NOT NULL,
     numero VARCHAR(20) NOT NULL,
-    tipo ENUM('Sala de Aula', 'Laboratorio', 'Auditorio', 'Cozinha', 'Especial') NOT NULL,
+    tipo ENUM('Sala de Aula', 'Laboratorio', 'Oficina', 'Auditorio') NOT NULL,
     capacidade INT NOT NULL,
     andar VARCHAR(20),
-    status ENUM('Disponivel', 'Ocupada', 'Manutencao') NOT NULL DEFAULT 'Disponivel',
+    status ENUM('Ativa', 'Manutencao', 'Inativa') NOT NULL DEFAULT 'Ativa',
     observacao VARCHAR(255),
     FOREIGN KEY (id_unidade) REFERENCES unidade(id_unidade),
     UNIQUE (id_unidade, numero)
@@ -54,7 +60,7 @@ CREATE TABLE recurso_sala (
 CREATE TABLE curso (
     id_curso INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(150) NOT NULL,
-    tipo_curso ENUM('Cursos Ageis', 'Graduacao', 'Pos Graduacao', 'Tecnico') NOT NULL,
+    tipo_curso ENUM('Tecnico', 'Aprendizagem', 'Qualificacao', 'Extensao') NOT NULL,
     area ENUM(
         'Gestao', 'Comercio', 'Comunicacao', 'Artes', 'Design',
         'Saude', 'Tecnologia da Informacao', 'Idioma', 'Educacional',
@@ -119,7 +125,7 @@ CREATE TABLE feriado (
     id_unidade INT NOT NULL,
     data DATE NOT NULL,
     descricao VARCHAR(100) NOT NULL,
-    tipo ENUM('Nacional', 'Estadual', 'Municipal', 'Recesso') NOT NULL,
+    tipo ENUM('Feriado Nacional', 'Feriado Estadual', 'Feriado Municipal', 'Recesso', 'Ponto Facultativo') NOT NULL,
     FOREIGN KEY (id_unidade) REFERENCES unidade(id_unidade),
     UNIQUE (id_unidade, data)
 );
@@ -148,6 +154,9 @@ CREATE TABLE log_alteracao (
     data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
+
+-- INDICE DE PERFORMANCE: busca semanal por unidade
+CREATE INDEX idx_reserva_data_status ON reserva (data, status);
 
 -- =============================================
 -- CONSTRAINT CRITICA: impede conflito de reserva

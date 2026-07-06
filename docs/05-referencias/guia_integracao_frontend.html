@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Integracao - Frontend | Mapa de Salas SENAC</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; color: #333; line-height: 1.7; }
+
+        .header { background: linear-gradient(135deg, #004C94, #003366); color: white; padding: 40px 0; text-align: center; }
+        .header h1 { font-size: 2.2em; margin-bottom: 8px; }
+        .header p { font-size: 1.1em; opacity: 0.9; }
+
+        .container { max-width: 960px; margin: 0 auto; padding: 30px 20px; }
+
+        .card { background: white; border-radius: 10px; padding: 30px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .card h2 { color: #004C94; font-size: 1.5em; margin-bottom: 15px; border-bottom: 3px solid #F7941D; padding-bottom: 8px; }
+        .card h3 { color: #004C94; font-size: 1.2em; margin: 20px 0 10px; }
+
+        code { background: #e8f0fe; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 0.9em; color: #004C94; }
+        pre { background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 15px 0; font-size: 0.85em; line-height: 1.5; }
+        pre .keyword { color: #569cd6; }
+        pre .string { color: #ce9178; }
+        pre .comment { color: #6a9955; }
+        pre .variable { color: #9cdcfe; }
+        pre .function { color: #dcdcaa; }
+
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th { background: #004C94; color: white; padding: 12px 15px; text-align: left; font-weight: 600; }
+        td { padding: 10px 15px; border-bottom: 1px solid #e0e0e0; }
+        tr:nth-child(even) { background: #f8f9fa; }
+
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.8em; font-weight: 600; }
+        .badge-azul { background: #e8f0fe; color: #004C94; }
+        .badge-laranja { background: #fff3e0; color: #e65100; }
+        .badge-verde { background: #e8f5e9; color: #2e7d32; }
+        .badge-vermelho { background: #ffebee; color: #c62828; }
+
+        .tree { font-family: 'Consolas', monospace; background: #f8f9fa; padding: 20px; border-radius: 8px; line-height: 1.8; }
+        .tree .folder { color: #004C94; font-weight: bold; }
+        .tree .file { color: #333; }
+        .tree .desc { color: #888; font-style: italic; }
+
+        .alert { padding: 15px 20px; border-radius: 8px; margin: 15px 0; }
+        .alert-info { background: #e3f2fd; border-left: 4px solid #2196f3; }
+        .alert-warning { background: #fff8e1; border-left: 4px solid #F7941D; }
+        .alert-success { background: #e8f5e9; border-left: 4px solid #4caf50; }
+
+        .step { display: flex; gap: 15px; margin: 15px 0; }
+        .step-number { width: 35px; height: 35px; background: #F7941D; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+        .step-content { flex: 1; }
+
+        .url-example { background: #f0f4f8; padding: 10px 15px; border-radius: 6px; font-family: 'Consolas', monospace; margin: 5px 0; }
+
+        ul { padding-left: 20px; }
+        li { margin: 5px 0; }
+
+        .toc { background: #f8f9fa; padding: 20px 30px; border-radius: 8px; margin-bottom: 25px; }
+        .toc h3 { color: #004C94; margin-bottom: 10px; }
+        .toc a { color: #004C94; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin: 6px 0; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Guia de Integracao Frontend</h1>
+    <p>Mapa de Salas SENAC Minas &mdash; Estrutura MVC PHP</p>
+    <p style="margin-top: 8px; font-size: 0.95em; opacity: 0.85;">Elaborado por <strong>Thais Oliveira</strong></p>
+    <p style="margin-top: 4px; font-size: 0.85em; opacity: 0.7;">Atualizado em 03/07/2026</p>
+</div>
+
+<div class="container">
+
+    <!-- Indice -->
+    <div class="toc">
+        <h3>Indice</h3>
+        <ol>
+            <li><a href="#estrutura">Estrutura de Pastas</a></li>
+            <li><a href="#como-rodar">Como Rodar o Projeto</a></li>
+            <li><a href="#login">Login e Credenciais</a></li>
+            <li><a href="#rotas">Mapa de Rotas (URLs)</a></li>
+            <li><a href="#arquivos">Arquivos Criados</a></li>
+            <li><a href="#banco">Banco de Dados</a></li>
+            <li><a href="#views">Como Editar as Views (Frontend)</a></li>
+            <li><a href="#formularios">Como Funcionam os Formularios</a></li>
+            <li><a href="#perfis">Perfis e Permissoes</a></li>
+            <li><a href="#cores">Cores e Estilo SENAC</a></li>
+            <li><a href="#checklist">Checklist de Tarefas Frontend</a></li>
+        </ol>
+    </div>
+
+    <!-- 1. Estrutura -->
+    <div class="card" id="estrutura">
+        <h2>1. Estrutura de Pastas</h2>
+        <div class="tree">
+            <span class="folder">src/</span><br>
+            &nbsp;&nbsp;<span class="folder">public/</span> <span class="desc">&larr; Document Root do Apache</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">index.php</span> <span class="desc">&larr; Roteador principal (todas URLs passam aqui)</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">css/</span> <span class="desc">&larr; Seus arquivos CSS customizados</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">js/</span> <span class="desc">&larr; Seus arquivos JavaScript</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">img/</span> <span class="desc">&larr; Imagens e logos</span><br>
+            &nbsp;&nbsp;<span class="folder">app/</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">config/</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">Database.php</span> <span class="desc">&larr; Conexao PDO com MySQL</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">Auth.php</span> <span class="desc">&larr; Login, logout, CSRF, controle de perfil</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">models/</span> <span class="desc">&larr; NAO MEXER (camada de dados pronta)</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">UnidadeModel.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">UsuarioModel.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">SalaModel.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">CursoModel.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">TurmaModel.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">ReservaModel.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">FeriadoModel.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">DiaCanceladoModel.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">LogModel.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">views/</span> <span class="desc">&larr; AQUI VOCES TRABALHAM (HTML/CSS/JS)</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">layout/</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">header.php</span> <span class="desc">&larr; Navbar + Sidebar + Alertas</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">footer.php</span> <span class="desc">&larr; Fecha HTML + Bootstrap JS</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">login.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">painel.php</span> <span class="desc">&larr; Mapa semanal de reservas</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">salas.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">turmas.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">cursos.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">usuarios.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">reserva_criar.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">reserva_disponibilidade.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">feriados.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">dia_cancelado.php</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">log.php</span><br>
+        </div>
+
+        <div class="alert alert-warning">
+            <strong>Regra importante:</strong> A pasta <code>models/</code> e a <code>config/</code> ja estao prontas.
+            O frontend trabalha SOMENTE na pasta <code>views/</code> e nos arquivos de <code>css/</code>, <code>js/</code> e <code>img/</code>.
+        </div>
+    </div>
+
+    <!-- 2. Como Rodar -->
+    <div class="card" id="como-rodar">
+        <h2>2. Como Rodar o Projeto</h2>
+
+        <h3>Opcao A: XAMPP (recomendado)</h3>
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">Abra o XAMPP e inicie <strong>Apache</strong> e <strong>MySQL</strong></div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">Copie a pasta do projeto para <code>C:\xampp\htdocs\mapa_de_salas\</code></div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">Acesse no navegador:
+                <div class="url-example">http://localhost/mapa_de_salas/src/public/index.php</div>
+            </div>
+        </div>
+
+        <h3>Opcao B: Servidor PHP embutido</h3>
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">Inicie o MySQL pelo XAMPP</div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">No terminal, rode:
+                <pre>cd C:\caminho\do\projeto\src\public
+C:\xampp\php\php.exe -S localhost:8888</pre>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">Acesse:
+                <div class="url-example">http://localhost:8888</div>
+            </div>
+        </div>
+
+        <div class="alert alert-info">
+            <strong>Banco de dados:</strong> O banco <code>mapa_de_salas</code> ja foi criado no MySQL com dados de exemplo.
+            Se precisar recriar, rode o arquivo <code>database/schema.sql</code> no phpMyAdmin.
+        </div>
+    </div>
+
+    <!-- 3. Login -->
+    <div class="card" id="login">
+        <h2>3. Login e Credenciais de Teste</h2>
+        <table>
+            <tr>
+                <th>E-mail</th>
+                <th>Senha</th>
+                <th>Perfil</th>
+                <th>Acesso</th>
+            </tr>
+            <tr>
+                <td><code>ana.silva@senacminas.com.br</code></td>
+                <td><code>senac2026</code></td>
+                <td><span class="badge badge-azul">Supervisao</span></td>
+                <td>Todas as telas</td>
+            </tr>
+            <tr>
+                <td><code>carlos.mendes@senacminas.com.br</code></td>
+                <td><code>senac2026</code></td>
+                <td><span class="badge badge-verde">Suporte</span></td>
+                <td>Salas, Turmas, Cursos, Reservas</td>
+            </tr>
+            <tr>
+                <td><code>maria.santos@senacminas.com.br</code></td>
+                <td><code>senac2026</code></td>
+                <td><span class="badge badge-laranja">Docente</span></td>
+                <td>Painel e Reservas (somente visualizar)</td>
+            </tr>
+        </table>
+        <div class="alert alert-warning">
+            <strong>Atencao:</strong> Se o login nao funcionar, execute no phpMyAdmin:
+            <pre>UPDATE usuario SET senha_hash = '$2y$10$Hh5Ktdp7d7rbn5eVSQmseO3cIkrvc9a0B/3Fjr1fUG4gddOrU/POW' WHERE id_usuario IN (1,2,3,4,5);</pre>
+            Isso define a senha <code>senac2026</code> para todos os usuarios.
+        </div>
+    </div>
+
+    <!-- 4. Rotas -->
+    <div class="card" id="rotas">
+        <h2>4. Mapa de Rotas (URLs)</h2>
+        <p>Todas as URLs seguem o padrao: <code>index.php?page=PAGINA&acao=ACAO</code></p>
+        <table>
+            <tr>
+                <th>URL</th>
+                <th>Pagina</th>
+                <th>Metodo</th>
+                <th>O que faz</th>
+            </tr>
+            <tr>
+                <td><code>?page=login</code></td>
+                <td>Login</td>
+                <td>GET/POST</td>
+                <td>Tela de login</td>
+            </tr>
+            <tr>
+                <td><code>?page=logout</code></td>
+                <td>-</td>
+                <td>GET</td>
+                <td>Encerra sessao</td>
+            </tr>
+            <tr>
+                <td><code>?page=painel</code></td>
+                <td>Painel</td>
+                <td>GET</td>
+                <td>Mapa semanal + ocupacao de hoje</td>
+            </tr>
+            <tr>
+                <td><code>?page=salas</code></td>
+                <td>Salas</td>
+                <td>GET</td>
+                <td>Lista de salas com filtros</td>
+            </tr>
+            <tr>
+                <td><code>?page=salas&acao=cadastrar</code></td>
+                <td>Salas</td>
+                <td>POST</td>
+                <td>Cadastra nova sala</td>
+            </tr>
+            <tr>
+                <td><code>?page=turmas</code></td>
+                <td>Turmas</td>
+                <td>GET</td>
+                <td>Lista de turmas</td>
+            </tr>
+            <tr>
+                <td><code>?page=turmas&acao=cadastrar</code></td>
+                <td>Turmas</td>
+                <td>POST</td>
+                <td>Cadastra nova turma</td>
+            </tr>
+            <tr>
+                <td><code>?page=reservas</code></td>
+                <td>Reservas</td>
+                <td>GET</td>
+                <td>Formulario de nova reserva</td>
+            </tr>
+            <tr>
+                <td><code>?page=reservas&acao=criar</code></td>
+                <td>Reservas</td>
+                <td>POST</td>
+                <td>Cria reserva (verifica conflito)</td>
+            </tr>
+            <tr>
+                <td><code>?page=reservas&acao=cancelar</code></td>
+                <td>Reservas</td>
+                <td>POST</td>
+                <td>Cancela reserva</td>
+            </tr>
+            <tr>
+                <td><code>?page=reservas&acao=disponibilidade</code></td>
+                <td>Disponibilidade</td>
+                <td>GET</td>
+                <td>Consulta salas livres</td>
+            </tr>
+            <tr>
+                <td><code>?page=cursos</code></td>
+                <td>Cursos</td>
+                <td>GET</td>
+                <td>Lista de cursos</td>
+            </tr>
+            <tr>
+                <td><code>?page=usuarios</code></td>
+                <td>Usuarios</td>
+                <td>GET</td>
+                <td>Lista de usuarios</td>
+            </tr>
+            <tr>
+                <td><code>?page=feriados</code></td>
+                <td>Feriados</td>
+                <td>GET</td>
+                <td>Lista de feriados</td>
+            </tr>
+            <tr>
+                <td><code>?page=dia-cancelado</code></td>
+                <td>Dias Cancelados</td>
+                <td>GET</td>
+                <td>Dias sem aula por turma</td>
+            </tr>
+            <tr>
+                <td><code>?page=log</code></td>
+                <td>Log</td>
+                <td>GET</td>
+                <td>Historico de alteracoes</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 5. Arquivos -->
+    <div class="card" id="arquivos">
+        <h2>5. Arquivos Criados</h2>
+
+        <h3>Config (nao mexer)</h3>
+        <table>
+            <tr><th>Arquivo</th><th>Funcao</th></tr>
+            <tr><td><code>config/Database.php</code></td><td>Conexao PDO com MySQL (localhost, root, sem senha, banco mapa_de_salas)</td></tr>
+            <tr><td><code>config/Auth.php</code></td><td>Login com password_verify(), sessoes, CSRF token, controle de perfil</td></tr>
+        </table>
+
+        <h3>Models (nao mexer)</h3>
+        <table>
+            <tr><th>Model</th><th>Tabela</th><th>Principais metodos</th></tr>
+            <tr><td><code>UnidadeModel</code></td><td>unidade</td><td>listarTodas(), listarAtivas(), buscarPorId(), criar()</td></tr>
+            <tr><td><code>UsuarioModel</code></td><td>usuario</td><td>listarTodos(), listarProfessoresAtivos(), criar(), buscarPorEmail()</td></tr>
+            <tr><td><code>SalaModel</code></td><td>sala</td><td>listarPorUnidade(), listarDisponiveisParaReserva(), criar(), listarAndares()</td></tr>
+            <tr><td><code>CursoModel</code></td><td>curso</td><td>listarTodos(), listarAtivos(), criar()</td></tr>
+            <tr><td><code>TurmaModel</code></td><td>turma</td><td>listarTodas(), listarAtivas(), criar(), vincularProfessor()</td></tr>
+            <tr><td><code>ReservaModel</code></td><td>reserva</td><td>listarPorSemana(), criar(), cancelar(), verificarConflito(), ocupacaoHoje()</td></tr>
+            <tr><td><code>FeriadoModel</code></td><td>feriado</td><td>listarPorUnidade(), criar(), excluir(), verificarFeriado()</td></tr>
+            <tr><td><code>DiaCanceladoModel</code></td><td>dia_cancelado</td><td>listarPorTurma(), criar() (recalcula termino automaticamente)</td></tr>
+            <tr><td><code>LogModel</code></td><td>log_alteracao</td><td>registrar(), listar(), contarTotal()</td></tr>
+        </table>
+
+        <h3>Views (AQUI VOCES TRABALHAM)</h3>
+        <table>
+            <tr><th>Arquivo</th><th>Tela</th><th>Variaveis disponiveis</th></tr>
+            <tr><td><code>layout/header.php</code></td><td>Template base</td><td>$_SESSION (usuario_nome, perfil), $page, $erro, $_GET['msg']</td></tr>
+            <tr><td><code>login.php</code></td><td>Login</td><td>$erro</td></tr>
+            <tr><td><code>painel.php</code></td><td>Painel semanal</td><td>$reservas, $salas, $andares, $ocupacaoHoje, $inicioSemana, $filtros</td></tr>
+            <tr><td><code>salas.php</code></td><td>CRUD Salas</td><td>$salas, $andares, $filtros</td></tr>
+            <tr><td><code>turmas.php</code></td><td>CRUD Turmas</td><td>$turmas, $cursos, $professores, $filtros</td></tr>
+            <tr><td><code>cursos.php</code></td><td>CRUD Cursos</td><td>$cursos, $filtros</td></tr>
+            <tr><td><code>usuarios.php</code></td><td>CRUD Usuarios</td><td>$usuarios, $unidades</td></tr>
+            <tr><td><code>reserva_criar.php</code></td><td>Nova Reserva</td><td>$salas, $turmas, $erro, $salasDisponiveis</td></tr>
+            <tr><td><code>reserva_disponibilidade.php</code></td><td>Consulta Salas Livres</td><td>$salasDisponiveis, $data, $turno</td></tr>
+            <tr><td><code>feriados.php</code></td><td>Feriados</td><td>$feriados, $ano</td></tr>
+            <tr><td><code>dia_cancelado.php</code></td><td>Dias Cancelados</td><td>$turmas, $diasCancelados</td></tr>
+            <tr><td><code>log.php</code></td><td>Log</td><td>$logs, $filtros, $pagina, $totalPaginas</td></tr>
+        </table>
+    </div>
+
+    <!-- 6. Banco -->
+    <div class="card" id="banco">
+        <h2>6. Banco de Dados</h2>
+        <p>Banco: <code>mapa_de_salas</code> | Host: <code>localhost</code> | User: <code>root</code> | Senha: <em>(vazia)</em></p>
+
+        <h3>Tabelas (11)</h3>
+        <table>
+            <tr><th>Tabela</th><th>Descricao</th><th>Campos principais</th></tr>
+            <tr><td><code>unidade</code></td><td>Unidades SENAC</td><td>id_unidade, nome, endereco, ativo</td></tr>
+            <tr><td><code>usuario</code></td><td>Usuarios do sistema</td><td>id_usuario, nome, email, senha_hash, perfil, ativo</td></tr>
+            <tr><td><code>sala</code></td><td>Salas/Labs/Auditorios</td><td>id_sala, numero, tipo, capacidade, andar, status</td></tr>
+            <tr><td><code>recurso_sala</code></td><td>Equipamentos da sala</td><td>id_recurso, id_sala, descricao, quantidade</td></tr>
+            <tr><td><code>curso</code></td><td>Cursos oferecidos</td><td>id_curso, nome, tipo_curso, area, carga_horaria_total</td></tr>
+            <tr><td><code>turma</code></td><td>Turmas ativas</td><td>id_turma, codigo, id_curso, turno, data_inicio, dias_semana</td></tr>
+            <tr><td><code>professor_turma</code></td><td>N:N Professor-Turma</td><td>id_usuario, id_turma, principal</td></tr>
+            <tr><td><code>reserva</code></td><td>Reservas de sala</td><td>id_reserva, id_sala, id_turma, data, turno, status</td></tr>
+            <tr><td><code>feriado</code></td><td>Feriados por unidade</td><td>id_feriado, data, descricao, tipo</td></tr>
+            <tr><td><code>dia_cancelado</code></td><td>Dias sem aula</td><td>id_cancelamento, id_turma, data, motivo</td></tr>
+            <tr><td><code>log_alteracao</code></td><td>Historico de acoes</td><td>id_log, id_usuario, acao, tabela_afetada, descricao</td></tr>
+        </table>
+
+        <h3>Regra critica: Conflito de reserva</h3>
+        <div class="alert alert-info">
+            A tabela <code>reserva</code> tem constraint <code>UNIQUE(id_sala, data, turno)</code>.
+            Isso significa que <strong>nao e possivel</strong> reservar a mesma sala, no mesmo dia, no mesmo turno.
+            O sistema verifica isso automaticamente antes de criar a reserva.
+        </div>
+
+        <h3>Views do banco (4)</h3>
+        <table>
+            <tr><th>View</th><th>O que retorna</th></tr>
+            <tr><td><code>vw_progresso_turma</code></td><td>% de conclusao de cada turma</td></tr>
+            <tr><td><code>vw_professores_turma</code></td><td>Nomes dos professores por turma (concatenados)</td></tr>
+            <tr><td><code>vw_historico_salas_turma</code></td><td>Historico de salas usadas por turma</td></tr>
+            <tr><td><code>vw_ocupacao_hoje</code></td><td>Ocupacao de todas as salas no dia atual</td></tr>
+        </table>
+    </div>
+
+    <!-- 7. Views -->
+    <div class="card" id="views">
+        <h2>7. Como Editar as Views (Frontend)</h2>
+
+        <p>Cada view PHP ja recebe as variaveis prontas do <code>index.php</code>. Voces so precisam usar essas variaveis no HTML.</p>
+
+        <h3>Exemplo: Listar salas na view</h3>
+        <pre><span class="comment">&lt;!-- As variaveis $salas, $andares ja vem do index.php --&gt;</span>
+
+<span class="keyword">&lt;?php</span> <span class="keyword">foreach</span> (<span class="variable">$salas</span> <span class="keyword">as</span> <span class="variable">$sala</span>): <span class="keyword">?&gt;</span>
+  &lt;tr&gt;
+    &lt;td&gt;<span class="keyword">&lt;?=</span> <span class="function">htmlspecialchars</span>(<span class="variable">$sala</span>[<span class="string">'numero'</span>]) <span class="keyword">?&gt;</span>&lt;/td&gt;
+    &lt;td&gt;<span class="keyword">&lt;?=</span> <span class="function">htmlspecialchars</span>(<span class="variable">$sala</span>[<span class="string">'tipo'</span>]) <span class="keyword">?&gt;</span>&lt;/td&gt;
+    &lt;td&gt;<span class="keyword">&lt;?=</span> <span class="variable">$sala</span>[<span class="string">'capacidade'</span>] <span class="keyword">?&gt;</span>&lt;/td&gt;
+  &lt;/tr&gt;
+<span class="keyword">&lt;?php</span> <span class="keyword">endforeach</span>; <span class="keyword">?&gt;</span></pre>
+
+        <h3>Exemplo: Mostrar dados do usuario logado</h3>
+        <pre><span class="comment">&lt;!-- Dados da sessao disponiveis em qualquer view --&gt;</span>
+
+&lt;p&gt;Ola, <span class="keyword">&lt;?=</span> <span class="variable">$_SESSION</span>[<span class="string">'usuario_nome'</span>] <span class="keyword">?&gt;</span>!&lt;/p&gt;
+&lt;p&gt;Seu perfil: <span class="keyword">&lt;?=</span> <span class="variable">$_SESSION</span>[<span class="string">'perfil'</span>] <span class="keyword">?&gt;</span>&lt;/p&gt;</pre>
+
+        <h3>Exemplo: Mostrar conteudo por perfil</h3>
+        <pre><span class="keyword">&lt;?php</span> <span class="keyword">if</span> (<span class="function">in_array</span>(<span class="variable">$_SESSION</span>[<span class="string">'perfil'</span>], [<span class="string">'Admin'</span>, <span class="string">'Supervisao'</span>])): <span class="keyword">?&gt;</span>
+  &lt;button&gt;Excluir&lt;/button&gt; <span class="comment">&lt;!-- So Admin e Supervisao veem --&gt;</span>
+<span class="keyword">&lt;?php</span> <span class="keyword">endif</span>; <span class="keyword">?&gt;</span></pre>
+
+        <div class="alert alert-success">
+            <strong>Dica:</strong> Sempre use <code>htmlspecialchars()</code> ao exibir dados do banco para evitar XSS.
+        </div>
+    </div>
+
+    <!-- 8. Formularios -->
+    <div class="card" id="formularios">
+        <h2>8. Como Funcionam os Formularios</h2>
+
+        <p>Os formularios enviam dados via <code>POST</code> para o <code>index.php</code> com <code>page</code> e <code>acao</code>.</p>
+
+        <h3>Exemplo: Formulario de cadastro de sala</h3>
+        <pre>&lt;form <span class="keyword">method</span>=<span class="string">"POST"</span> <span class="keyword">action</span>=<span class="string">"index.php?page=salas&amp;acao=cadastrar"</span>&gt;
+  &lt;input <span class="keyword">type</span>=<span class="string">"text"</span> <span class="keyword">name</span>=<span class="string">"numero"</span> required&gt;
+  &lt;select <span class="keyword">name</span>=<span class="string">"tipo"</span>&gt;
+    &lt;option value=<span class="string">"Sala de Aula"</span>&gt;Sala de Aula&lt;/option&gt;
+    &lt;option value=<span class="string">"Laboratorio"</span>&gt;Laboratorio&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;input <span class="keyword">type</span>=<span class="string">"number"</span> <span class="keyword">name</span>=<span class="string">"capacidade"</span> required&gt;
+  &lt;input <span class="keyword">type</span>=<span class="string">"text"</span> <span class="keyword">name</span>=<span class="string">"andar"</span>&gt;
+  &lt;button <span class="keyword">type</span>=<span class="string">"submit"</span>&gt;Salvar&lt;/button&gt;
+&lt;/form&gt;</pre>
+
+        <h3>Campos obrigatorios por formulario</h3>
+        <table>
+            <tr><th>Formulario</th><th>Campos POST</th></tr>
+            <tr><td>Sala</td><td>numero, tipo, capacidade, andar, observacao</td></tr>
+            <tr><td>Turma</td><td>codigo, id_curso, turno, data_inicio, data_termino_prevista, dias_semana[], professores[], professor_principal</td></tr>
+            <tr><td>Reserva</td><td>id_sala, id_turma, data, turno, observacao</td></tr>
+            <tr><td>Curso</td><td>nome, tipo_curso, area, programa, carga_horaria_total</td></tr>
+            <tr><td>Usuario</td><td>id_unidade, nome, email, senha, perfil</td></tr>
+            <tr><td>Feriado</td><td>data, descricao, tipo</td></tr>
+            <tr><td>Dia Cancelado</td><td>id_turma, data, motivo</td></tr>
+        </table>
+
+        <div class="alert alert-info">
+            <strong>Mensagens de sucesso:</strong> Apos salvar, o sistema redireciona com <code>?msg=criada</code>.
+            O <code>header.php</code> exibe automaticamente o alerta verde de sucesso.
+        </div>
+    </div>
+
+    <!-- 9. Perfis -->
+    <div class="card" id="perfis">
+        <h2>9. Perfis e Permissoes</h2>
+        <table>
+            <tr>
+                <th>Perfil</th>
+                <th>Paginas com acesso</th>
+                <th>O que pode fazer</th>
+            </tr>
+            <tr>
+                <td><span class="badge badge-vermelho">Admin</span></td>
+                <td>TODAS</td>
+                <td>Tudo: cadastrar, editar, excluir, gerenciar usuarios, ver logs</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-azul">Supervisao</span></td>
+                <td>TODAS</td>
+                <td>Mesmas permissoes do Admin</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-verde">Suporte</span></td>
+                <td>Painel, Salas, Turmas, Cursos, Reservas, Feriados, Dias Cancelados</td>
+                <td>Cadastrar e editar, mas NAO gerencia usuarios nem ve logs</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-laranja">Docente</span></td>
+                <td>Painel, Reservas (visualizar)</td>
+                <td>Apenas consultar o painel e ver disponibilidade de salas</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 10. Cores -->
+    <div class="card" id="cores">
+        <h2>10. Cores e Estilo SENAC</h2>
+        <table>
+            <tr><th>Cor</th><th>Codigo</th><th>Uso</th><th>Amostra</th></tr>
+            <tr>
+                <td>Azul SENAC</td>
+                <td><code>#004C94</code></td>
+                <td>Navbar, sidebar ativo, titulos, headers de tabela</td>
+                <td><div style="width:60px;height:30px;background:#004C94;border-radius:4px;"></div></td>
+            </tr>
+            <tr>
+                <td>Laranja SENAC</td>
+                <td><code>#F7941D</code></td>
+                <td>Botoes de acao, bordas de titulo, destaques</td>
+                <td><div style="width:60px;height:30px;background:#F7941D;border-radius:4px;"></div></td>
+            </tr>
+            <tr>
+                <td>Laranja Claro</td>
+                <td><code>#FDC180</code></td>
+                <td>Hover em botoes, fundos suaves</td>
+                <td><div style="width:60px;height:30px;background:#FDC180;border-radius:4px;"></div></td>
+            </tr>
+        </table>
+
+        <h3>CSS Variables (definidas no header.php)</h3>
+        <pre>:root {
+    <span class="variable">--senac-azul</span>: <span class="string">#004C94</span>;
+    <span class="variable">--senac-laranja</span>: <span class="string">#F7941D</span>;
+    <span class="variable">--senac-laranja-claro</span>: <span class="string">#FDC180</span>;
+}
+
+<span class="comment">/* Botao padrao laranja */</span>
+.<span class="variable">btn-senac</span> {
+    background-color: <span class="function">var</span>(<span class="variable">--senac-laranja</span>);
+    border-color: <span class="function">var</span>(<span class="variable">--senac-laranja</span>);
+    color: #fff;
+}</pre>
+
+        <h3>Frameworks usados</h3>
+        <ul>
+            <li><strong>Bootstrap 5.3</strong> - Grid, componentes, modais, tabelas</li>
+            <li><strong>Bootstrap Icons</strong> - Icones (bi-door-open, bi-people, bi-calendar-check, etc.)</li>
+        </ul>
+    </div>
+
+    <!-- 11. Checklist -->
+    <div class="card" id="checklist">
+        <h2>11. Checklist de Tarefas Frontend</h2>
+        <p>Sugestao de melhorias que o time de frontend pode implementar:</p>
+        <table>
+            <tr><th>Tarefa</th><th>Arquivo</th><th>Prioridade</th></tr>
+            <tr><td>Melhorar layout do Painel (mapa visual colorido)</td><td>painel.php</td><td><span class="badge badge-vermelho">Alta</span></td></tr>
+            <tr><td>Adicionar logo SENAC na navbar e login</td><td>header.php, login.php</td><td><span class="badge badge-azul">Media</span></td></tr>
+            <tr><td>Criar tela de edicao de sala (nao so cadastro)</td><td>salas.php</td><td><span class="badge badge-azul">Media</span></td></tr>
+            <tr><td>Melhorar responsividade mobile</td><td>header.php (CSS)</td><td><span class="badge badge-azul">Media</span></td></tr>
+            <tr><td>Adicionar confirmacao antes de cancelar reserva</td><td>painel.php</td><td><span class="badge badge-verde">Baixa</span></td></tr>
+            <tr><td>Adicionar graficos de ocupacao (Chart.js)</td><td>painel.php</td><td><span class="badge badge-verde">Baixa</span></td></tr>
+            <tr><td>Criar CSS customizado separado</td><td>public/css/style.css</td><td><span class="badge badge-verde">Baixa</span></td></tr>
+            <tr><td>Adicionar favicon SENAC</td><td>header.php</td><td><span class="badge badge-verde">Baixa</span></td></tr>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
